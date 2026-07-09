@@ -1,0 +1,5565 @@
+// Auto-generated from the original index.html legacy script.
+// This file preserves the original data, UI behavior, and rendering logic.
+
+const ROLE_META = {
+gk: { label: 'GK', long: 'Goalkeeper', color: '#d4a017' },
+def: { label: 'DEF', long: 'Defender', color: '#2563eb' },
+mid: { label: 'MID', long: 'Midfielder', color: '#16a34a' },
+fwd: { label: 'FWD', long: 'Forward', color: '#dc2626' }
+};
+
+const triggerNames = [
+'Our GK has the ball',
+'We win the ball in our own half',
+'We win the ball in their half',
+'They have the ball - defensive block',
+'Long ball over the top',
+'Corner Kick - defending',
+'Corner Kick - attacking'
+];
+
+function mkPositionDetails(name, roleLabel, formationName) {
+return {
+yourJob: `In the ${formationName}, the ${name} must understand space, support angles, and timing. This ${roleLabel.toLowerCase()} role should stay connected to nearby teammates, make the field bigger in possession when needed, and become compact immediately when the team loses the ball.`,
+keyMoments: {
+lost: `When we lost the ball, the ${name} must react first by recovering into the team shape, protecting the most dangerous central space, and communicating the nearest pressure or cover responsibility.`,
+won: `When we won the ball, the ${name} should scan early, choose the safest forward option when available, and help the team either secure possession or attack quickly depending on the game moment.`,
+gk: `When their GK has it, the ${name} should take up a position that helps close central lanes, cues teammates around the press, and prepares to jump if the ball travels into the nearest zone.`
+},
+remember: [
+`Stay connected to the nearest line in the ${formationName}.`,
+`Scan before the ball arrives so your first action is clear.`,
+`React quickly on transitions - shape first, then pressure.`,
+`Use your body shape to see both the ball and the next option.`
+]
+};
+}
+
+function mkSessionPlans(formationName) {
+return Array.from({ length: 8 }, (_, i) => ({
+title: `Session ${i + 1} - ${formationName} Team Function`,
+subtitle: `Teach a key game model behavior inside the ${formationName} through progressive, position-specific work.`,
+time: `${60 + (i % 3) * 10} min`,
+objective: `Build shared understanding of spacing, timing, and decision-making in the ${formationName}, with special focus on transition moments, support angles, and role clarity.`,
+drills: [
+{ title: 'Pattern Play Warmup', time: '10 min', players: 'Full squad', opposition: 'Unopposed', desc: `Rehearse starting positions and passing lanes in the ${formationName}.` },
+{ title: 'Shape Retention Game', time: '12 min', players: '7v6 / 8v7', opposition: 'Passive to live', desc: 'Keep shape while circulating and finding the free player.' },
+{ title: 'Transition Wave', time: '12 min', players: 'Units', opposition: 'Live', desc: 'Train immediate reactions after winning or losing the ball.' },
+{ title: 'Positional Functional Game', time: '14 min', players: 'Lines/units', opposition: 'Live', desc: 'Coach the specific responsibilities of each line in the system.' },
+{ title: 'Conditioned Scrimmage', time: '16 min', players: 'Team', opposition: 'Live', desc: `Reward execution of the core principles of the ${formationName}.` }
+]
+}));
+}
+
+function makeGenericTriggers(formation) {
+return triggerNames.map(trigger => ({
+title: trigger,
+cue: `Coach call: "${trigger.toUpperCase()}"`,
+summary: `On "${trigger}," the team in the ${formation.name} should react together, with every line moving on the same cue and each position understanding its immediate job before the next action.`,
+actions: formation.positions.map(p => ({
+position: p.label,
+action: `${p.label} adjusts based on the cue, keeps compact spacing in the ${formation.name}, and performs the first role-specific action with urgency and clarity.`
+}))
+}));
+}
+
+function makeGenericBuildout(formation) {
+return [
+{
+title: `${formation.name} Pattern 1 - Primary Buildout`,
+trigger: `Use when the first line of pressure allows a clean first pass out of the back in the ${formation.name}.`,
+objective: `Create a stable first phase, draw pressure, and progress into the next line with balance and support.`,
+steps: formation.positions.map(p => `${p.label} takes the role-appropriate starting position and moves in sequence as the ball progresses.`),
+coaching: formation.positions.map(p => ({
+position: p.label,
+point: `${p.label} should scan early, arrive on time, and keep body shape open to the next action.`
+}))
+},
+{
+title: `${formation.name} Pattern 2 - Wide Release`,
+trigger: `Use when the opponent narrows and the outside lane becomes available.`,
+objective: `Attract pressure centrally, then release into the wide lane with supporting movement around the ball.`,
+steps: formation.positions.map(p => `${p.label} adjusts to support the ball-side triangle and prepare the next pass or run.`),
+coaching: formation.positions.map(p => ({
+position: p.label,
+point: `${p.label} should understand whether the next action is to support short, receive wide, or run beyond.`
+}))
+},
+{
+title: `${formation.name} Pattern 3 - Vertical Entry`,
+trigger: `Use when a central lane opens and a receiving player can take the next line.`,
+objective: `Break a line with control and connect into advanced support without losing rest-defense balance.`,
+steps: formation.positions.map(p => `${p.label} must move on the pass, not after it, so the pattern stays synchronized.`),
+coaching: formation.positions.map(p => ({
+position: p.label,
+point: `${p.label} should move with timing and avoid arriving too early into a marked space.`
+}))
+}
+];
+}
+
+function makeGenericDefensiveBlock(formation) {
+return {
+shapeDescription: `In the ${formation.name}, the team defends by protecting the center first, staying connected between lines, and using role clarity to decide who pressures, who covers, and who balances.`,
+roleSummary: formation.positions.map(p => `${p.label}: Defend the immediate zone with compact distances, communicate early, and recover quickly into the structure.`),
+principles: [
+'Protect the central lane first before chasing wide pressure.',
+'Keep compact distances between the lines at all times.',
+'The nearest player pressures; teammates provide cover and balance.',
+'Body shape should show play into less dangerous areas.',
+'React immediately when the first press is broken.',
+'Win the ball if possible; delay and recover if not.'
+],
+sessionPlan: [
+{ title: 'Step 1', text: `Walk through the ${formation.name} defensive shape and freeze distances between players.` },
+{ title: 'Step 2', text: 'Coach who presses, who covers, and who balances in each zone.' },
+{ title: 'Step 3', text: 'Add the ball and train shifting across the field as a unit.' },
+{ title: 'Step 4', text: 'Introduce live transitions after turnovers.' },
+{ title: 'Step 5', text: 'Finish with a conditioned game rewarding compact defending and communication.' }
+]
+};
+}
+
+function mkCurriculum(formationName) {
+return Array.from({ length: 8 }, (_, i) => ({
+week: `Week ${i + 1}`,
+title: `${formationName} Learning Block ${i + 1}`,
+focus: [
+`Role clarity inside the ${formationName}`,
+'Transition reactions and immediate shape recovery',
+'Support angles and communication by line'
+],
+phrases: [
+'Shape first, then pressure.',
+'See the next action before the ball arrives.',
+'Move with the pass, not after the pass.'
+],
+notes: `This week reinforces a core behavior in the ${formationName}. The coaching priority is to simplify player decision-making while repeating the same pictures until the team recognizes them naturally in game play.`
+}));
+}
+
+/* App state */
+const formations = { "7v7": [], "9v9": [], "11v11": [] };
+
+const state = {
+format: '7v7',
+selectedFormationId: null,
+view: 'formations',
+selectedPositionLabel: null,
+keyMomentTab: 'lost',
+coachSection: 'sessionPlans',
+openCoachItem: 0
+};
+
+function getCurrentFormations() { return formations[state.format] || []; }
+function getSelectedFormation() {
+const list = getCurrentFormations();
+return list.find(f => f.id === state.selectedFormationId) || list[0] || null;
+}
+function setDefaultFormationForFormat(fmt) {
+const list = formations[fmt] || [];
+const preferred = list.find(f => f.current) || list[0] || null;
+state.selectedFormationId = preferred ? preferred.id : null;
+state.selectedPositionLabel = null;
+state.keyMomentTab = 'lost';
+state.coachSection = 'sessionPlans';
+state.openCoachItem = 0;
+}
+
+function updateHeader() {
+const f = getSelectedFormation();
+document.getElementById('headerFormatBadge').textContent = state.format;
+document.getElementById('headerFormationBadge').textContent = f ? f.name : '—';
+document.getElementById('headerViewBadge').textContent =
+state.view === 'formations' ? 'Formations View' :
+state.view === 'player' ? 'Player View' : 'Coach View';
+
+document.getElementById('btnFormat7v7').classList.toggle('active', state.format === '7v7');
+document.getElementById('btnFormat9v9').classList.toggle('active', state.format === '9v9');
+document.getElementById('btnFormat11v11').classList.toggle('active', state.format === '11v11');
+
+document.getElementById('btnViewFormations').classList.toggle('active', state.view === 'formations');
+document.getElementById('btnViewPlayer').classList.toggle('active', state.view === 'player');
+document.getElementById('btnViewCoach').classList.toggle('active', state.view === 'coach');
+}
+
+function setFormat(fmt) {
+if (state.format !== fmt) {
+state.format = fmt;
+setDefaultFormationForFormat(fmt);
+}
+render();
+}
+function setView(view) {
+state.view = view;
+if (view === 'player') {
+const f = getSelectedFormation();
+if (f && !state.selectedPositionLabel && f.positions.length) {
+state.selectedPositionLabel = f.positions[0].label;
+}
+}
+render();
+}
+function selectFormation(id) { state.selectedFormationId = id; state.selectedPositionLabel = null; state.keyMomentTab = 'lost'; state.openCoachItem = 0; render(); }
+function selectPosition(label) { state.selectedPositionLabel = label; renderPlayerView(); }
+function setKeyMoment(tab) { state.keyMomentTab = tab; renderPlayerView(); }
+function setCoachSection(section) { state.coachSection = section; state.openCoachItem = 0; renderCoachView(); }
+function toggleCoachItem(index) { state.openCoachItem = state.openCoachItem === index ? -1 : index; renderCoachView(); }
+function roleClass(role) { return `role-${role}`; }
+
+function renderField(formation, clickable = false, selectedPosition = null) {
+return `
+<div class="field">
+<div class="field-mark half-line"></div>
+<div class="field-mark center-circle"></div>
+<div class="box top"></div>
+<div class="box bottom"></div>
+${formation.positions.map(p => `
+<button type="button"
+class="field-player ${roleClass(p.role)} ${clickable ? 'clickable' : ''} ${selectedPosition === p.label ? 'selected' : ''}"
+style="left:${p.x}%; top:${p.y}%"
+${clickable ? `onclick="selectPosition('${p.label}')"` : ''}
+title="${p.label} - ${p.full}"
+>${p.label}</button>
+`).join('')}
+</div>
+`;
+}
+
+function renderKey(counts) {
+return `
+<div class="key">
+<div class="key-item"><span class="key-swatch" style="background:${ROLE_META.gk.color}"></span># GK (${counts.gk})</div>
+<div class="key-item"><span class="key-swatch" style="background:${ROLE_META.def.color}"></span># DEF (${counts.def})</div>
+<div class="key-item"><span class="key-swatch" style="background:${ROLE_META.mid.color}"></span># Mid (${counts.mid})</div>
+<div class="key-item"><span class="key-swatch" style="background:${ROLE_META.fwd.color}"></span># FWD (${counts.fwd})</div>
+</div>
+`;
+}
+
+function renderFormationView() {
+const grid = document.getElementById('formationGrid');
+const list = getCurrentFormations();
+grid.innerHTML = (list || []).map(f => `
+<article class="formation-card ${state.selectedFormationId === f.id ? 'selected' : ''}" onclick="selectFormation('${f.id}')">
+<div class="card-top">
+<div class="chip-row">
+<span class="chip"><span class="dot" style="background:${ROLE_META.gk.color}"></span>${f.counts.gk} GK</span>
+<span class="chip"><span class="dot" style="background:${ROLE_META.def.color}"></span>${f.counts.def} DEF</span>
+<span class="chip"><span class="dot" style="background:${ROLE_META.mid.color}"></span>${f.counts.mid} MID</span>
+<span class="chip"><span class="dot" style="background:${ROLE_META.fwd.color}"></span>${f.counts.fwd} FWD</span>
+</div>
+${f.current ? `<span class="current-badge">✓ CURRENT</span>` : ``}
+</div>
+<div class="card-body">
+<div class="formation-name">${f.name}</div>
+<div class="formation-style">${f.style}</div>
+<p class="best-for"><strong>Best For:</strong> ${f.bestFor}</p>
+<div class="formation-layout">
+<div class="mini-pitch-panel">
+<div class="subheading">Formation Image</div>
+${renderField(f, false)}
+${renderKey(f.counts)}
+</div>
+<div class="content-panel">
+<div class="columns">
+<div class="sublist"><h4>Strengths</h4><ul>${f.strengths.map(s => `<li>${s}</li>`).join('')}</ul></div>
+<div class="sublist"><h4>Weaknesses</h4><ul>${f.weaknesses.map(w => `<li>${w}</li>`).join('')}</ul></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+`).join('');
+}
+
+function renderPlayerView() {
+const f = getSelectedFormation();
+const content = document.getElementById('playerViewContent');
+if (!f) { content.innerHTML = ''; return; }
+const pos = f.positions.find(p => p.label === state.selectedPositionLabel) || null;
+document.getElementById('playerViewTitle').textContent = `${state.format} ${f.name} - Player View`;
+document.getElementById('playerViewSubtitle').textContent = `${f.style} | Click any position circle on the field to see detailed role information, key moments, and coaching points.`;
+
+const right = !pos ? `
+<div class="player-info-panel">
+<div class="detail-block"><h4>Select a Position</h4>
+<p class="placeholder-note">Click any position circle on the field to see detailed role information, key moments, and coaching points.</p></div>
+</div>
+` : (() => {
+const d = f.playerDetails[pos.label]; const role = ROLE_META[pos.role];
+const mt = state.keyMomentTab === 'lost' ? d.keyMoments.lost : state.keyMomentTab === 'won' ? d.keyMoments.won : d.keyMoments.gk;
+return `
+<div class="player-info-panel">
+<div class="position-header">
+<h3>${pos.label} - ${pos.full}</h3>
+<div class="position-meta">
+<span class="meta-pill" style="color:${role.color}">${role.label}</span>
+<span class="meta-pill">${f.name}</span>
+</div>
+</div>
+<div class="detail-block"><h4>Your Job</h4><p>${d.yourJob}</p></div>
+<div class="detail-block">
+<h4>Key Moments</h4>
+<div class="moment-tabs">
+<button class="tab-btn ${state.keyMomentTab === 'lost' ? 'active' : ''}" onclick="setKeyMoment('lost')">We Lost the Ball</button>
+<button class="tab-btn ${state.keyMomentTab === 'won' ? 'active' : ''}" onclick="setKeyMoment('won')">We Won the Ball</button>
+<button class="tab-btn ${state.keyMomentTab === 'gk' ? 'active' : ''}" onclick="setKeyMoment('gk')">Their GK has it</button>
+</div>
+<p>${mt}</p>
+</div>
+<div class="detail-block"><h4>Remember This</h4><ul>${d.remember.map(x => `<li>${x}</li>`).join('')}</ul></div>
+</div>
+`;
+})();
+
+content.innerHTML = `
+<div class="player-view-grid">
+<div class="pitch-panel">
+<div class="subheading">Formation Image</div>
+${renderField(f, true, pos ? pos.label : null)}
+${renderKey(f.counts)}
+</div>
+${right}
+</div>
+`;
+}
+
+function renderBuildoutSVG(formation, patternIndex = 0) {
+
+  const players = formation.positions.map(p =>
+    `<circle cx="${p.x * 3.2}" cy="${p.y * 4.8}" r="16"
+      fill="${ROLE_META[p.role].color}"
+      stroke="#fff"
+      stroke-width="2"></circle>
+
+     <text x="${p.x * 3.2}"
+       y="${p.y * 4.8 + 4}"
+       text-anchor="middle"
+       font-size="9"
+       font-weight="700"
+       fill="#fff">${p.label}</text>`
+  ).join('');
+
+  const arrows =
+    (formation.coachData &&
+     formation.coachData.buildoutVisuals &&
+     formation.coachData.buildoutVisuals[patternIndex])
+    || '';
+
+  return `
+  <div class="svg-wrap">
+
+  <svg viewBox="0 0 320 500" width="100%" height="auto">
+
+    <defs>
+      <marker id="arrowGreen"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto-start-reverse">
+
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"></path>
+      </marker>
+    </defs>
+
+    <rect x="10" y="10"
+          width="300"
+          height="480"
+          rx="18"
+          fill="#9fdf9f"
+          stroke="#6abf7d"
+          stroke-width="3"></rect>
+
+    <line x1="10" y1="250"
+          x2="310" y2="250"
+          stroke="#ffffff"
+          stroke-width="2"></line>
+
+    <circle cx="160"
+            cy="250"
+            r="38"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="2"></circle>
+
+    <rect x="80" y="10"
+          width="160"
+          height="68"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="2"></rect>
+
+    <rect x="80" y="422"
+          width="160"
+          height="68"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="2"></rect>
+
+    ${arrows}
+
+    ${players}
+
+  </svg>
+
+  </div>
+  `;
+}
+
+function renderCoachView() {
+const f = getSelectedFormation();
+const content = document.getElementById('coachViewContent');
+if (!f) { content.innerHTML = ''; return; }
+
+document.getElementById('coachViewTitle').textContent = `${state.format} ${f.name} - Coach View`;
+document.getElementById('coachViewSubtitle').textContent = `${f.style} | Use the selector below to switch between coaching detail layers for this formation.`;
+
+let bodyHtml = '';
+if (state.coachSection === 'sessionPlans') {
+const items = f.coachData.sessionPlans;
+bodyHtml = `
+<div class="accordion">
+${items.map((it, i) => `
+<div class="accordion-item">
+<button class="accordion-head" onclick="toggleCoachItem(${i})">
+<div class="accordion-head-main">
+<div class="accordion-title">${it.title}</div>
+<div class="accordion-subtitle">${it.subtitle}</div>
+<div class="accordion-time">${it.time}</div>
+</div>
+<div class="accordion-icon">${state.openCoachItem === i ? '−' : '+'}</div>
+</button>
+${state.openCoachItem === i ? `
+<div class="accordion-body">
+  <div class="coach-section">
+    <h4>Objective</h4>
+    <p>${it.objective}</p>
+  </div>
+
+  ${it.focus ? `
+    <div class="coach-section">
+      <h4>Key Focus Areas</h4>
+      <ul>
+        ${it.focus.map(x => `<li>${x}</li>`).join('')}
+      </ul>
+    </div>
+  ` : ``}
+
+  ${it.phrases ? `
+    <div class="coach-section">
+      <h4>Key Coach Phrases</h4>
+      <ul>
+        ${it.phrases.map(x => `<li>${x}</li>`).join('')}
+      </ul>
+    </div>
+  ` : ``}
+
+  ${it.notes ? `
+    <div class="coach-section">
+      <h4>Coach Notes</h4>
+      <p>${it.notes}</p>
+    </div>
+  ` : ``}
+
+  <div class="coach-section">
+    <h4>Training Drills</h4>
+    <div class="drill-list">
+      ${it.drills.map(d => `
+        <div class="drill-item">
+          <h5>${d.title}</h5>
+          <p>${d.desc}</p>
+          <div class="tiny-meta">
+            <span class="tiny-badge">${d.time}</span>
+            <span class="tiny-badge">${d.players}</span>
+            <span class="tiny-badge">${d.opposition}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+</div>
+` : ``}
+</div>
+`).join('')}
+</div>
+`;
+}
+
+if (state.coachSection === 'triggers') {
+const items = f.coachData.triggers;
+bodyHtml = `
+<div class="accordion">
+${items.map((it, i) => `
+<div class="accordion-item">
+<button class="accordion-head" onclick="toggleCoachItem(${i})">
+<div class="accordion-head-main">
+<div class="accordion-title">${it.title}</div>
+<div class="accordion-subtitle">Formation-specific team response in the ${f.name}.</div>
+</div>
+<div class="accordion-icon">${state.openCoachItem === i ? '−' : '+'}</div>
+</button>
+${state.openCoachItem === i ? `
+<div class="accordion-body">
+<div class="coach-section"><h4>Cue</h4><p>${it.cue}</p></div>
+<div class="coach-section"><h4>Team Response</h4><p>${it.summary}</p></div>
+<div class="coach-section">
+<h4>Actions by Position</h4>
+<table><thead><tr><th>Position</th><th>Action</th></tr></thead>
+<tbody>${it.actions.map(a => `<tr><td><strong>${a.position}</strong></td><td>${a.action}</td></tr>`).join('')}</tbody>
+</table>
+</div>
+</div>
+` : ``}
+</div>
+`).join('')}
+</div>
+`;
+}
+
+if (state.coachSection === 'buildoutPatterns') {
+const items = f.coachData.buildoutPatterns;
+bodyHtml = `
+<div class="accordion">
+${items.map((it, i) => `
+<div class="accordion-item">
+<button class="accordion-head" onclick="toggleCoachItem(${i})">
+<div class="accordion-head-main">
+<div class="accordion-title">${it.title}</div>
+<div class="accordion-subtitle">${it.objective}</div>
+</div>
+<div class="accordion-icon">${state.openCoachItem === i ? '−' : '+'}</div>
+</button>
+${state.openCoachItem === i ? `
+<div class="accordion-body">
+<div class="coach-section"><h4>Trigger</h4><p>${it.trigger}</p></div>
+<div class="coach-section"><h4>Objective</h4><p>${it.objective}</p></div>
+<div class="coach-section"><h4>Buildout Pattern</h4>${renderBuildoutSVG(f, i)}</div>
+<div class="coach-section"><h4>Steps</h4><ul>${it.steps.map(s => `<li>${s}</li>`).join('')}</ul></div>
+<div class="coach-section">
+<h4>Key Coaching Points by Position</h4>
+<table><thead><tr><th>Position</th><th>Coaching Point</th></tr></thead>
+<tbody>${it.coaching.map(c => `<tr><td><strong>${c.position}</strong></td><td>${c.point}</td></tr>`).join('')}</tbody>
+</table>
+</div>
+</div>
+` : ``}
+</div>
+`).join('')}
+</div>
+`;
+}
+
+if (state.coachSection === 'defensiveBlock') {
+const it = f.coachData.defensiveBlock;
+bodyHtml = `
+<div class="coach-panel">
+<div class="coach-section"><h4>Defensive Shape</h4><p>${it.shapeDescription}</p><ul>${it.roleSummary.map(r => `<li>${r}</li>`).join('')}</ul></div>
+<div class="coach-section"><h4>6 Key Principles</h4><div class="drill-list">${it.principles.map((p, i) => `<div class="principle-card"><h5>Principle ${i + 1}</h5><p>${p}</p></div>`).join('')}</div></div>
+<div class="coach-section"><h4>5-Step Session Plan</h4><div class="drill-list">${it.sessionPlan.map(s => `<div class="step-card"><h5>${s.title}</h5><p>${s.text}</p></div>`).join('')}</div></div>
+</div>
+`;
+}
+
+content.innerHTML = `
+<div class="coach-view-grid">
+<div class="pitch-panel">
+<div class="subheading">Formation Image</div>
+${renderField(f, false)}
+${renderKey(f.counts)}
+</div>
+<div>
+<div class="coach-toolbar">
+<div class="coach-tabs">
+<button class="tab-btn ${state.coachSection === 'sessionPlans' ? 'active' : ''}" onclick="setCoachSection('sessionPlans')">Session Plans</button>
+<button class="tab-btn ${state.coachSection === 'triggers' ? 'active' : ''}" onclick="setCoachSection('triggers')">Triggers</button>
+<button class="tab-btn ${state.coachSection === 'buildoutPatterns' ? 'active' : ''}" onclick="setCoachSection('buildoutPatterns')">Buildout Patterns</button>
+<button class="tab-btn ${state.coachSection === 'defensiveBlock' ? 'active' : ''}" onclick="setCoachSection('defensiveBlock')">Defensive Block</button>
+</div>
+</div>
+${bodyHtml}
+</div>
+</div>
+`;
+}
+
+function render() {
+updateHeader();
+document.getElementById('screen-formations').classList.toggle('hidden', state.view !== 'formations');
+document.getElementById('screen-player').classList.toggle('hidden', state.view !== 'player');
+document.getElementById('screen-coach').classList.toggle('hidden', state.view !== 'coach');
+renderFormationView();
+if (state.view === 'player') renderPlayerView();
+if (state.view === 'coach') renderCoachView();
+}
+
+formations["7v7"] = [
+{ id: "231", name: "2-3-1", style: "Balanced & Developmental",
+counts: { gk: 1, def: 2, mid: 3, fwd: 1 },
+bestFor: "Teams that want a balanced shape with natural support angles across the field and strong player development in all phases.",
+strengths: ["Creates simple triangles in buildup and midfield support","Gives natural width through the outside midfielders","Keeps a strong central presence without losing defensive cover","Easy for players to understand in both attack and defense"],
+weaknesses: ["The striker can get isolated if midfield support is slow","Back two can be exposed if both wide mids push too high","Requires midfielders to work hard in transition","Can struggle to create overloads in the box without late runs"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LB", full: "Left Back", role: "def", x: 34, y: 73 },
+{ label: "RB", full: "Right Back", role: "def", x: 66, y: 73 },
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 20, y: 45 },
+{ label: "CM", full: "Center Midfielder", role: "mid", x: 50, y: 44 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 80, y: 45 },
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 12 }
+],
+current: true
+},
+{ id: "312", name: "3-1-2", style: "Compact & Countering",
+counts: { gk: 1, def: 3, mid: 1, fwd: 2 },
+bestFor: "Teams that want extra defensive security and a direct route into two forwards on the break.",
+strengths: ["Strong defensive coverage with three players across the backline","Two forwards stay high and offer immediate counterattacking threat","Simple shape for protecting central areas","Useful when facing athletic or aggressive opponents"],
+weaknesses: ["The single midfielder carries a heavy workload","Can lose control of the middle if the lone mid gets overloaded","Limited natural width in possession","Buildout can become too direct if defenders skip the midfield"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 24, y: 74 },
+{ label: "CB", full: "Center Back", role: "def", x: 50, y: 74 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 76, y: 74 },
+{ label: "CM", full: "Center Midfielder", role: "mid", x: 50, y: 47 },
+{ label: "LS", full: "Left Striker", role: "fwd", x: 38, y: 20 },
+{ label: "RS", full: "Right Striker", role: "fwd", x: 62, y: 20 }
+]
+},
+{ id: "321", name: "3-2-1", style: "Secure & Patient",
+counts: { gk: 1, def: 3, mid: 2, fwd: 1 },
+bestFor: "Teams that want patient buildup, strong defensive balance, and a compact structure that is hard to break down.",
+strengths: ["Excellent defensive stability with a back three and two midfielders protecting centrally","Good shape for circulating possession safely","Midfield pair can control tempo and protect against transitions","Simple defensive roles for younger players"],
+weaknesses: ["Attacking width can disappear if defenders do not support forward","The striker needs strong movement and hold-up ability","Can become passive if the midfield pair sit too deep","Fewer players arrive in advanced areas"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 24, y: 74 },
+{ label: "CB", full: "Center Back", role: "def", x: 50, y: 70 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 76, y: 74 },
+{ label: "LCM", full: "Left Center Midfielder", role: "mid", x: 38, y: 48 },
+{ label: "RCM", full: "Right Center Midfielder", role: "mid", x: 62, y: 48 },
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 12 }
+]
+},
+{ id: "222", name: "2-2-2", style: "Direct & Aggressive",
+counts: { gk: 1, def: 2, mid: 2, fwd: 2 },
+bestFor: "Teams that want simple partnerships in every line and an aggressive, vertical style of play.",
+strengths: ["Clear pairs in defense, midfield, and attack simplify roles","Two forwards create constant pressure on the opponent backline","Straightforward passing options make it easy to play forward quickly","Good for pressing with numbers high up the field"],
+weaknesses: ["Can become too narrow without smart movement into wide areas","Spaces between the three units can open if the team stretches","Midfield pair can be overrun against teams with extra central numbers","Defenders may be isolated if the press is broken"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LB", full: "Left Back", role: "def", x: 34, y: 73 },
+{ label: "RB", full: "Right Back", role: "def", x: 66, y: 73 },
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 20, y: 48 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 80, y: 48 },
+{ label: "LS", full: "Left Striker", role: "fwd", x: 38, y: 13 },
+{ label: "RS", full: "Right Striker", role: "fwd", x: 62, y: 13 }
+]
+}
+];
+
+formations["9v9"] = [
+{ id: "3131", name: "3-1-3-1", style: "Press & Counter",
+counts: { gk: 1, def: 3, mid: 4, fwd: 1 },
+bestFor: "Teams that want to press high, control the middle third, and hit on the counter with a clinical striker.",
+strengths: ["High-press system disrupts opponents in their half","Single defensive mid protects back three and recycles possession","Three central mids dominate the center of the field","Lone striker makes penetrating runs in behind"],
+weaknesses: ["Lone striker can be isolated without quick midfield support","Wide areas vulnerable if wing-mids are not disciplined","Defensive mid takes on huge responsibility if pressed","Requires high fitness across the midfield four"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 18, y: 74 },
+{ label: "CB", full: "Center Back", role: "def", x: 50, y: 74 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 82, y: 74 },
+{ label: "DM", full: "Defensive Midfielder", role: "mid", x: 50, y: 57 },
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 18, y: 42 },
+{ label: "CM", full: "Center Midfielder", role: "mid", x: 50, y: 39 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 82, y: 42 },
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 15 }
+]
+},
+{ id: "242", name: "2-4-2", style: "Wide & Attacking",
+counts: { gk: 1, def: 2, mid: 4, fwd: 2 },
+bestFor: "Teams with strong wide players and two athletic center-backs comfortable defending in a high line.",
+strengths: ["Two wide mids provide constant width and crossing threat","Double pivot in center protects the back two","Two strikers create combination-play danger","High attacking intent puts opponents on the back foot"],
+weaknesses: ["Back two exposed on the counter without disciplined mids","Gaps can appear between defence and midfield if shape breaks","Requires center-backs with pace and composure in 1v1s","Wide mids must track back or the flank is wide open"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 35, y: 73 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 65, y: 73 },
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 16, y: 45 },
+{ label: "LCM", full: "Left Center Midfielder", role: "mid", x: 38, y: 45 },
+{ label: "RCM", full: "Right Center Midfielder", role: "mid", x: 62, y: 45 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 84, y: 45 },
+{ label: "LS", full: "Left Striker", role: "fwd", x: 38, y: 14 },
+{ label: "RS", full: "Right Striker", role: "fwd", x: 62, y: 14 }
+]
+},
+{ id: "233", name: "2-3-3", style: "High-Tempo Attack",
+counts: { gk: 1, def: 2, mid: 3, fwd: 3 },
+bestFor: "Attack-minded teams with pacey forwards who can press and transition quickly.",
+strengths: ["Three-forward line creates constant pressure and multiple goal threats","Midfield three can press high and win the ball back quickly","Flexible enough to shift into a 2-5 when building up","High goal-scoring potential with width and a central striker"],
+weaknesses: ["Back two heavily exposed if midfield is bypassed","Defensive duties fall heavily on midfield three","Requires very high energy levels from forwards to press effectively","Vulnerable to quick counter-attacks down the flanks"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 35, y: 74 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 65, y: 74 },
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 24, y: 49 },
+{ label: "CM", full: "Center Midfielder", role: "mid", x: 50, y: 44 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 76, y: 49 },
+{ label: "LW", full: "Left Wing", role: "fwd", x: 20, y: 15 },
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 11 },
+{ label: "RW", full: "Right Wing", role: "fwd", x: 80, y: 15 }
+]
+},
+{ id: "341", name: "3-4-1", style: "Midfield Dominance",
+counts: { gk: 1, def: 3, mid: 4, fwd: 1 },
+bestFor: "Disciplined, possession-oriented teams that build patiently and create through the midfield.",
+strengths: ["Four-man midfield suffocates opponent possession","Back three provides strong defensive coverage","Lone striker can link play and draw defenders out","Wide mids can push forward to create overloads in the final third"],
+weaknesses: ["Lone striker requires clinical finishing to justify low-number attack","If wide mids push up, the flanks are exposed defensively","Heavy reliance on midfield work rate and communication","Can lack directness if the striker is not proactive in movement"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 24, y: 74 },
+{ label: "CB", full: "Center Back", role: "def", x: 50, y: 74 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 76, y: 74 },
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 16, y: 50 },
+{ label: "LCM", full: "Left Center Midfielder", role: "mid", x: 38, y: 50 },
+{ label: "RCM", full: "Right Center Midfielder", role: "mid", x: 62, y: 50 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 84, y: 50 },
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 15 }
+],
+current: true
+},
+{ id: "332", name: "3-3-2", style: "Balanced & Compact",
+counts: { gk: 1, def: 3, mid: 3, fwd: 2 },
+bestFor: "Teams that want a controlled midfield and a clinical two-striker partnership.",
+strengths: ["Three-man midfield controls the center and limits space","Two strikers create constant pressure and combination-play opportunities","Midfield can split into a defensive 2 + attacking 1 by situation","Strong defensive shape - back three stays connected with midfield close behind"],
+weaknesses: ["Wings depend on midfielders getting forward to provide width","Center midfielder carries a heavy physical and tactical load all game","Can be overloaded wide by aggressive wingers if shape breaks down","Requires high fitness in midfield to maintain shape all game"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 24, y: 74 },
+{ label: "CB", full: "Center Back", role: "def", x: 50, y: 74 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 76, y: 74 },
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 24, y: 48 },
+{ label: "CM", full: "Center Midfielder", role: "mid", x: 50, y: 48 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 76, y: 48 },
+{ label: "LS", full: "Left Striker", role: "fwd", x: 38, y: 13 },
+{ label: "RS", full: "Right Striker", role: "fwd", x: 62, y: 13 }
+]
+},
+{ id: "323", name: "3-2-3", style: "Wide & Dynamic",
+counts: { gk: 1, def: 3, mid: 2, fwd: 3 },
+bestFor: "Teams that want high pressing, wide attacking threats, and fast transitions.",
+strengths: ["Three attacking mids create width, combinations, and goal threat simultaneously","High press from front three generates turnovers in dangerous areas","Quick transitions with three attackers already forward","Double DM pivot provides defensive protection for the back three"],
+weaknesses: ["DMs must cover a very wide area - vulnerability in wide channels","Front three must press as a coordinated unit or gaps appear behind","Requires athletic wide players who track back and press","Can be stretched if opponent plays deep and wide simultaneously","Requires high discipline from the front three out of possession"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 24, y: 74 },
+{ label: "CB", full: "Center Back", role: "def", x: 50, y: 74 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 76, y: 74 },
+{ label: "LDM", full: "Left Defensive Midfielder", role: "mid", x: 30, y: 45 },
+{ label: "RDM", full: "Right Defensive Midfielder", role: "mid", x: 70, y: 45 },
+{ label: "LW", full: "Left Wing", role: "fwd", x: 20, y: 15 },
+{ label: "CAM", full: "Central Attacking Midfielder", role: "mid", x: 50, y: 30 },
+{ label: "RW", full: "Right Wing", role: "fwd", x: 80, y: 15 }
+]
+},
+{ id: "431", name: "4-3-1", style: "Solid & Controlled",
+counts: { gk: 1, def: 4, mid: 3, fwd: 1 },
+bestFor: "Teams that prioritize defensive solidity and controlled possession build-up.",
+strengths: ["Four-man backline provides exceptional defensive width and cover","Compact midfield three is hard to break through centrally","Excellent at controlling possession and dictating tempo from deep","Natural wide outlets in the back four for switching play quickly"],
+weaknesses: ["Lone striker can become isolated without good movement and midfield runs","Limited attacking numbers makes sustaining pressure harder","Wide midfielders must contribute heavily to both phases","Can be too conservative when chasing a game"],
+positions: [
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 92 },
+{ label: "LB", full: "Left Back", role: "def", x: 16, y: 72 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 38, y: 72 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 62, y: 72 },
+{ label: "RB", full: "Right Back", role: "def", x: 84, y: 73 },
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 25, y: 47 },
+{ label: "CM", full: "Center Midfielder", role: "mid", x: 50, y: 47 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 75, y: 47 },
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 15 }
+]
+}
+];
+
+/* Auto-generate player/coach scaffolding for 7v7 & 9v9 */
+Object.values({ "7v7": formations["7v7"], "9v9": formations["9v9"] }).forEach(group => {
+group.forEach(f => {
+f.playerDetails = {};
+f.positions.forEach(p => { f.playerDetails[p.label] = mkPositionDetails(p.full, ROLE_META[p.role].label, f.name); });
+f.coachData = {
+sessionPlans: mkSessionPlans(f.name),
+triggers: makeGenericTriggers(f),
+buildoutPatterns: makeGenericBuildout(f),
+defensiveBlock: makeGenericDefensiveBlock(f),
+sessionCurriculum: mkCurriculum(f.name)
+};
+});
+});
+
+/* ===========================
+   UNIQUE 7v7 SESSION PLANS
+   =========================== */
+
+const f231 = formations["7v7"].find(f => f.id === "231");
+
+f231.coachData.sessionPlans = [
+
+{
+title:"Session 1 – 2-3-1 Shape Introduction",
+subtitle:"Teach lines, spacing and support triangles.",
+time:"70 min",
+objective:"Players understand basic 2-3-1 spacing.",
+focus:[
+"Formation shape and spacing",
+"Support triangles",
+"Player positioning"
+],
+phrases:[
+"Stay connected.",
+"Create triangles.",
+"See two passing options."
+],
+notes:"Prioritize understanding shape over speed of play. Freeze the game frequently to reinforce distances between lines.",
+drills:[
+{title:"Shape Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Introduce starting positions."},
+{title:"Triangle Passing",time:"12 min",players:"Groups",opposition:"None",desc:"Build support angles."},
+{title:"4v2 Possession",time:"12 min",players:"Units",opposition:"Passive",desc:"Maintain spacing."},
+{title:"Buildout Pattern",time:"16 min",players:"Team",opposition:"Passive",desc:"GK through midfield."},
+{title:"Conditioned Game",time:"20 min",players:"Team",opposition:"Live",desc:"Reward proper shape."}
+]
+},
+
+{
+title:"Session 2 – Building From GK",
+subtitle:"Creating safe exits from the back.",
+time:"70 min",
+objective:"Connect GK, backs and midfielders.",
+focus:[
+"Goalkeeper distribution",
+"Back-line composure",
+"Support underneath the ball"
+],
+phrases:[
+"Play the simple pass.",
+"Support behind the ball.",
+"Build with confidence."
+],
+notes:"Encourage patience during buildout. Reinforce that maintaining possession is more important than forcing forward passes.",
+drills:[
+{title:"GK Distribution",time:"10 min",players:"Units",opposition:"None",desc:"Safe first pass."},
+{title:"Back Two Buildout",time:"12 min",players:"Back unit",opposition:"Passive",desc:"Circulate under pressure."},
+{title:"5v3 Buildout",time:"15 min",players:"Units",opposition:"Live",desc:"Play through thirds."},
+{title:"Midfield Connection",time:"13 min",players:"Units",opposition:"Passive",desc:"Find CM."},
+{title:"Game",time:"20 min",players:"Team",opposition:"Live",desc:"Buildout bonus points."}
+]
+},
+
+{
+title:"Session 3 – Midfield Control",
+subtitle:"Using the midfield three effectively.",
+time:"70 min",
+objective:"Create support and switching opportunities.",
+focus:[
+"Midfield movement",
+"Supporting angles",
+"Switching play"
+],
+phrases:[
+"Move before the pass.",
+"Support underneath.",
+"Switch to find space."
+],
+notes:"Allow midfielders to solve problems independently. Praise players who scan and switch play proactively.",
+drills:[
+{title:"Rondo",time:"10 min",players:"Groups",opposition:"Live",desc:"First-touch quality."},
+{title:"Midfield Rotation",time:"12 min",players:"Midfielders",opposition:"Passive",desc:"Movement patterns."},
+{title:"Switching Play",time:"14 min",players:"Units",opposition:"Passive",desc:"Move opponents."},
+{title:"6v6 Midfield Game",time:"14 min",players:"Groups",opposition:"Live",desc:"Retain possession."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward switches."}
+]
+},
+
+{
+title:"Session 4 – Supporting the Striker",
+subtitle:"Improving service into the ST.",
+time:"70 min",
+objective:"Create quality chances.",
+focus:[
+"Forward support",
+"Third-man runs",
+"Finishing"
+],
+phrases:[
+"Support the striker.",
+"Arrive in the box.",
+"Finish with confidence."
+],
+notes:"Striker support should come from multiple midfielders. Avoid leaving the forward isolated for long periods.",
+drills:[
+{title:"Passing Patterns",time:"10 min",players:"Units",opposition:"None",desc:"Feed striker feet."},
+{title:"Overlap Runs",time:"12 min",players:"Groups",opposition:"Passive",desc:"Support attack."},
+{title:"Crossing Game",time:"15 min",players:"Units",opposition:"Passive",desc:"Target forward."},
+{title:"Finishing Circuit",time:"13 min",players:"Groups",opposition:"None",desc:"One-touch finishes."},
+{title:"Game",time:"20 min",players:"Team",opposition:"Live",desc:"Goals from combinations."}
+]
+},
+
+{
+title:"Session 5 – Defending Compactly",
+subtitle:"Defensive organization in the 2-3-1.",
+time:"70 min",
+objective:"Stay connected and deny central space.",
+focus:[
+"Defensive compactness",
+"Press-cover-balance",
+"Transition defense"
+],
+phrases:[
+"Protect the middle.",
+"Stay connected.",
+"Recover quickly."
+],
+notes:"Reward defensive shape and communication. Focus on distances between players rather than tackling alone.",
+drills:[
+{title:"Shadow Play",time:"10 min",players:"Team",opposition:"None",desc:"Defensive spacing."},
+{title:"Press-Cover-Balance",time:"12 min",players:"Groups",opposition:"Passive",desc:"Roles in defense."},
+{title:"4v4+2",time:"15 min",players:"Groups",opposition:"Live",desc:"Compact defending."},
+{title:"Transition Game",time:"13 min",players:"Team",opposition:"Live",desc:"Recover shape."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Defensive points."}
+]
+},
+
+{
+title:"Session 6 – Transition Moments",
+subtitle:"Winning and losing the ball.",
+time:"70 min",
+objective:"React instantly after turnovers.",
+focus:[
+"Transition mentality",
+"Counterattacking",
+"Recovery runs"
+],
+phrases:[
+"React first.",
+"Attack the moment.",
+"Recover your shape."
+],
+notes:"Transition behaviors should become automatic. Measure success by reaction speed rather than outcomes.",
+drills:[
+{title:"Reaction Race",time:"10 min",players:"Groups",opposition:"None",desc:"Fast responses."},
+{title:"3v2 Transition",time:"12 min",players:"Units",opposition:"Live",desc:"Counter attacks."},
+{title:"Wave Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Continuous transitions."},
+{title:"Recovery Runs",time:"13 min",players:"Team",opposition:"Live",desc:"Track runners."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Transition scoring."}
+]
+},
+
+{
+title:"Session 7 – Wide Play",
+subtitle:"Using LM and RM effectively.",
+time:"70 min",
+objective:"Create chances from width.",
+focus:[
+"Wide positioning",
+"Crossing quality",
+"1v1 attacking"
+],
+phrases:[
+"Use the width.",
+"Attack the flank.",
+"Deliver quality service."
+],
+notes:"Encourage wide midfielders to recognize when to stay wide and when to attack central spaces.",
+drills:[
+{title:"Wing Passing",time:"10 min",players:"Groups",opposition:"None",desc:"Wide combinations."},
+{title:"1v1 Flank",time:"12 min",players:"Pairs",opposition:"Live",desc:"Beat defender."},
+{title:"Cross & Finish",time:"15 min",players:"Units",opposition:"Passive",desc:"Service to ST."},
+{title:"Wide Channel Game",time:"13 min",players:"Groups",opposition:"Live",desc:"Use width."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Wide goals count double."}
+]
+},
+
+{
+title:"Session 8 – Match Preparation",
+subtitle:"Review all 2-3-1 concepts.",
+time:"70 min",
+objective:"Apply the entire game model.",
+focus:[
+"Formation review",
+"Game model execution",
+"Decision making"
+],
+phrases:[
+"Play our shape.",
+"Trust the system.",
+"Make the next action simple."
+],
+notes:"Coach less and observe more. Use the match to evaluate understanding of all previous learning blocks.",
+drills:[
+{title:"Review Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Refresh concepts."},
+{title:"Buildout Review",time:"12 min",players:"Units",opposition:"Passive",desc:"Pattern practice."},
+{title:"Defensive Shape",time:"12 min",players:"Team",opposition:"Passive",desc:"Compact block."},
+{title:"Set Scenarios",time:"16 min",players:"Team",opposition:"Live",desc:"Game situations."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Free play."}
+]
+}
+
+];
+
+f231.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="108" y2="350"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="108" y1="350" x2="64" y2="216"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="160" y2="210"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="210" x2="160" y2="58"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="212" y2="350"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="212" y1="350" x2="256" y2="216"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+
+const f312 = formations["7v7"].find(f => f.id === "312");
+
+f312.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the Back Three",
+subtitle:"Introduce defensive balance and back-three responsibilities.",
+time:"70 min",
+objective:"Teach shape, spacing, and defensive security in the 3-1-2.",
+focus:[
+"Back-three organization",
+"Defensive cover and balance",
+"Communication"
+],
+phrases:[
+"Protect the center.",
+"Cover for your teammate.",
+"Move together."
+],
+notes:"The priority is teaching relationships between defenders. Players should understand who pressures, who covers, and who balances.",
+drills:[
+{title:"Back Three Walkthrough",time:"10 min",players:"Defenders",opposition:"None",desc:"Establish distances and cover relationships."},
+{title:"Defensive Triangle Passing",time:"12 min",players:"Back Unit",opposition:"None",desc:"Build comfort in possession."},
+{title:"3v2 Defending",time:"14 min",players:"Defenders",opposition:"Live",desc:"Protect central spaces."},
+{title:"Shape Rotation",time:"14 min",players:"Team",opposition:"Passive",desc:"Move collectively as a unit."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward compact defending."}
+]
+},
+
+{
+title:"Session 2 – The Lone Midfielder",
+subtitle:"Develop the CM as the team's link player.",
+time:"70 min",
+objective:"Improve support angles and decision-making.",
+focus:[
+"Scanning before receiving",
+"Connecting lines",
+"Decision making"
+],
+phrases:[
+"Check your shoulder.",
+"Be available.",
+"Connect the team."
+],
+notes:"The CM is the most important connector in the formation. Encourage constant movement and awareness.",
+drills:[
+{title:"Scanning Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Develop awareness before receiving."},
+{title:"Central Support Circuit",time:"12 min",players:"Midfield Unit",opposition:"Passive",desc:"Create passing lanes."},
+{title:"4v2 Rondo",time:"14 min",players:"Groups",opposition:"Live",desc:"Quick support play."},
+{title:"6v4 Possession",time:"14 min",players:"Units",opposition:"Live",desc:"CM links both lines."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Bonus points for CM involvement."}
+]
+},
+
+{
+title:"Session 3 – Playing Into Two Strikers",
+subtitle:"Build direct attacking opportunities.",
+time:"70 min",
+objective:"Connect through the strikers quickly.",
+focus:[
+"Forward partnerships",
+"Target play",
+"Combination attacking"
+],
+phrases:[
+"One checks, one stretches.",
+"Play forward early.",
+"Support the striker."
+],
+notes:"Develop complementary movement between forwards. Avoid having both strikers occupy the same space.",
+drills:[
+{title:"Target Passing",time:"10 min",players:"Groups",opposition:"None",desc:"Find forwards early."},
+{title:"Checking Runs",time:"12 min",players:"Forwards",opposition:"Passive",desc:"One checks, one spins."},
+{title:"3v2 Attack",time:"14 min",players:"Units",opposition:"Live",desc:"Use striker partnerships."},
+{title:"Combination Finishing",time:"14 min",players:"Attackers",opposition:"Passive",desc:"Wall passes and finishes."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward forward combinations."}
+]
+},
+
+{
+title:"Session 4 – Counterattacking Principles",
+subtitle:"Transition quickly after regains.",
+time:"70 min",
+objective:"Exploit space with two forwards.",
+focus:[
+"Quick transitions",
+"Forward runs",
+"Decision speed"
+],
+phrases:[
+"Attack immediately.",
+"Run into space.",
+"First pass forward."
+],
+notes:"Reward players who recognize transition moments quickly and attack before defenders recover.",
+drills:[
+{title:"Reaction Races",time:"10 min",players:"Groups",opposition:"None",desc:"Immediate transition response."},
+{title:"2v1 Breakouts",time:"12 min",players:"Forwards",opposition:"Live",desc:"Fast attacks."},
+{title:"Wave Counter Game",time:"14 min",players:"Units",opposition:"Live",desc:"Attack after regain."},
+{title:"Channel Runs",time:"14 min",players:"Forwards",opposition:"Passive",desc:"Use width and depth."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Bonus for goals within 10 seconds."}
+]
+},
+
+{
+title:"Session 5 – Defending Deep",
+subtitle:"Protecting the goal with numerical superiority.",
+time:"70 min",
+objective:"Maintain compact defensive shape.",
+focus:[
+"Defensive compactness",
+"Protecting central areas",
+"Recovery principles"
+],
+phrases:[
+"Stay compact.",
+"Protect the goal.",
+"Recover quickly."
+],
+notes:"Keep distances short between defenders and midfield. Prioritize organization over pressing.",
+drills:[
+{title:"Defensive Shadow Play",time:"10 min",players:"Team",opposition:"None",desc:"Positioning practice."},
+{title:"3v3 Defensive Unit",time:"12 min",players:"Defenders",opposition:"Live",desc:"Pressure and cover."},
+{title:"Recover & Defend",time:"14 min",players:"Groups",opposition:"Live",desc:"Transition to shape."},
+{title:"Half-Field Defending",time:"14 min",players:"Team",opposition:"Live",desc:"Protect central spaces."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Clean-sheet challenge."}
+]
+},
+
+{
+title:"Session 6 – Switching From Defense To Attack",
+subtitle:"Connecting the back three with the front two.",
+time:"70 min",
+objective:"Play forward quickly but safely.",
+focus:[
+"Buildout progression",
+"Vertical passing",
+"Transition support"
+],
+phrases:[
+"Play through the lines.",
+"Support underneath.",
+"Look forward first."
+],
+notes:"Encourage progressive thinking but maintain possession discipline when forward options are unavailable.",
+drills:[
+{title:"Passing Gates",time:"10 min",players:"Groups",opposition:"None",desc:"Accuracy and weight of pass."},
+{title:"Back-to-Front Pattern",time:"12 min",players:"Team",opposition:"Passive",desc:"Defender to striker progression."},
+{title:"5v4 Transition",time:"14 min",players:"Units",opposition:"Live",desc:"Fast support play."},
+{title:"Vertical Passing Game",time:"14 min",players:"Groups",opposition:"Live",desc:"Forward-thinking decisions."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward direct attacks."}
+]
+},
+
+{
+title:"Session 7 – Striker Partnerships",
+subtitle:"Develop chemistry between LS and RS.",
+time:"70 min",
+objective:"Create coordinated movement and finishing.",
+focus:[
+"Movement patterns",
+"Combination play",
+"Finishing"
+],
+phrases:[
+"Move together.",
+"Create space for each other.",
+"Finish with confidence."
+],
+notes:"Strikers should understand when to separate, combine, and rotate positions to unsettle defenders.",
+drills:[
+{title:"Movement Patterns",time:"10 min",players:"Forwards",opposition:"None",desc:"Check-and-spin timing."},
+{title:"Wall Pass Combinations",time:"12 min",players:"Forwards",opposition:"Passive",desc:"Quick combinations."},
+{title:"2v2 Attacking",time:"14 min",players:"Forwards",opposition:"Live",desc:"Decision-making."},
+{title:"Finishing Waves",time:"14 min",players:"Attackers",opposition:"Passive",desc:"Multiple finishes."},
+{title:"Small-Sided Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward striker combinations."}
+]
+},
+
+{
+title:"Session 8 – Complete 3-1-2 Match Model",
+subtitle:"Integrate defensive stability and counterattacking play.",
+time:"70 min",
+objective:"Execute the complete game model.",
+focus:[
+"Game-model execution",
+"Shape recognition",
+"Decision making"
+],
+phrases:[
+"Trust the structure.",
+"Play with purpose.",
+"React together."
+],
+notes:"Observe player understanding of all previous sessions. Encourage players to solve problems independently.",
+drills:[
+{title:"Formation Review",time:"10 min",players:"Team",opposition:"None",desc:"Refresh responsibilities."},
+{title:"Buildout Walkthrough",time:"12 min",players:"Team",opposition:"Passive",desc:"Back-three progression."},
+{title:"Transition Scenarios",time:"12 min",players:"Team",opposition:"Live",desc:"Win and lose the ball."},
+{title:"Functional Match Situations",time:"16 min",players:"Team",opposition:"Live",desc:"Apply key concepts."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Coach minimally and observe."}
+]
+}
+
+];
+
+f312.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="160" y2="226"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="226" x2="122" y2="96"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="80" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="80" y1="355" x2="160" y2="226"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="160" y1="226" x2="122" y2="96"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="240" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="240" y1="355" x2="160" y2="226"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="160" y1="226" x2="198" y2="96"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f321 = formations["7v7"].find(f => f.id === "321");
+
+f321.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 3-2-1 Structure",
+subtitle:"Introducing shape, balance, and defensive security.",
+time:"70 min",
+objective:"Teach player roles and relationships within the 3-2-1.",
+focus:[
+"Formation shape",
+"Defensive balance",
+"Player responsibilities"
+],
+phrases:[
+"Stay connected.",
+"Protect the middle.",
+"Know your role."
+],
+notes:"The 3-2-1 is built on defensive stability and patient possession. Emphasize shape before speed.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review positions and spacing."},
+{title:"Back Three Passing",time:"12 min",players:"Defenders",opposition:"None",desc:"Build familiarity across the back line."},
+{title:"Shape Movement",time:"14 min",players:"Team",opposition:"Passive",desc:"Move as a connected unit."},
+{title:"Positional Possession",time:"14 min",players:"Groups",opposition:"Passive",desc:"Retain shape while keeping possession."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward maintaining structure."}
+]
+},
+
+{
+title:"Session 2 – Building Through the Back Three",
+subtitle:"Creating confidence and composure during buildup.",
+time:"70 min",
+objective:"Develop reliable buildout habits from the defensive line.",
+focus:[
+"Buildout play",
+"Patience in possession",
+"Decision making"
+],
+phrases:[
+"Stay calm.",
+"Find the free player.",
+"Keep the ball moving."
+],
+notes:"The back three create a natural numerical advantage. Encourage patience and smart decisions.",
+drills:[
+{title:"Passing Gates",time:"10 min",players:"Defenders",opposition:"None",desc:"Improve passing quality."},
+{title:"3v1 Buildout",time:"12 min",players:"Defenders",opposition:"Passive",desc:"Play out under pressure."},
+{title:"Back-to-Midfield Progression",time:"14 min",players:"Units",opposition:"Passive",desc:"Connect lines."},
+{title:"5v3 Possession",time:"14 min",players:"Groups",opposition:"Live",desc:"Retain and progress possession."},
+{title:"Game",time:"20 min",players:"Team",opposition:"Live",desc:"Reward successful buildouts."}
+]
+},
+
+{
+title:"Session 3 – Midfield Partnership",
+subtitle:"Developing the LCM and RCM relationship.",
+time:"70 min",
+objective:"Improve support, communication, and control.",
+focus:[
+"Midfield support",
+"Scanning",
+"Connection play"
+],
+phrases:[
+"Support early.",
+"Check your shoulder.",
+"Connect the team."
+],
+notes:"The midfield pair controls rhythm and protects the defense. Constant movement is essential.",
+drills:[
+{title:"Scanning Warmup",time:"10 min",players:"Midfielders",opposition:"None",desc:"Awareness before receiving."},
+{title:"Pair Passing",time:"12 min",players:"Midfielders",opposition:"None",desc:"Develop rhythm and timing."},
+{title:"Support Angle Game",time:"14 min",players:"Groups",opposition:"Passive",desc:"Create passing lanes."},
+{title:"6v4 Possession",time:"14 min",players:"Groups",opposition:"Live",desc:"Control the center."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward midfield involvement."}
+]
+},
+
+{
+title:"Session 4 – Supporting the Lone Striker",
+subtitle:"Creating chances while playing with one forward.",
+time:"70 min",
+objective:"Improve attacking support from midfield.",
+focus:[
+"Forward support",
+"Third-man runs",
+"Finishing"
+],
+phrases:[
+"Support the striker.",
+"Arrive on time.",
+"Attack the space."
+],
+notes:"The striker should never be isolated. Encourage midfield runners to join attacks.",
+drills:[
+{title:"Target Passing",time:"10 min",players:"Groups",opposition:"None",desc:"Find the striker effectively."},
+{title:"Third-Man Runs",time:"12 min",players:"Midfielders",opposition:"Passive",desc:"Support beyond the striker."},
+{title:"3v2 Attacking",time:"14 min",players:"Units",opposition:"Live",desc:"Create overloads."},
+{title:"Finishing Circuit",time:"14 min",players:"Attackers",opposition:"Passive",desc:"Turn attacks into goals."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward support runs."}
+]
+},
+
+{
+title:"Session 5 – Defending as a Unit",
+subtitle:"Protecting central spaces and staying compact.",
+time:"70 min",
+objective:"Develop defensive shape and communication.",
+focus:[
+"Compact defending",
+"Protecting the middle",
+"Communication"
+],
+phrases:[
+"Stay compact.",
+"Protect the goal.",
+"Move together."
+],
+notes:"The strength of the 3-2-1 is defensive balance. Keep distances short between all lines.",
+drills:[
+{title:"Shadow Defending",time:"10 min",players:"Team",opposition:"None",desc:"Practice team shape."},
+{title:"Press-Cover-Balance",time:"12 min",players:"Groups",opposition:"Passive",desc:"Learn defensive roles."},
+{title:"5v4 Defending",time:"14 min",players:"Groups",opposition:"Live",desc:"Protect dangerous spaces."},
+{title:"Recovery Game",time:"14 min",players:"Team",opposition:"Live",desc:"Recover shape quickly."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward defensive discipline."}
+]
+},
+
+{
+title:"Session 6 – Transition Moments",
+subtitle:"Reacting quickly when possession changes.",
+time:"70 min",
+objective:"Improve reactions after winning and losing the ball.",
+focus:[
+"Transitions",
+"Counterattacking",
+"Recovery runs"
+],
+phrases:[
+"React first.",
+"Attack quickly.",
+"Recover quickly."
+],
+notes:"The first few seconds after a turnover are critical. Train immediate reactions.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Develop reaction speed."},
+{title:"3v2 Transition",time:"12 min",players:"Units",opposition:"Live",desc:"Attack from regains."},
+{title:"Transition Waves",time:"14 min",players:"Groups",opposition:"Live",desc:"Repeated transition moments."},
+{title:"Recovery Runs",time:"14 min",players:"Team",opposition:"Live",desc:"Track runners quickly."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward transition success."}
+]
+},
+
+{
+title:"Session 7 – Patient Possession",
+subtitle:"Using the 3-2-1 to control the tempo.",
+time:"70 min",
+objective:"Improve possession and decision-making.",
+focus:[
+"Patience",
+"Ball circulation",
+"Tempo control"
+],
+phrases:[
+"Keep the ball.",
+"Move the opponent.",
+"Wait for the moment."
+],
+notes:"Players should understand that possession can create opportunities without forcing forward play.",
+drills:[
+{title:"Rondo",time:"10 min",players:"Groups",opposition:"Live",desc:"Quick support play."},
+{title:"Circle Possession",time:"12 min",players:"Groups",opposition:"Passive",desc:"Retain possession."},
+{title:"Switching Play",time:"14 min",players:"Team",opposition:"Passive",desc:"Move opponents side-to-side."},
+{title:"6v6 Possession",time:"14 min",players:"Groups",opposition:"Live",desc:"Control the game rhythm."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward long possession sequences."}
+]
+},
+
+{
+title:"Session 8 – Complete 3-2-1 Match Model",
+subtitle:"Combining buildup, midfield control, and defending.",
+time:"70 min",
+objective:"Execute the complete tactical identity of the 3-2-1.",
+focus:[
+"Game-model execution",
+"Tactical understanding",
+"Decision making"
+],
+phrases:[
+"Trust the shape.",
+"Play with purpose.",
+"React together."
+],
+notes:"Evaluate overall understanding. Allow players to solve problems independently.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review shape and responsibilities."},
+{title:"Buildout Review",time:"12 min",players:"Team",opposition:"Passive",desc:"Practice progression patterns."},
+{title:"Defensive Shape Review",time:"12 min",players:"Team",opposition:"Passive",desc:"Maintain compactness."},
+{title:"Scenario Match",time:"16 min",players:"Team",opposition:"Live",desc:"Apply tactical concepts."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Evaluate execution."}
+]
+}
+
+];
+
+f321.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="122" y2="230"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="122" y1="230" x2="160" y2="58"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="198" y2="230"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="198" y1="230" x2="160" y2="58"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="160" y2="230"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="230" x2="160" y2="58"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+
+const f222 = formations["7v7"].find(f => f.id === "222");
+
+f222.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 2-2-2 Structure",
+subtitle:"Introduce the balanced partnerships within the 2-2-2 formation.",
+time:"70 min",
+objective:"Teach player relationships and spacing between all three units.",
+focus:[
+"Formation shape",
+"Player partnerships",
+"Team spacing"
+],
+phrases:[
+"Stay connected.",
+"Work with your partner.",
+"Move together."
+],
+notes:"The 2-2-2 is built around partnerships. Focus on relationships between defensive, midfield, and forward pairs before emphasizing tactics.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review starting positions and partnerships."},
+{title:"Partner Passing",time:"12 min",players:"Pairs",opposition:"None",desc:"Build communication and awareness."},
+{title:"Unit Rotation",time:"14 min",players:"Team",opposition:"Passive",desc:"Maintain spacing while moving."},
+{title:"Shape Possession Game",time:"14 min",players:"Groups",opposition:"Passive",desc:"Preserve formation structure."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward staying connected to partners."}
+]
+},
+
+{
+title:"Session 2 – Building from the Back Pair",
+subtitle:"Develop confidence and decision-making in the defensive pair.",
+time:"70 min",
+objective:"Create reliable buildout habits from the back.",
+focus:[
+"Defensive partnerships",
+"Buildout play",
+"Decision making"
+],
+phrases:[
+"Find the safe pass.",
+"Support underneath.",
+"Stay available."
+],
+notes:"Encourage defenders to solve problems together. Reinforce communication and patience under pressure.",
+drills:[
+{title:"Passing Gates",time:"10 min",players:"Defenders",opposition:"None",desc:"Develop passing accuracy."},
+{title:"2v1 Buildout",time:"12 min",players:"Defenders",opposition:"Passive",desc:"Play out under light pressure."},
+{title:"Defender-to-Midfield Progression",time:"14 min",players:"Units",opposition:"Passive",desc:"Connect lines effectively."},
+{title:"4v2 Possession",time:"14 min",players:"Groups",opposition:"Live",desc:"Retain and progress possession."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward successful buildouts."}
+]
+},
+
+{
+title:"Session 3 – Midfield Pair Control",
+subtitle:"Using the midfield pair as the engine of the team.",
+time:"70 min",
+objective:"Improve support, possession, and transitions.",
+focus:[
+"Midfield support",
+"Possession retention",
+"Transitions"
+],
+phrases:[
+"Always support the ball.",
+"Scan before receiving.",
+"Keep possession first."
+],
+notes:"The midfield pair should become the connection point for the entire team. Emphasize movement and support angles.",
+drills:[
+{title:"Scanning Exercise",time:"10 min",players:"Midfielders",opposition:"None",desc:"Prepare before receiving."},
+{title:"Midfield Combination Passing",time:"12 min",players:"Pairs",opposition:"None",desc:"Develop rhythm and timing."},
+{title:"Support Angles Game",time:"14 min",players:"Groups",opposition:"Passive",desc:"Create passing lanes."},
+{title:"5v3 Possession",time:"14 min",players:"Units",opposition:"Live",desc:"Control the middle."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward midfield involvement."}
+]
+},
+
+{
+title:"Session 4 – Developing the Strike Pair",
+subtitle:"Building chemistry between LS and RS.",
+time:"70 min",
+objective:"Improve movement, combination play, and finishing.",
+focus:[
+"Forward movement",
+"Combination play",
+"Finishing"
+],
+phrases:[
+"Move together.",
+"Create space.",
+"Finish confidently."
+],
+notes:"One striker should often check while the other stretches the defense. Encourage complementary movement.",
+drills:[
+{title:"Check-and-Spin Runs",time:"10 min",players:"Forwards",opposition:"None",desc:"Coordinate movement."},
+{title:"Wall Pass Finishing",time:"12 min",players:"Forwards",opposition:"Passive",desc:"Quick combinations."},
+{title:"2v1 Attacking",time:"14 min",players:"Attackers",opposition:"Live",desc:"Exploit overloads."},
+{title:"Finishing Circuit",time:"14 min",players:"Groups",opposition:"Passive",desc:"Multiple shot opportunities."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Goals from combinations count double."}
+]
+},
+
+{
+title:"Session 5 – High Pressure Defending",
+subtitle:"Winning the ball back quickly with a compact shape.",
+time:"70 min",
+objective:"Teach coordinated pressing from front to back.",
+focus:[
+"Pressing cues",
+"Compact defending",
+"Team communication"
+],
+phrases:[
+"Press together.",
+"Protect the middle.",
+"Recover quickly."
+],
+notes:"Stress collective pressure rather than individual chasing. The shape must stay connected while pressing.",
+drills:[
+{title:"Pressing Triggers",time:"10 min",players:"Team",opposition:"None",desc:"Recognize pressing moments."},
+{title:"2v2 Pressing",time:"12 min",players:"Pairs",opposition:"Live",desc:"Pressure and cover."},
+{title:"4v4 Compact Game",time:"14 min",players:"Groups",opposition:"Live",desc:"Stay connected defensively."},
+{title:"Transition Press",time:"14 min",players:"Units",opposition:"Live",desc:"React immediately after loss."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward regains high up the field."}
+]
+},
+
+{
+title:"Session 6 – Fast Transition Attacks",
+subtitle:"Turning regains into immediate attacking opportunities.",
+time:"70 min",
+objective:"Attack quickly through the midfield and strike pairs.",
+focus:[
+"Transitions",
+"Counterattacking",
+"Forward support"
+],
+phrases:[
+"React first.",
+"Attack quickly.",
+"Play forward."
+],
+notes:"Reward speed of thought and movement. Encourage players to recognize transition moments before the opponent organizes.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Quick decision-making."},
+{title:"3v2 Counterattack",time:"12 min",players:"Units",opposition:"Live",desc:"Exploit defensive imbalance."},
+{title:"Wave Transition Game",time:"14 min",players:"Groups",opposition:"Live",desc:"Repeated transition moments."},
+{title:"Forward Release Drill",time:"14 min",players:"Units",opposition:"Passive",desc:"Play quickly to strikers."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Bonus for goals after regains."}
+]
+},
+
+{
+title:"Session 7 – Width and Penetration",
+subtitle:"Preventing the 2-2-2 from becoming too narrow.",
+time:"70 min",
+objective:"Stretch opponents while maintaining partnerships.",
+focus:[
+"Attacking width",
+"Wide support",
+"Creating space"
+],
+phrases:[
+"Use the width.",
+"Stretch the field.",
+"Attack the space."
+],
+notes:"Players often become narrow in a 2-2-2. Reinforce width as a way to create central opportunities.",
+drills:[
+{title:"Wide Passing Patterns",time:"10 min",players:"Groups",opposition:"None",desc:"Use full width of field."},
+{title:"Channel Runs",time:"12 min",players:"Units",opposition:"Passive",desc:"Attack outside lanes."},
+{title:"Crossing & Finishing",time:"14 min",players:"Groups",opposition:"Passive",desc:"Create chances from wide areas."},
+{title:"Wide Channel Game",time:"14 min",players:"Groups",opposition:"Live",desc:"Encourage width."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 8 – Complete 2-2-2 Match Model",
+subtitle:"Integrate attacking partnerships, midfield control, and team defending.",
+time:"70 min",
+objective:"Execute the complete tactical identity of the 2-2-2.",
+focus:[
+"Tactical understanding",
+"Game-model execution",
+"Decision making"
+],
+phrases:[
+"Trust your partner.",
+"Keep the shape.",
+"Make simple decisions."
+],
+notes:"Allow players to apply concepts learned throughout the curriculum. Observe rather than constantly coaching.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review shape and responsibilities."},
+{title:"Buildout Review",time:"12 min",players:"Team",opposition:"Passive",desc:"Connect defensive and midfield pairs."},
+{title:"Attacking Pattern Play",time:"12 min",players:"Team",opposition:"Passive",desc:"Practice forward combinations."},
+{title:"Scenario-Based Game",time:"16 min",players:"Team",opposition:"Live",desc:"Apply all game principles."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Coach minimally and evaluate performance."}
+]
+}
+
+];
+
+f222.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="108" y2="350"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="108" y1="350" x2="64" y2="230"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="64" y1="230" x2="122" y2="62"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="212" y2="350"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="212" y1="350" x2="256" y2="230"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="256" y1="230" x2="198" y2="62"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="108" y2="350"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="108" y1="350" x2="212" y2="230"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="212" y1="230" x2="198" y2="62"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+
+/* ===========================
+   UNIQUE 9v9 SESSION PLANS
+   =========================== */
+
+const f3131 = formations["9v9"].find(f => f.id === "3131");
+
+f3131.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Introducing the 3-1-3-1 Structure",
+subtitle:"Understanding line spacing and the role of the defensive midfielder.",
+time:"80 min",
+objective:"Teach team shape, player relationships, and positional responsibilities within the 3-1-3-1.",
+focus:[
+"Formation structure",
+"Line relationships",
+"Positional discipline"
+],
+phrases:[
+"Stay connected.",
+"Protect the middle.",
+"Know your role."
+],
+notes:"The first session should focus on understanding spacing and shape. Encourage players to recognize how each line supports the others.",
+drills:[
+{title:"Shape Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Introduce positioning of all lines."},
+{title:"Three-Line Passing",time:"15 min",players:"Units",opposition:"None",desc:"Connect defenders, midfielders, and striker."},
+{title:"Positional Movement",time:"15 min",players:"Team",opposition:"Passive",desc:"Maintain structure while circulating the ball."},
+{title:"Shape Game",time:"20 min",players:"Team",opposition:"Passive",desc:"Reward maintaining formation."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Points awarded for proper shape."}
+]
+},
+
+{
+title:"Session 2 – The Defensive Midfielder as the Pivot",
+subtitle:"Building the team around the DM.",
+time:"80 min",
+objective:"Develop the DM as the team's primary link and defensive shield.",
+focus:[
+"Pivot play",
+"Scanning",
+"Ball circulation"
+],
+phrases:[
+"Play through the pivot.",
+"Check your shoulder.",
+"Be available."
+],
+notes:"The DM is the foundation of the 3-1-3-1. Reinforce constant awareness and intelligent positioning.",
+drills:[
+{title:"Scanning Circuit",time:"10 min",players:"Midfielders",opposition:"None",desc:"Develop awareness before receiving."},
+{title:"Pivot Passing Pattern",time:"15 min",players:"Units",opposition:"Passive",desc:"Play through the DM consistently."},
+{title:"5v3 Possession",time:"15 min",players:"Groups",opposition:"Live",desc:"Use the DM as the central outlet."},
+{title:"Switching Play Exercise",time:"20 min",players:"Team",opposition:"Passive",desc:"Move the ball through the pivot."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Extra points for successful pivot usage."}
+]
+},
+
+{
+title:"Session 3 – Midfield Four Dominance",
+subtitle:"Using numbers to control the middle third.",
+time:"80 min",
+objective:"Create midfield superiority through movement and support.",
+focus:[
+"Midfield control",
+"Support angles",
+"Numerical superiority"
+],
+phrases:[
+"Create options.",
+"Support the ball.",
+"Control the middle."
+],
+notes:"The midfield four must learn to work together to dominate possession and deny central space defensively.",
+drills:[
+{title:"Rondo Progression",time:"10 min",players:"Groups",opposition:"Live",desc:"Quick possession habits."},
+{title:"Midfield Rotation",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Rotate without losing shape."},
+{title:"Overload Possession",time:"15 min",players:"Groups",opposition:"Live",desc:"Exploit numerical superiority."},
+{title:"6v4 Midfield Game",time:"20 min",players:"Units",opposition:"Live",desc:"Maintain control under pressure."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward midfield combinations."}
+]
+},
+
+{
+title:"Session 4 – Creating Chances for the Lone Striker",
+subtitle:"Supporting the ST with intelligent movement.",
+time:"80 min",
+objective:"Improve attacking connections between midfield and striker.",
+focus:[
+"Attacking support",
+"Forward combinations",
+"Chance creation"
+],
+phrases:[
+"Support the striker.",
+"Arrive in the box.",
+"Create options."
+],
+notes:"Players must understand that the striker cannot attack alone. Midfield support is essential for success.",
+drills:[
+{title:"Target Passing",time:"10 min",players:"Groups",opposition:"None",desc:"Find the striker cleanly."},
+{title:"Third-Man Runs",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Support the front player."},
+{title:"4v3 Attack",time:"15 min",players:"Units",opposition:"Live",desc:"Create overloads around the striker."},
+{title:"Finishing Patterns",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Combination play ending with shots."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals involving midfield support."}
+]
+},
+
+{
+title:"Session 5 – High Pressing Organization",
+subtitle:"Winning the ball in the opponent's half.",
+time:"80 min",
+objective:"Coordinate pressure from the striker and midfield line.",
+focus:[
+"Pressing triggers",
+"Team pressure",
+"Defensive organization"
+],
+phrases:[
+"Press together.",
+"Force mistakes.",
+"Win it back."
+],
+notes:"Success comes from coordinated movement. Players should learn to press as a unit rather than individually.",
+drills:[
+{title:"Pressing Triggers",time:"10 min",players:"Team",opposition:"None",desc:"Identify pressing cues."},
+{title:"Front-Line Pressing",time:"15 min",players:"Attackers",opposition:"Passive",desc:"Direct opponents into traps."},
+{title:"5v5 Pressing Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Immediate pressure after loss."},
+{title:"Half-Field Press",time:"20 min",players:"Team",opposition:"Live",desc:"Compact pressing shape."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Bonus for regains in attacking half."}
+]
+},
+
+{
+title:"Session 6 – Transition and Counterattack",
+subtitle:"Converting regains into quick attacks.",
+time:"80 min",
+objective:"Attack rapidly through the midfield four after winning possession.",
+focus:[
+"Transitions",
+"Counterattacking",
+"Decision speed"
+],
+phrases:[
+"React first.",
+"Attack quickly.",
+"Play forward."
+],
+notes:"Reward immediate actions after regaining possession and encourage players to recognize transition opportunities early.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Quick decision-making."},
+{title:"4v2 Counterattack",time:"15 min",players:"Units",opposition:"Live",desc:"Fast attacking play."},
+{title:"Wave Transition Exercise",time:"15 min",players:"Groups",opposition:"Live",desc:"Continuous transitions."},
+{title:"Vertical Passing Game",time:"20 min",players:"Team",opposition:"Live",desc:"Forward-thinking movement."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals after regains."}
+]
+},
+
+{
+title:"Session 7 – Wide Play and Penetration",
+subtitle:"Using LM and RM to stretch opponents.",
+time:"80 min",
+objective:"Create width while maintaining central control.",
+focus:[
+"Attacking width",
+"Wide play",
+"Penetration"
+],
+phrases:[
+"Use the width.",
+"Stretch the field.",
+"Attack the flank."
+],
+notes:"Encourage wide players to create space centrally by staying wide before making attacking runs.",
+drills:[
+{title:"Wing Passing Pattern",time:"10 min",players:"Groups",opposition:"None",desc:"Develop wide combinations."},
+{title:"1v1 Wing Play",time:"15 min",players:"Pairs",opposition:"Live",desc:"Beat defenders wide."},
+{title:"Crossing Exercise",time:"15 min",players:"Units",opposition:"Passive",desc:"Deliver quality service."},
+{title:"Wide Channel Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Encourage flank attacks."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 8 – Complete 3-1-3-1 Game Model",
+subtitle:"Combining possession, press, and transition principles.",
+time:"80 min",
+objective:"Execute the full tactical identity of the 3-1-3-1.",
+focus:[
+"Tactical execution",
+"Game-model understanding",
+"Decision making"
+],
+phrases:[
+"Trust the shape.",
+"Play with purpose.",
+"React together."
+],
+notes:"Reduce coaching interruptions and observe how players apply the concepts learned throughout the curriculum.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review all responsibilities."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Practice structured progression."},
+{title:"Defensive Shape Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Maintain compactness."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply all game moments."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Evaluate execution of principles."}
+]
+}
+
+];
+
+f3131.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="160" y2="274"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="274" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="58" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="58" y1="355" x2="58" y2="202"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="58" y1="202" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="262" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="262" y1="355" x2="262" y2="202"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="262" y1="202" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f242 = formations["9v9"].find(f => f.id === "242");
+
+f242.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 2-4-2 Structure",
+subtitle:"Introducing balance, width, and partnerships across the field.",
+time:"80 min",
+objective:"Teach positional responsibilities and shape within the 2-4-2.",
+focus:[
+"Formation shape",
+"Player partnerships",
+"Width and spacing"
+],
+phrases:[
+"Stay connected.",
+"Use the width.",
+"Know your partner."
+],
+notes:"The 2-4-2 depends heavily on strong partnerships throughout the team. Focus on spacing between units before introducing more advanced tactical concepts.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review responsibilities and positioning."},
+{title:"Partner Passing",time:"15 min",players:"Pairs",opposition:"None",desc:"Build communication and support."},
+{title:"Shape Movement Exercise",time:"15 min",players:"Team",opposition:"Passive",desc:"Shift together while maintaining spacing."},
+{title:"Positional Possession",time:"20 min",players:"Groups",opposition:"Passive",desc:"Maintain shape while circulating."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward positional discipline."}
+]
+},
+
+{
+title:"Session 2 – Building From the Back",
+subtitle:"Developing composure and confidence in possession.",
+time:"80 min",
+objective:"Build safely through the defensive pair and midfield line.",
+focus:[
+"Buildout principles",
+"Defender decision-making",
+"Support angles"
+],
+phrases:[
+"Support behind the ball.",
+"Play the simple pass.",
+"Stay composed."
+],
+notes:"Encourage patience in possession and reinforce creating passing options before the ball arrives.",
+drills:[
+{title:"Defender Passing Circuit",time:"10 min",players:"Defenders",opposition:"None",desc:"Develop technical quality."},
+{title:"2v1 Buildout",time:"15 min",players:"Defenders",opposition:"Passive",desc:"Play out under pressure."},
+{title:"Back-to-Midfield Progression",time:"15 min",players:"Units",opposition:"Passive",desc:"Connect lines effectively."},
+{title:"5v3 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Work through midfield support."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward successful buildouts."}
+]
+},
+
+{
+title:"Session 3 – Midfield Four Control",
+subtitle:"Using the midfield line to dominate possession.",
+time:"80 min",
+objective:"Improve support, movement, and control through midfield.",
+focus:[
+"Midfield support",
+"Possession retention",
+"Scanning"
+],
+phrases:[
+"Create angles.",
+"Support the ball.",
+"Scan before receiving."
+],
+notes:"The midfield four are the engine of the formation. Encourage constant movement to provide passing options.",
+drills:[
+{title:"Rondo Warmup",time:"10 min",players:"Groups",opposition:"Live",desc:"Improve first-touch quality."},
+{title:"Midfield Rotation",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Rotate while preserving shape."},
+{title:"6v4 Possession",time:"15 min",players:"Groups",opposition:"Live",desc:"Control the middle."},
+{title:"Switching Play Exercise",time:"20 min",players:"Units",opposition:"Passive",desc:"Move opponents side-to-side."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward possession sequences."}
+]
+},
+
+{
+title:"Session 4 – Strike Pair Relationships",
+subtitle:"Developing chemistry between the two forwards.",
+time:"80 min",
+objective:"Improve movement, finishing, and attacking partnerships.",
+focus:[
+"Forward movement",
+"Combination play",
+"Finishing"
+],
+phrases:[
+"One checks, one stretches.",
+"Move together.",
+"Finish confidently."
+],
+notes:"The forwards should complement each other rather than occupy the same space. Reinforce coordinated movement.",
+drills:[
+{title:"Movement Patterns",time:"10 min",players:"Forwards",opposition:"None",desc:"Develop timing of runs."},
+{title:"Wall Pass Combinations",time:"15 min",players:"Forwards",opposition:"Passive",desc:"Combine around defenders."},
+{title:"2v2 Attack",time:"15 min",players:"Forwards",opposition:"Live",desc:"Create scoring chances."},
+{title:"Finishing Circuit",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Multiple finishing opportunities."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward forward combinations."}
+]
+},
+
+{
+title:"Session 5 – Using the Width",
+subtitle:"Stretching opponents through midfield width.",
+time:"80 min",
+objective:"Improve attacking and defensive use of wide areas.",
+focus:[
+"Attacking width",
+"Wide support",
+"Creating space"
+],
+phrases:[
+"Stay wide early.",
+"Stretch the field.",
+"Attack the flank."
+],
+notes:"Players should understand that width creates central space. Reward intelligent positioning in wide channels.",
+drills:[
+{title:"Wide Passing Patterns",time:"10 min",players:"Groups",opposition:"None",desc:"Develop flank combinations."},
+{title:"1v1 Wing Play",time:"15 min",players:"Pairs",opposition:"Live",desc:"Beat defenders wide."},
+{title:"Crossing Exercise",time:"15 min",players:"Units",opposition:"Passive",desc:"Deliver quality service."},
+{title:"Wide Channel Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Encourage wide attacks."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 6 – Defensive Compactness",
+subtitle:"Protecting central areas and defending as a unit.",
+time:"80 min",
+objective:"Develop defensive organization in the 2-4-2.",
+focus:[
+"Defensive shape",
+"Compactness",
+"Pressure and cover"
+],
+phrases:[
+"Protect the middle.",
+"Move together.",
+"Stay connected."
+],
+notes:"Compact defending starts with proper spacing. Focus on movement as a unit rather than individual defending.",
+drills:[
+{title:"Shadow Defending",time:"10 min",players:"Team",opposition:"None",desc:"Teach positioning."},
+{title:"Press-Cover-Balance",time:"15 min",players:"Groups",opposition:"Passive",desc:"Assign defensive roles."},
+{title:"5v5 Defensive Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Protect central channels."},
+{title:"Recovery Defending",time:"20 min",players:"Team",opposition:"Live",desc:"Recover shape quickly."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward defensive discipline."}
+]
+},
+
+{
+title:"Session 7 – Transition and Counterattacking",
+subtitle:"Turning defensive wins into attacking opportunities.",
+time:"80 min",
+objective:"Develop quick transitions and aggressive attack-minded play.",
+focus:[
+"Transitions",
+"Counterattacking",
+"Decision speed"
+],
+phrases:[
+"React first.",
+"Play forward quickly.",
+"Attack the space."
+],
+notes:"Teach players to identify transition moments instantly. Reward immediate forward-thinking decisions.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Quick transition mindset."},
+{title:"4v3 Counterattack",time:"15 min",players:"Units",opposition:"Live",desc:"Exploit numerical advantages."},
+{title:"Transition Waves",time:"15 min",players:"Groups",opposition:"Live",desc:"Continuous transition moments."},
+{title:"Forward Release Drill",time:"20 min",players:"Units",opposition:"Passive",desc:"Play quickly to strikers."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Bonus for goals after regains."}
+]
+},
+
+{
+title:"Session 8 – Complete 2-4-2 Match Model",
+subtitle:"Combine possession, width, partnerships, and transition play.",
+time:"80 min",
+objective:"Execute the complete tactical identity of the 2-4-2.",
+focus:[
+"Game-model execution",
+"Tactical understanding",
+"Decision making"
+],
+phrases:[
+"Trust the structure.",
+"Support your partner.",
+"Play with purpose."
+],
+notes:"Use this session as an evaluation of player understanding. Observe decision-making and reinforce key concepts with minimal interruptions.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review responsibilities and shape."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Practice progression patterns."},
+{title:"Attacking Pattern Play",time:"15 min",players:"Team",opposition:"Passive",desc:"Develop attacking combinations."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply all game principles."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Evaluate execution of concepts."}
+]
+}
+
+];
+
+f242.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="112" y2="350"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="112" y1="350" x2="122" y2="216"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="122" y1="216" x2="122" y2="67"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="208" y2="350"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="208" y1="350" x2="198" y2="216"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="198" y1="216" x2="198" y2="67"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="112" y2="350"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="112" y1="350" x2="208" y2="216"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="208" y1="216" x2="198" y2="67"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f233 = formations["9v9"].find(f => f.id === "233");
+
+f233.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 2-3-3 Structure",
+subtitle:"Introducing width, depth, and the front three.",
+time:"80 min",
+objective:"Teach player roles and shape within the 2-3-3.",
+focus:[
+"Formation shape",
+"Attacking width",
+"Front-three positioning"
+],
+phrases:[
+"Stay wide.",
+"Create depth.",
+"Keep the shape."
+],
+notes:"The 2-3-3 thrives on width and depth. Emphasize spacing between lines and encourage the front three to stretch the field.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review positioning and responsibilities."},
+{title:"Line Passing Exercise",time:"15 min",players:"Units",opposition:"None",desc:"Connect all three lines."},
+{title:"Width & Depth Activity",time:"15 min",players:"Team",opposition:"Passive",desc:"Maintain attacking spacing."},
+{title:"Positional Possession",time:"20 min",players:"Groups",opposition:"Passive",desc:"Keep shape while moving the ball."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward shape retention."}
+]
+},
+
+{
+title:"Session 2 – Building From the Back Two",
+subtitle:"Creating confidence and composure during buildout.",
+time:"80 min",
+objective:"Develop effective buildout patterns from defenders to midfield.",
+focus:[
+"Buildout play",
+"Decision making",
+"Support angles"
+],
+phrases:[
+"Find the free player.",
+"Support the ball.",
+"Be patient."
+],
+notes:"Defenders should remain composed under pressure and use midfield support rather than forcing passes forward.",
+drills:[
+{title:"Defender Passing Circuit",time:"10 min",players:"Defenders",opposition:"None",desc:"Improve technical quality."},
+{title:"2v1 Buildout",time:"15 min",players:"Back Line",opposition:"Passive",desc:"Keep possession while progressing."},
+{title:"Back-to-Midfield Progression",time:"15 min",players:"Units",opposition:"Passive",desc:"Connect through midfield."},
+{title:"5v3 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Build through pressure."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward successful buildouts."}
+]
+},
+
+{
+title:"Session 3 – Midfield Triangle Control",
+subtitle:"Using the three midfielders to control possession.",
+time:"80 min",
+objective:"Improve support, movement, and central dominance.",
+focus:[
+"Midfield support",
+"Possession retention",
+"Switching play"
+],
+phrases:[
+"Create triangles.",
+"Support underneath.",
+"Switch the point."
+],
+notes:"The midfield triangle should constantly provide two passing options to the player on the ball.",
+drills:[
+{title:"Triangle Passing",time:"10 min",players:"Midfielders",opposition:"None",desc:"Build support patterns."},
+{title:"Third-Man Runs",time:"15 min",players:"Units",opposition:"Passive",desc:"Create forward options."},
+{title:"6v4 Possession",time:"15 min",players:"Groups",opposition:"Live",desc:"Control the middle."},
+{title:"Switching Play Game",time:"20 min",players:"Team",opposition:"Passive",desc:"Move opponents side-to-side."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward midfield involvement."}
+]
+},
+
+{
+title:"Session 4 – Front Three Combinations",
+subtitle:"Developing chemistry among LW, ST, and RW.",
+time:"80 min",
+objective:"Improve attacking combinations and finishing.",
+focus:[
+"Forward movement",
+"Combination play",
+"Finishing"
+],
+phrases:[
+"Stretch the defense.",
+"Combine quickly.",
+"Finish decisively."
+],
+notes:"The front three should create space for each other through coordinated movement and quick combinations.",
+drills:[
+{title:"Movement Patterns",time:"10 min",players:"Forwards",opposition:"None",desc:"Coordinate attacking runs."},
+{title:"Triangle Combinations",time:"15 min",players:"Attackers",opposition:"Passive",desc:"Quick passing combinations."},
+{title:"3v2 Attack",time:"15 min",players:"Forwards",opposition:"Live",desc:"Exploit numerical advantages."},
+{title:"Finishing Circuit",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Multiple finishing opportunities."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward front-three combinations."}
+]
+},
+
+{
+title:"Session 5 – Attacking Width and Service",
+subtitle:"Using wide players to create scoring opportunities.",
+time:"80 min",
+objective:"Develop attacking width and effective crossing.",
+focus:[
+"Attacking width",
+"1v1 play",
+"Crossing quality"
+],
+phrases:[
+"Stay wide early.",
+"Attack the defender.",
+"Deliver quality service."
+],
+notes:"Wide players should recognize when to isolate defenders and when to combine with teammates.",
+drills:[
+{title:"Wing Passing Patterns",time:"10 min",players:"Wide Players",opposition:"None",desc:"Develop flank combinations."},
+{title:"1v1 Wing Battles",time:"15 min",players:"Pairs",opposition:"Live",desc:"Beat defenders in wide areas."},
+{title:"Crossing & Finishing",time:"15 min",players:"Units",opposition:"Passive",desc:"Create goal-scoring opportunities."},
+{title:"Wide Channel Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Reward wide attacks."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 6 – High Pressing Principles",
+subtitle:"Winning possession high up the field.",
+time:"80 min",
+objective:"Coordinate pressure from the front three and midfield.",
+focus:[
+"Pressing triggers",
+"Collective pressure",
+"Defensive organization"
+],
+phrases:[
+"Press together.",
+"Force mistakes.",
+"Win it back."
+],
+notes:"Players should understand pressing triggers and move collectively rather than chasing individually.",
+drills:[
+{title:"Pressing Triggers",time:"10 min",players:"Team",opposition:"None",desc:"Recognize pressing moments."},
+{title:"Front Three Pressing",time:"15 min",players:"Forwards",opposition:"Passive",desc:"Lead the press."},
+{title:"5v5 Pressing Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Recover possession quickly."},
+{title:"Half-Field Press",time:"20 min",players:"Team",opposition:"Live",desc:"Coordinate collective pressure."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Bonus for attacking-third regains."}
+]
+},
+
+{
+title:"Session 7 – Transition and Counterattacking",
+subtitle:"Attacking immediately after regaining possession.",
+time:"80 min",
+objective:"Develop quick transitions through the front three.",
+focus:[
+"Transition moments",
+"Counterattacking",
+"Decision speed"
+],
+phrases:[
+"React first.",
+"Attack quickly.",
+"Play forward."
+],
+notes:"Transition opportunities are often brief. Encourage immediate recognition and forward-thinking decisions.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Quick transition mentality."},
+{title:"4v3 Counterattack",time:"15 min",players:"Units",opposition:"Live",desc:"Exploit overloads."},
+{title:"Transition Waves",time:"15 min",players:"Groups",opposition:"Live",desc:"Repeated attacking transitions."},
+{title:"Forward Release Drill",time:"20 min",players:"Units",opposition:"Passive",desc:"Find the front three quickly."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals after regains."}
+]
+},
+
+{
+title:"Session 8 – Complete 2-3-3 Match Model",
+subtitle:"Combining possession, pressing, width, and attacking play.",
+time:"80 min",
+objective:"Execute the complete tactical identity of the 2-3-3.",
+focus:[
+"Game-model execution",
+"Tactical understanding",
+"Decision making"
+],
+phrases:[
+"Trust the shape.",
+"Play with purpose.",
+"React together."
+],
+notes:"This final session should assess understanding of all previous concepts while providing minimal coaching interruptions.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review responsibilities and principles."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Progress through the lines."},
+{title:"Pressing Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Coordinate defensive pressure."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply all game moments."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Evaluate execution of the game model."}
+]
+}
+
+];
+
+f233.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="112" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="112" y1="355" x2="160" y2="211"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="160" y1="211" x2="64" y2="53"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="208" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="208" y1="355" x2="160" y2="211"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="160" y1="211" x2="256" y2="53"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="160" y2="211"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="211" x2="160" y2="40"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f341 = formations["9v9"].find(f => f.id === "341");
+
+f341.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 3-4-1 Structure",
+subtitle:"Introducing the defensive foundation and midfield control.",
+time:"80 min",
+objective:"Teach player responsibilities, spacing, and overall shape within the 3-4-1.",
+focus:[
+"Formation shape",
+"Team spacing",
+"Role clarity"
+],
+phrases:[
+"Stay connected.",
+"Know your role.",
+"Protect the middle."
+],
+notes:"The 3-4-1 is built around defensive balance and midfield control. Prioritize shape and player relationships before introducing advanced tactics.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review structure and responsibilities."},
+{title:"Three-Line Passing",time:"15 min",players:"Units",opposition:"None",desc:"Connect back line, midfield, and striker."},
+{title:"Shape Movement Exercise",time:"15 min",players:"Team",opposition:"Passive",desc:"Shift together while maintaining shape."},
+{title:"Positional Possession",time:"20 min",players:"Groups",opposition:"Passive",desc:"Retain shape while circulating possession."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward proper shape and spacing."}
+]
+},
+
+{
+title:"Session 2 – Building Through the Back Three",
+subtitle:"Developing composure and decision-making in possession.",
+time:"80 min",
+objective:"Create confidence building from the defensive line.",
+focus:[
+"Buildout play",
+"Defensive decision making",
+"Ball circulation"
+],
+phrases:[
+"Be patient.",
+"Find the free player.",
+"Keep the ball moving."
+],
+notes:"The back three provide a numerical advantage during buildout. Encourage players to use possession to create opportunities rather than forcing play.",
+drills:[
+{title:"Back Three Passing Circuit",time:"10 min",players:"Defenders",opposition:"None",desc:"Technical passing repetitions."},
+{title:"3v2 Buildout",time:"15 min",players:"Back Unit",opposition:"Passive",desc:"Play through pressure."},
+{title:"Defender-to-Midfield Progression",time:"15 min",players:"Units",opposition:"Passive",desc:"Connect through the midfield line."},
+{title:"6v4 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Build under realistic pressure."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward successful buildout sequences."}
+]
+},
+
+{
+title:"Session 3 – Midfield Four Control",
+subtitle:"Using midfield superiority to dominate possession.",
+time:"80 min",
+objective:"Develop support, movement, and control through midfield.",
+focus:[
+"Support angles",
+"Possession retention",
+"Midfield superiority"
+],
+phrases:[
+"Create options.",
+"Support underneath.",
+"Control the middle."
+],
+notes:"The midfield four are the engine of the system. Encourage constant movement and scanning before receiving.",
+drills:[
+{title:"Scanning Warmup",time:"10 min",players:"Midfielders",opposition:"None",desc:"Improve awareness."},
+{title:"Midfield Rotation Exercise",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Move without losing balance."},
+{title:"6v4 Possession",time:"15 min",players:"Groups",opposition:"Live",desc:"Control the middle third."},
+{title:"Switching Play Exercise",time:"20 min",players:"Team",opposition:"Passive",desc:"Move opponents side-to-side."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward midfield involvement."}
+]
+},
+
+{
+title:"Session 4 – Attacking Midfielder Influence",
+subtitle:"Using the CAM as the creative link.",
+time:"80 min",
+objective:"Improve the CAM's ability to create and connect attacks.",
+focus:[
+"Finding space",
+"Creative passing",
+"Attacking support"
+],
+phrases:[
+"Find the pocket.",
+"Play forward.",
+"Create chances."
+],
+notes:"Teach the CAM to operate between lines and recognize opportunities to combine with the striker.",
+drills:[
+{title:"Pocket Awareness Exercise",time:"10 min",players:"Attacking Mids",opposition:"None",desc:"Find space between defenders."},
+{title:"Turn and Play Forward",time:"15 min",players:"Units",opposition:"Passive",desc:"Receive and attack quickly."},
+{title:"4v3 Attacking Game",time:"15 min",players:"Units",opposition:"Live",desc:"Create overloads through the CAM."},
+{title:"Final Third Combinations",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Link CAM and striker."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals created through CAM involvement."}
+]
+},
+
+{
+title:"Session 5 – Supporting the Lone Striker",
+subtitle:"Ensuring the ST receives meaningful support.",
+time:"80 min",
+objective:"Develop attacking relationships around the striker.",
+focus:[
+"Forward support",
+"Combination play",
+"Finishing"
+],
+phrases:[
+"Support the striker.",
+"Arrive in the box.",
+"Finish the action."
+],
+notes:"The striker should never be isolated. Encourage midfielders to join attacks and create numerical superiority.",
+drills:[
+{title:"Target Play Warmup",time:"10 min",players:"Attackers",opposition:"None",desc:"Connect with the striker."},
+{title:"Third-Man Runs",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Support beyond the front line."},
+{title:"4v3 Attack",time:"15 min",players:"Units",opposition:"Live",desc:"Attack with numbers."},
+{title:"Finishing Circuit",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Create and finish chances."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals involving support runs."}
+]
+},
+
+{
+title:"Session 6 – Defensive Organization",
+subtitle:"Protecting central spaces with the 3-4-1.",
+time:"80 min",
+objective:"Develop defensive compactness and discipline.",
+focus:[
+"Defensive shape",
+"Compactness",
+"Pressure and cover"
+],
+phrases:[
+"Protect the middle.",
+"Move together.",
+"Stay compact."
+],
+notes:"The back three and midfield four must remain connected. Focus more on positioning than tackling.",
+drills:[
+{title:"Shadow Defending",time:"10 min",players:"Team",opposition:"None",desc:"Practice defensive shape."},
+{title:"Press-Cover-Balance",time:"15 min",players:"Groups",opposition:"Passive",desc:"Understand defensive roles."},
+{title:"5v5 Defensive Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Protect central channels."},
+{title:"Recovery Defending",time:"20 min",players:"Team",opposition:"Live",desc:"Recover shape quickly."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward defensive discipline."}
+]
+},
+
+{
+title:"Session 7 – Transition and Counterattacking",
+subtitle:"Turning defensive wins into attacking opportunities.",
+time:"80 min",
+objective:"React quickly when possession changes.",
+focus:[
+"Transition moments",
+"Counterattacking",
+"Decision speed"
+],
+phrases:[
+"React first.",
+"Attack the space.",
+"Play forward quickly."
+],
+notes:"Players should immediately recognize transition opportunities and support attacks with speed and purpose.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Prepare for transitions."},
+{title:"4v3 Counterattack",time:"15 min",players:"Units",opposition:"Live",desc:"Exploit overloads."},
+{title:"Transition Waves",time:"15 min",players:"Groups",opposition:"Live",desc:"Repeated transition situations."},
+{title:"Forward Release Drill",time:"20 min",players:"Units",opposition:"Passive",desc:"Find attacking players quickly."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Bonus for goals after regains."}
+]
+},
+
+{
+title:"Session 8 – Complete 3-4-1 Match Model",
+subtitle:"Combining buildout, midfield control, attacking support, and defending.",
+time:"80 min",
+objective:"Execute the full tactical identity of the 3-4-1.",
+focus:[
+"Game-model execution",
+"Tactical understanding",
+"Decision making"
+],
+phrases:[
+"Trust the structure.",
+"Play with purpose.",
+"React together."
+],
+notes:"Use this final session to evaluate player understanding of all previous principles while minimizing coaching interruptions.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review shape and responsibilities."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Progress through the lines."},
+{title:"Defensive Shape Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Maintain organization."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply all tactical principles."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Assess execution of the complete game model."}
+]
+}
+
+];
+
+f341.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="80" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="80" y1="355" x2="52" y2="240"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="52" y1="240" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="240" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="240" y1="355" x2="268" y2="240"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="268" y1="240" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="160" y2="240"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="240" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f332 = formations["9v9"].find(f => f.id === "332");
+
+f332.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 3-3-2 Structure",
+subtitle:"Introducing shape, balance, and line relationships.",
+time:"80 min",
+objective:"Teach player responsibilities and spacing within the 3-3-2.",
+focus:[
+"Formation shape",
+"Line relationships",
+"Player responsibilities"
+],
+phrases:[
+"Stay connected.",
+"Know your role.",
+"Protect the middle."
+],
+notes:"The 3-3-2 relies on strong relationships between all three lines. Focus on spacing and understanding before introducing game-speed decisions.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review positions and responsibilities."},
+{title:"Line Connection Passing",time:"15 min",players:"Units",opposition:"None",desc:"Connect all three lines."},
+{title:"Shape Movement Exercise",time:"15 min",players:"Team",opposition:"Passive",desc:"Maintain structure during movement."},
+{title:"Positional Possession",time:"20 min",players:"Groups",opposition:"Passive",desc:"Keep shape while circulating."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward positional discipline."}
+]
+},
+
+{
+title:"Session 2 – Building Through the Midfield Three",
+subtitle:"Using midfield numbers to control the game.",
+time:"80 min",
+objective:"Improve ball circulation, support, and possession retention.",
+focus:[
+"Support angles",
+"Midfield connections",
+"Possession retention"
+],
+phrases:[
+"Create triangles.",
+"Always support.",
+"Keep the ball moving."
+],
+notes:"The midfield three provide the control center of the formation. Encourage constant movement and awareness.",
+drills:[
+{title:"Scanning Circuit",time:"10 min",players:"Midfielders",opposition:"None",desc:"Improve awareness before receiving."},
+{title:"Triangle Passing",time:"15 min",players:"Midfielders",opposition:"None",desc:"Build constant support."},
+{title:"5v3 Possession",time:"15 min",players:"Groups",opposition:"Live",desc:"Use numerical superiority."},
+{title:"Midfield Rotation Game",time:"20 min",players:"Units",opposition:"Passive",desc:"Rotate without losing balance."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward midfield involvement."}
+]
+},
+
+{
+title:"Session 3 – Developing the Front Two Partnership",
+subtitle:"Building chemistry between the strikers.",
+time:"80 min",
+objective:"Improve movement, support, and attacking combinations.",
+focus:[
+"Striker partnerships",
+"Movement patterns",
+"Finishing"
+],
+phrases:[
+"One checks, one stretches.",
+"Move together.",
+"Finish confidently."
+],
+notes:"The front two must complement each other through coordinated movement and communication.",
+drills:[
+{title:"Checking Runs",time:"10 min",players:"Forwards",opposition:"None",desc:"Coordinate movement timing."},
+{title:"Wall Pass Finishing",time:"15 min",players:"Forwards",opposition:"Passive",desc:"Combine around defenders."},
+{title:"2v2 Attack",time:"15 min",players:"Attackers",opposition:"Live",desc:"Create scoring opportunities."},
+{title:"Finishing Waves",time:"20 min",players:"Forwards",opposition:"Passive",desc:"Multiple finishing opportunities."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward striker combinations."}
+]
+},
+
+{
+title:"Session 4 – Defensive Organization",
+subtitle:"Building a compact and reliable defensive structure.",
+time:"80 min",
+objective:"Improve defensive shape and communication.",
+focus:[
+"Defensive compactness",
+"Pressure and cover",
+"Communication"
+],
+phrases:[
+"Protect the middle.",
+"Cover for your teammate.",
+"Stay compact."
+],
+notes:"The back three should function as a single unit. Emphasize positioning before tackling.",
+drills:[
+{title:"Defensive Shadow Play",time:"10 min",players:"Defenders",opposition:"None",desc:"Practice shape and movement."},
+{title:"3v2 Defending",time:"15 min",players:"Back Three",opposition:"Live",desc:"Protect central spaces."},
+{title:"Recovery Runs",time:"15 min",players:"Groups",opposition:"Live",desc:"Track runners quickly."},
+{title:"Half-Field Defense",time:"20 min",players:"Team",opposition:"Live",desc:"Defend as a compact unit."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward defensive discipline."}
+]
+},
+
+{
+title:"Session 5 – Winning the Midfield Battle",
+subtitle:"Controlling central areas through teamwork.",
+time:"80 min",
+objective:"Dominate possession and second-ball situations.",
+focus:[
+"Midfield dominance",
+"Winning second balls",
+"Ball retention"
+],
+phrases:[
+"Win the middle.",
+"Compete for every ball.",
+"Keep possession."
+],
+notes:"Most games are won in midfield. Reinforce anticipation, work rate, and intelligent support play.",
+drills:[
+{title:"Rondo Progression",time:"10 min",players:"Groups",opposition:"Live",desc:"Improve retention under pressure."},
+{title:"3v3 Midfield Contest",time:"15 min",players:"Midfielders",opposition:"Live",desc:"Compete for control."},
+{title:"Second Ball Exercise",time:"15 min",players:"Units",opposition:"Passive",desc:"React to loose balls."},
+{title:"Central Possession Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Maintain control."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward midfield success."}
+]
+},
+
+{
+title:"Session 6 – Counterattacking Through the Front Two",
+subtitle:"Transitioning from defense to attack rapidly.",
+time:"80 min",
+objective:"Develop quick attacks after winning possession.",
+focus:[
+"Transitions",
+"Counterattacking",
+"Forward support"
+],
+phrases:[
+"React first.",
+"Attack the space.",
+"Play forward quickly."
+],
+notes:"Encourage players to recognize transition opportunities immediately and support attacks aggressively.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Develop transition awareness."},
+{title:"4v3 Counterattack",time:"15 min",players:"Units",opposition:"Live",desc:"Exploit numerical advantages."},
+{title:"Front Pair Release Drill",time:"15 min",players:"Forwards",opposition:"Passive",desc:"Find strikers early."},
+{title:"Transition Waves",time:"20 min",players:"Groups",opposition:"Live",desc:"Repeated transition moments."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals after regains."}
+]
+},
+
+{
+title:"Session 7 – Width from the Midfield Line",
+subtitle:"Creating space through wide support and positioning.",
+time:"80 min",
+objective:"Stretch opponents while maintaining balance.",
+focus:[
+"Attacking width",
+"Wide midfield play",
+"Creating space"
+],
+phrases:[
+"Use the width.",
+"Stretch the field.",
+"Create space centrally."
+],
+notes:"Wide midfielders should understand when to remain wide and when to join attacks centrally.",
+drills:[
+{title:"Wide Passing Circuit",time:"10 min",players:"Wide Midfielders",opposition:"None",desc:"Build technical quality."},
+{title:"1v1 Wide Battles",time:"15 min",players:"Pairs",opposition:"Live",desc:"Beat defenders out wide."},
+{title:"Crossing and Finishing",time:"15 min",players:"Units",opposition:"Passive",desc:"Serve the front two."},
+{title:"Wide Channel Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Encourage width."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 8 – Complete 3-3-2 Game Model",
+subtitle:"Combining midfield control, defending, and strike partnership play.",
+time:"80 min",
+objective:"Execute the full tactical identity of the 3-3-2.",
+focus:[
+"Game-model execution",
+"Tactical understanding",
+"Decision making"
+],
+phrases:[
+"Trust the shape.",
+"Support each other.",
+"Play with purpose."
+],
+notes:"Observe player understanding of all previous sessions. Encourage independent problem-solving and communication.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review roles and responsibilities."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Connect all three lines."},
+{title:"Defensive Shape Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Maintain compact organization."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply tactical principles."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Evaluate execution of the game model."}
+]
+}
+
+];
+
+f332.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="78" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="78" y1="355" x2="78" y2="230"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="78" y1="230" x2="122" y2="63"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="242" y2="355"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="242" y1="355" x2="242" y2="230"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="242" y1="230" x2="198" y2="63"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="160" y2="230"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="230" x2="122" y2="63"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f323 = formations["9v9"].find(f => f.id === "323");
+
+f323.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 3-2-3 Structure",
+subtitle:"Introducing the double pivot, back three, and front three.",
+time:"80 min",
+objective:"Teach player responsibilities and shape within the 3-2-3.",
+focus:[
+"Formation structure",
+"Line relationships",
+"Player responsibilities"
+],
+phrases:[
+"Stay connected.",
+"Know your role.",
+"Create balance."
+],
+notes:"The 3-2-3 relies on strong relationships between the back three, double pivot, and front three. Establish structure before increasing game speed.",
+drills:[
+{title:"Shape Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review shape and positioning."},
+{title:"Three-Line Passing",time:"15 min",players:"Units",opposition:"None",desc:"Connect all units."},
+{title:"Front Three Positioning",time:"15 min",players:"Forwards",opposition:"Passive",desc:"Maintain width and depth."},
+{title:"Shape Possession Game",time:"20 min",players:"Team",opposition:"Passive",desc:"Preserve structure while circulating."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward positional discipline."}
+]
+},
+
+{
+title:"Session 2 – The Double Pivot Partnership",
+subtitle:"Developing understanding between the LDM and RDM.",
+time:"80 min",
+objective:"Improve ball circulation, defensive cover, and support angles.",
+focus:[
+"Double-pivot play",
+"Support angles",
+"Scanning"
+],
+phrases:[
+"Be available.",
+"Support underneath.",
+"Check your shoulder."
+],
+notes:"The pivots are responsible for controlling tempo and protecting the defense. Encourage constant awareness and communication.",
+drills:[
+{title:"Scanning and Receiving",time:"10 min",players:"Midfielders",opposition:"None",desc:"Develop awareness before receiving."},
+{title:"Pivot Passing Patterns",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Create partnership habits."},
+{title:"6v4 Possession",time:"15 min",players:"Groups",opposition:"Live",desc:"Control possession through pivots."},
+{title:"Switching Play Exercise",time:"20 min",players:"Units",opposition:"Passive",desc:"Use pivots to change sides."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward successful use of pivots."}
+]
+},
+
+{
+title:"Session 3 – Front Three Attacking Combinations",
+subtitle:"Improving chemistry among LW, CAM, and RW.",
+time:"80 min",
+objective:"Create attacking fluidity and chance creation.",
+focus:[
+"Combination play",
+"Movement patterns",
+"Chance creation"
+],
+phrases:[
+"Create options.",
+"Move after the pass.",
+"Attack space."
+],
+notes:"The front three must learn how to interchange positions and create overloads through coordinated movement.",
+drills:[
+{title:"Movement Patterns",time:"10 min",players:"Attackers",opposition:"None",desc:"Coordinate attacking movement."},
+{title:"Triangle Passing",time:"15 min",players:"Attackers",opposition:"Passive",desc:"Develop combinations around the CAM."},
+{title:"3v2 Attack",time:"15 min",players:"Units",opposition:"Live",desc:"Create numerical advantages."},
+{title:"Finishing Circuit",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Convert chances from combinations."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals from front-three combinations."}
+]
+},
+
+{
+title:"Session 4 – High Pressing from the Front",
+subtitle:"Winning possession in advanced areas.",
+time:"80 min",
+objective:"Coordinate pressure from the front three and pivots.",
+focus:[
+"Pressing triggers",
+"Collective pressure",
+"Winning possession high"
+],
+phrases:[
+"Press together.",
+"Force mistakes.",
+"Win it back."
+],
+notes:"The front three must initiate pressure while the pivots provide balance behind them. Stress coordination instead of chasing.",
+drills:[
+{title:"Pressing Triggers",time:"10 min",players:"Team",opposition:"None",desc:"Recognize pressing opportunities."},
+{title:"Front Three Pressing",time:"15 min",players:"Attackers",opposition:"Live",desc:"Guide opponents into traps."},
+{title:"5v5 Pressing Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Recover possession quickly."},
+{title:"Half-Field High Press",time:"20 min",players:"Team",opposition:"Live",desc:"Coordinate collective pressure."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Bonus for attacking-third regains."}
+]
+},
+
+{
+title:"Session 5 – Defensive Security Behind the Press",
+subtitle:"Protecting space while pressing aggressively.",
+time:"80 min",
+objective:"Develop balance between attacking pressure and defensive stability.",
+focus:[
+"Defensive balance",
+"Cover and recovery",
+"Compactness"
+],
+phrases:[
+"Protect the middle.",
+"Cover your teammate.",
+"Stay compact."
+],
+notes:"The back three and double pivot must remain connected whenever pressure is applied higher up the field.",
+drills:[
+{title:"Back Three Shape",time:"10 min",players:"Defenders",opposition:"None",desc:"Maintain proper positioning."},
+{title:"3v2 Defending",time:"15 min",players:"Back Three",opposition:"Live",desc:"Protect central lanes."},
+{title:"Pivot Recovery Runs",time:"15 min",players:"Midfielders",opposition:"Live",desc:"Support the defense."},
+{title:"Defensive Transition Game",time:"20 min",players:"Team",opposition:"Live",desc:"Recover shape after pressing."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward defensive recovery."}
+]
+},
+
+{
+title:"Session 6 – Fast Transition Attacks",
+subtitle:"Turning regains into immediate attacking opportunities.",
+time:"80 min",
+objective:"Develop rapid attacks after recovering possession.",
+focus:[
+"Transition moments",
+"Counterattacking",
+"Decision speed"
+],
+phrases:[
+"React first.",
+"Attack forward.",
+"Play quickly."
+],
+notes:"Quick recognition and execution are critical. Reward players who immediately exploit open space after regains.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Prepare transition mentality."},
+{title:"4v3 Breakouts",time:"15 min",players:"Units",opposition:"Live",desc:"Exploit overload situations."},
+{title:"Transition Waves",time:"15 min",players:"Groups",opposition:"Live",desc:"Repeated attacking transitions."},
+{title:"Forward Release Drill",time:"20 min",players:"Team",opposition:"Passive",desc:"Find attacking players early."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals after regains."}
+]
+},
+
+{
+title:"Session 7 – Width and Wing Play",
+subtitle:"Maximizing the impact of LW and RW.",
+time:"80 min",
+objective:"Stretch defenses and improve attacking production from wide areas.",
+focus:[
+"Attacking width",
+"1v1 attacking",
+"Wide service"
+],
+phrases:[
+"Stay wide early.",
+"Attack the defender.",
+"Deliver quality service."
+],
+notes:"Wide players should know when to isolate defenders, combine with teammates, or attack the goal directly.",
+drills:[
+{title:"Wing Passing Circuit",time:"10 min",players:"Wide Players",opposition:"None",desc:"Develop technical quality."},
+{title:"1v1 Wing Battles",time:"15 min",players:"Pairs",opposition:"Live",desc:"Beat defenders in wide areas."},
+{title:"Crossing and Finishing",time:"15 min",players:"Units",opposition:"Passive",desc:"Create scoring opportunities."},
+{title:"Wide Channel Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Reward attacking width."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 8 – Complete 3-2-3 Game Model",
+subtitle:"Combining pressing, width, transitions, and attacking play.",
+time:"80 min",
+objective:"Execute the complete tactical identity of the 3-2-3.",
+focus:[
+"Tactical execution",
+"Game-model understanding",
+"Decision making"
+],
+phrases:[
+"Trust the structure.",
+"Play with purpose.",
+"React together."
+],
+notes:"This final session should evaluate the players' understanding of the complete 3-2-3 model with minimal coaching intervention.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review responsibilities and principles."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Progress through the pivots."},
+{title:"Pressing Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Coordinate front-three pressure."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply all tactical concepts."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Evaluate execution of the complete model."}
+]
+}
+
+];
+
+f323.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="96" y2="216"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="96" y1="216" x2="64" y2="53"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="224" y2="216"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="224" y1="216" x2="256" y2="53"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="160" y2="144"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="144" x2="160" y2="53"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f431 = formations["9v9"].find(f => f.id === "431");
+
+f431.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 4-3-1 Shape",
+subtitle:"Building the foundation of defensive stability and organization.",
+time:"80 min",
+objective:"Introduce player roles, spacing, and shape within the 4-3-1.",
+focus:[
+"Defensive structure",
+"Shape recognition",
+"Player responsibilities"
+],
+phrases:[
+"Stay organized.",
+"Protect the middle.",
+"Know your role."
+],
+notes:"The 4-3-1 is built on defensive stability. Players should understand spacing and shape before tactical details are added.",
+drills:[
+{title:"Shape Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review positions and responsibilities."},
+{title:"Back Four Passing",time:"15 min",players:"Defenders",opposition:"None",desc:"Develop defensive familiarity."},
+{title:"Three-Line Progression",time:"15 min",players:"Units",opposition:"Passive",desc:"Connect all lines."},
+{title:"Positional Possession",time:"20 min",players:"Team",opposition:"Passive",desc:"Maintain shape while circulating."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward positional discipline."}
+]
+},
+
+{
+title:"Session 2 – The Back Four Unit",
+subtitle:"Developing defensive communication and coordination.",
+time:"80 min",
+objective:"Improve organization and movement across the back line.",
+focus:[
+"Back-four communication",
+"Pressure and cover",
+"Defensive movement"
+],
+phrases:[
+"Move together.",
+"Cover your teammate.",
+"Stay connected."
+],
+notes:"The back four should function as one unit. Prioritize collective movement over individual defending actions.",
+drills:[
+{title:"Defensive Footwork",time:"10 min",players:"Defenders",opposition:"None",desc:"Develop defensive habits."},
+{title:"Back Four Shifting",time:"15 min",players:"Defenders",opposition:"Passive",desc:"Move together across the field."},
+{title:"4v3 Defending",time:"15 min",players:"Back Four",opposition:"Live",desc:"Protect central areas."},
+{title:"Recovery Runs",time:"20 min",players:"Defenders",opposition:"Live",desc:"Recover defensive shape."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward defensive discipline."}
+]
+},
+
+{
+title:"Session 3 – Midfield Triangle Control",
+subtitle:"Using LM, CM, and RM to control the game.",
+time:"80 min",
+objective:"Improve possession, support angles, and decision making.",
+focus:[
+"Midfield support",
+"Possession retention",
+"Scanning"
+],
+phrases:[
+"Create angles.",
+"Support the ball.",
+"Check your shoulder."
+],
+notes:"The midfield triangle should consistently provide options around the ball. Encourage constant movement and awareness.",
+drills:[
+{title:"Scanning Warmup",time:"10 min",players:"Midfielders",opposition:"None",desc:"Develop awareness."},
+{title:"Triangle Passing Pattern",time:"15 min",players:"Midfielders",opposition:"None",desc:"Build support relationships."},
+{title:"5v3 Possession",time:"15 min",players:"Groups",opposition:"Live",desc:"Control the central area."},
+{title:"Midfield Rotation Exercise",time:"20 min",players:"Units",opposition:"Passive",desc:"Rotate without losing structure."},
+{title:"Match Play",time:"20 min",players:"Team",opposition:"Live",desc:"Reward midfield involvement."}
+]
+},
+
+{
+title:"Session 4 – Supporting the Lone Striker",
+subtitle:"Creating attacking support around the ST.",
+time:"80 min",
+objective:"Prevent isolation and improve chance creation.",
+focus:[
+"Supporting runs",
+"Attacking combinations",
+"Finishing"
+],
+phrases:[
+"Support the striker.",
+"Arrive on time.",
+"Create options."
+],
+notes:"The striker should always have support. Midfielders must learn when to join attacks and provide depth.",
+drills:[
+{title:"Target Passing",time:"10 min",players:"Groups",opposition:"None",desc:"Play accurately into the striker."},
+{title:"Third-Man Runs",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Support beyond the striker."},
+{title:"4v3 Attack",time:"15 min",players:"Units",opposition:"Live",desc:"Create attacking overloads."},
+{title:"Combination Finishing",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Build attacks through support."},
+{title:"Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals from combinations."}
+]
+},
+
+{
+title:"Session 5 – Defensive Compactness",
+subtitle:"Protecting central spaces and maintaining shape.",
+time:"80 min",
+objective:"Develop team defending and compact organization.",
+focus:[
+"Compact defending",
+"Shape retention",
+"Pressure and cover"
+],
+phrases:[
+"Protect the middle.",
+"Stay compact.",
+"Recover quickly."
+],
+notes:"Defensive success in the 4-3-1 comes from organization and compactness rather than constant pressure.",
+drills:[
+{title:"Shadow Defending",time:"10 min",players:"Team",opposition:"None",desc:"Practice spacing."},
+{title:"Press-Cover-Balance",time:"15 min",players:"Groups",opposition:"Passive",desc:"Understand team defending."},
+{title:"6v5 Defensive Game",time:"15 min",players:"Units",opposition:"Live",desc:"Protect dangerous spaces."},
+{title:"Half-Field Defending",time:"20 min",players:"Team",opposition:"Live",desc:"Defend as a compact block."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward defensive organization."}
+]
+},
+
+{
+title:"Session 6 – Transition from Defense to Attack",
+subtitle:"Moving quickly from regain to possession.",
+time:"80 min",
+objective:"Develop efficient transitions through midfield.",
+focus:[
+"Transitions",
+"Counterattacking",
+"Forward play"
+],
+phrases:[
+"React first.",
+"Play forward quickly.",
+"Attack the space."
+],
+notes:"Players should recognize transition opportunities immediately and support attacks with speed.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Prepare for transition moments."},
+{title:"4v3 Counterattack",time:"15 min",players:"Units",opposition:"Live",desc:"Attack before recovery."},
+{title:"Midfield Release Drill",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Play forward efficiently."},
+{title:"Transition Games",time:"20 min",players:"Groups",opposition:"Live",desc:"Practice repeated transitions."},
+{title:"Scrimmage",time:"20 min",players:"Team",opposition:"Live",desc:"Reward goals after regains."}
+]
+},
+
+{
+title:"Session 7 – Building Through the Fullbacks",
+subtitle:"Using LB and RB as attacking outlets.",
+time:"80 min",
+objective:"Develop width and progression from the back.",
+focus:[
+"Wide support",
+"Fullback involvement",
+"Attacking width"
+],
+phrases:[
+"Use the width.",
+"Support forward.",
+"Stretch the field."
+],
+notes:"Fullbacks should learn when to join attacks and when to provide defensive balance.",
+drills:[
+{title:"Wide Passing Circuit",time:"10 min",players:"Defenders",opposition:"None",desc:"Improve technical quality."},
+{title:"Overlapping Runs",time:"15 min",players:"Wide Players",opposition:"Passive",desc:"Coordinate movement."},
+{title:"Buildout Pattern Play",time:"15 min",players:"Units",opposition:"Passive",desc:"Progress through fullbacks."},
+{title:"Wide Channel Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Encourage attacking width."},
+{title:"Conditioned Match",time:"20 min",players:"Team",opposition:"Live",desc:"Reward attacks built from wide areas."}
+]
+},
+
+{
+title:"Session 8 – Complete 4-3-1 Game Model",
+subtitle:"Integrating defending, possession, and attacking support.",
+time:"80 min",
+objective:"Execute the complete tactical identity of the 4-3-1.",
+focus:[
+"Game-model execution",
+"Tactical understanding",
+"Decision making"
+],
+phrases:[
+"Trust the shape.",
+"Play with purpose.",
+"Support each other."
+],
+notes:"This session should evaluate understanding from the entire curriculum. Observe more and coach less.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review responsibilities and shape."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Connect all lines effectively."},
+{title:"Defensive Shape Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Maintain organization."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply tactical principles."},
+{title:"Full Match",time:"20 min",players:"Team",opposition:"Live",desc:"Evaluate execution of the full game model."}
+]
+}
+
+];
+
+f431.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="442" x2="52" y2="346"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="52" y1="346" x2="80" y2="226"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="80" y1="226" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="268" y2="346"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="268" y1="346" x2="240" y2="226"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="240" y1="226" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="442" x2="160" y2="226"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="226" x2="160" y2="72"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+
+/* Default to 11v11 (will be filled in Part 3/4), else fall back */
+if (!formations["11v11"] || formations["11v11"].length === 0) {
+state.format = '9v9';
+}
+
+/* ===== Part 3 — Add 11v11 formations (4-4-2, 4-3-3, 4-2-3-1, 3-5-2, 3-4-3) ===== */
+/* Source-informed tactical profiles and role layouts grounded in:
+ - Be Your Best (4-4-2, 4-3-3 overview) [beyourbest.com](https://www.beyourbest.com/insight/soccer-formations-exploring-the-4-4-2-4-3-3-and-more)
+ - Coaches’ Voice (formation tradeoffs) [learning.coachesvoice.com](https://learning.coachesvoice.com/cv/formations-football-tactics-explained-best-most-used/)
+ - Arlington Soccer 11v11 Positions/roles PDF (numbering + line structure) [arlingtonsoccer.ottosport.ai](https://arlingtonsoccer.ottosport.ai/_files/programs/recreation/coach-education-development/rec-curriculum/11_v_11_Soccer_Formations-2.pdf)
+*/
+
+formations["11v11"] = [
+/* 4-4-2 */
+{ id: "442", name: "4-4-2", style: "Balanced & Compact",
+counts: { gk: 1, def: 4, mid: 4, fwd: 2 },
+bestFor: "Teams seeking balance, defensive stability, and simple partnership play across lines.",
+strengths: [
+"Strong horizontal and vertical balance across the pitch",
+"Wide midfielders can give both defensive cover and attacking width",
+"Two strikers offer constant threat and simple combinations",
+"Straightforward roles aid team compactness and transitions"
+],
+weaknesses: [
+"Can be outnumbered centrally by three-player midfields",
+"Wide mids have heavy two-way demands",
+"Build-up can become predictable if fullbacks stay low",
+"Gaps may appear between lines if distances stretch"
+],
+positions: [
+/* Back four */
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 90 },
+{ label: "LB", full: "Left Back", role: "def", x: 15, y: 74 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 38, y: 76 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 62, y: 76 },
+{ label: "RB", full: "Right Back", role: "def", x: 85, y: 74 },
+/* Mid four */
+{ label: "LM", full: "Left Midfielder", role: "mid", x: 15, y: 55 },
+{ label: "LCM", full: "Left Center Midfielder", role: "mid", x: 38, y: 52 },
+{ label: "RCM", full: "Right Center Midfielder", role: "mid", x: 62, y: 52 },
+{ label: "RM", full: "Right Midfielder", role: "mid", x: 85, y: 55 },
+/* Front two */
+{ label: "LS", full: "Left Striker", role: "fwd", x: 38, y: 20 },
+{ label: "RS", full: "Right Striker", role: "fwd", x: 62, y: 20 }
+],
+current: true
+},
+
+/* 4-3-3 */
+{ id: "433", name: "4-3-3", style: "Attacking Width & Press",
+counts: { gk: 1, def: 4, mid: 3, fwd: 3 },
+bestFor: "Teams emphasizing width, high pressing from the front, and quick wide combinations.",
+strengths: [
+"Natural width with wingers pinning fullbacks",
+"Front three enable coordinated high press",
+"Midfield triangle supports balance of 6/8/10 roles",
+"Good spacing for switches and overloads"
+],
+weaknesses: [
+"Single pivot can be exposed if team is stretched",
+"Wingers must recover or fullbacks are isolated",
+"Central overloads can trouble the 6 without support",
+"Crossing defense relies heavily on back four timing"
+],
+positions: [
+/* Back four */
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 90 },
+{ label: "LB", full: "Left Back", role: "def", x: 15, y: 70 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 38, y: 72 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 62, y: 72 },
+{ label: "RB", full: "Right Back", role: "def", x: 85, y: 70 },
+/* Mid three (6 + two 8s) */
+{ label: "LM", full: "Left Central Midfielder", role: "mid", x: 25, y: 54 },
+{ label: "CM", full: "Defensive Midfielder", role: "mid", x: 50, y: 50 },
+{ label: "RM", full: "Right Central Midfielder", role: "mid", x: 75, y: 54 },
+/* Front three */
+{ label: "LW", full: "Left Wing", role: "fwd", x: 22, y: 26 },
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 18 },
+{ label: "RW", full: "Right Wing", role: "fwd", x: 78, y: 26 }
+]
+},
+
+/* 4-2-3-1 */
+{ id: "4231", name: "4-2-3-1", style: "Control & Flexibility",
+counts: { gk: 1, def: 4, mid: 5, fwd: 1 },
+bestFor: "Teams seeking modern balance: double pivot stability with an advanced creative line of three.",
+strengths: [
+"Double pivot protects transitions and supports buildout",
+"Three behind striker create multiple pockets and overloads",
+"Adaptable press: 4-4-2 without ball, 4-2-4 in fast breaks",
+"Stable central presence in both phases"
+],
+weaknesses: [
+"Lone striker can be isolated without aggressive 10/wing runs",
+"Fullbacks must time advances or leave space in channels",
+"Attacking width depends on wings/fullbacks’ chemistry",
+"Can become static if the 10 is tightly marked"
+],
+positions: [
+/* Back four */
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 90 },
+{ label: "LB", full: "Left Back", role: "def", x: 16, y: 72 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 38, y: 74 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 62, y: 74 },
+{ label: "RB", full: "Right Back", role: "def", x: 84, y: 72 },
+/* Double pivot */
+{ label: "LDM", full: "Left Defensive Midfielder", role: "mid", x: 34, y: 55 },
+{ label: "RDM", full: "Right Defensive Midfielder", role: "mid", x: 66, y: 55 },
+/* Advanced 3 */
+{ label: "LW", full: "Left Wing", role: "fwd", x: 22, y: 35 },
+{ label: "CAM", full: "Attacking Midfielder (10)", role: "mid", x: 50, y: 40 },
+{ label: "RW", full: "Right Wing", role: "fwd", x: 78, y: 35 },
+/* Striker */
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 18 }
+]
+},
+
+/* 3-5-2 */
+{ id: "352", name: "3-5-2", style: "Central Control & Dual Threat",
+counts: { gk: 1, def: 3, mid: 5, fwd: 2 },
+bestFor: "Teams with strong wingbacks and a mobile midfield trio to control central spaces.",
+strengths: [
+"Three center-backs plus a compact midfield secure central lanes",
+"Wingbacks can create width and 2v1s in channels",
+"Two strikers allow combination play and depth threats",
+"Good rest-defense if wingbacks coordinate with pivots"
+],
+weaknesses: [
+"Wingbacks must cover huge distances; timing is critical",
+"Wider center-backs can be drawn out by inside runs",
+"Harder to create wide overloads if wingbacks are pinned",
+"Transitions can expose spaces if midfield line is slow"
+],
+positions: [
+/* Back 3 */
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 90 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 22, y: 70 },
+{ label: "CB", full: "Center Back", role: "def", x: 50, y: 72 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 78, y: 70 },
+/* Wingbacks */
+{ label: "LWB", full: "Left Wing Back", role: "mid", x: 16, y: 50 },
+{ label: "RWB", full: "Right Wing Back", role: "mid", x: 84, y: 50 },
+/* Midfield triangle (6 + two 8s) */
+{ label: "LM", full: "Left Central Midfielder", role: "mid", x: 36, y: 39 },
+{ label: "CM", full: "Defensive Midfielder", role: "mid", x: 50, y: 53 },
+{ label: "RM", full: "Right Central Midfielder", role: "mid", x: 64, y: 39 },
+/* Front two */
+{ label: "LS", full: "Left Striker", role: "fwd", x: 38, y: 16 },
+{ label: "RS", full: "Right Striker", role: "fwd", x: 62, y: 16 }
+]
+},
+
+/* 3-4-3 */
+{ id: "343", name: "3-4-3", style: "Width & Five-Lane Attack",
+counts: { gk: 1, def: 3, mid: 4, fwd: 3 },
+bestFor: "Teams aiming for five-lane occupation in attack and aggressive counter-pressing.",
+strengths: [
+"Front five lanes offer constant width and depth options",
+"Wingbacks + wingers create layered wide threats",
+"Back three can hold a high line with good covering angles",
+"Counter-press potential with many players near the ball"
+],
+weaknesses: [
+"Wider center-backs can be stretched by diagonal runs",
+"Wingback timing is crucial to avoid channel exposure",
+"If front press is late, midfield can be bypassed",
+"Switches against high wingbacks can isolate far CB"
+],
+positions: [
+/* Back 3 */
+{ label: "GK", full: "Goalkeeper", role: "gk", x: 50, y: 90 },
+{ label: "LCB", full: "Left Center Back", role: "def", x: 22, y: 70 },
+{ label: "CB", full: "Center Back", role: "def", x: 50, y: 72 },
+{ label: "RCB", full: "Right Center Back", role: "def", x: 78, y: 70 },
+/* Mid 4 */
+{ label: "LWB", full: "Left Wing Back", role: "mid", x: 16, y: 48 },
+{ label: "LB", full: "Left Central Midfielder", role: "mid", x: 40, y: 48 },
+{ label: "RB", full: "Right Central Midfielder", role: "mid", x: 64, y: 48 },
+{ label: "RWB", full: "Right Wing Back", role: "mid", x: 88, y: 48 },
+/* Front 3 */
+{ label: "LW", full: "Left Wing", role: "fwd", x: 24, y: 26 },
+{ label: "ST", full: "Striker", role: "fwd", x: 50, y: 20 },
+{ label: "RW", full: "Right Wing", role: "fwd", x: 76, y: 26 }
+]
+}
+];
+
+/* Populate default Player + baseline Coach scaffolding for 11v11
+ (Part 4 will overwrite Coach data with formation-specific content) */
+formations["11v11"].forEach(f => {
+f.playerDetails = {};
+f.positions.forEach(p => {
+f.playerDetails[p.label] = mkPositionDetails(p.full, ROLE_META[p.role].label, f.name);
+});
+f.coachData = {
+sessionPlans: mkSessionPlans(f.name),
+triggers: makeGenericTriggers(f),// will be replaced in Part 4
+buildoutPatterns: makeGenericBuildout(f),// will be replaced in Part 4
+defensiveBlock: makeGenericDefensiveBlock(f),// will be replaced in Part 4
+sessionCurriculum: mkCurriculum(f.name)
+};
+});
+
+/* ===========================
+   UNIQUE 11v11 SESSION PLANS
+   =========================== */
+
+const f442 = formations["11v11"].find(f => f.id === "442");
+
+f442.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 4-4-2 Shape",
+subtitle:"Establishing the foundation of the classic two-bank system.",
+time:"90 min",
+objective:"Teach spacing, partnerships, and line relationships in the 4-4-2.",
+focus:[
+"Team shape",
+"Line compactness",
+"Player partnerships"
+],
+phrases:[
+"Stay connected.",
+"Move as a unit.",
+"Protect the middle."
+],
+notes:"The focus is helping players understand the two lines of four and the relationship between units. Prioritize organization over speed of play.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review starting positions and responsibilities."},
+{title:"Unit Passing",time:"15 min",players:"Lines",opposition:"None",desc:"Connect defenders, midfielders, and strikers."},
+{title:"Shape Movement",time:"20 min",players:"Team",opposition:"Passive",desc:"Move as two connected banks."},
+{title:"Positional Possession",time:"20 min",players:"Team",opposition:"Passive",desc:"Maintain structure under movement."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward shape and compactness."}
+]
+},
+
+{
+title:"Session 2 – Back Four Organization",
+subtitle:"Building defensive stability through communication and movement.",
+time:"90 min",
+objective:"Develop coordinated movement and decision-making in the back four.",
+focus:[
+"Defensive communication",
+"Pressure-cover-balance",
+"Back-four movement"
+],
+phrases:[
+"Shift together.",
+"Cover your teammate.",
+"Stay compact."
+],
+notes:"The back four should act as a single defensive unit. Reinforce communication and spacing at all times.",
+drills:[
+{title:"Defensive Footwork",time:"10 min",players:"Defenders",opposition:"None",desc:"Develop proper defensive habits."},
+{title:"Back Four Shifting",time:"15 min",players:"Back Four",opposition:"Passive",desc:"Move together as a unit."},
+{title:"4v3 Defending",time:"20 min",players:"Defenders",opposition:"Live",desc:"Manage overload situations."},
+{title:"Recovery Runs",time:"20 min",players:"Defenders",opposition:"Live",desc:"React to transitions."},
+{title:"Defensive Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward clean defensive actions."}
+]
+},
+
+{
+title:"Session 3 – Midfield Four Balance",
+subtitle:"Creating control through the midfield line.",
+time:"90 min",
+objective:"Improve support angles, width, and central control.",
+focus:[
+"Midfield shape",
+"Support angles",
+"Possession control"
+],
+phrases:[
+"Create two options.",
+"Use the width.",
+"Support underneath."
+],
+notes:"The midfield four must stay balanced while providing width and support around the ball.",
+drills:[
+{title:"Scanning Warmup",time:"10 min",players:"Midfielders",opposition:"None",desc:"Develop awareness before receiving."},
+{title:"Four-Man Passing Circuit",time:"15 min",players:"Midfielders",opposition:"None",desc:"Build midfield relationships."},
+{title:"6v4 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Control the center of the pitch."},
+{title:"Switching Play Exercise",time:"20 min",players:"Team",opposition:"Passive",desc:"Move opponents side-to-side."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward midfield combinations."}
+]
+},
+
+{
+title:"Session 4 – Strike Partnership Development",
+subtitle:"Building chemistry between LS and RS.",
+time:"90 min",
+objective:"Improve coordinated movement, support, and finishing.",
+focus:[
+"Striker partnerships",
+"Combination play",
+"Finishing"
+],
+phrases:[
+"One checks, one stretches.",
+"Combine quickly.",
+"Finish with confidence."
+],
+notes:"The partnership should create uncertainty for defenders through complementary movement and timing.",
+drills:[
+{title:"Checking and Spinning Runs",time:"10 min",players:"Forwards",opposition:"None",desc:"Coordinate movement patterns."},
+{title:"Wall Pass Combinations",time:"15 min",players:"Forwards",opposition:"Passive",desc:"Play around defenders."},
+{title:"2v2 Attacking",time:"20 min",players:"Forwards",opposition:"Live",desc:"Create and finish chances."},
+{title:"Finishing Waves",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Repeated shooting opportunities."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward striker partnerships."}
+]
+},
+
+{
+title:"Session 5 – The 4-4-2 Defensive Block",
+subtitle:"Creating a compact and difficult-to-break-down shape.",
+time:"90 min",
+objective:"Develop defensive compactness and coordinated pressing.",
+focus:[
+"Defensive compactness",
+"Pressing triggers",
+"Protecting central areas"
+],
+phrases:[
+"Stay compact.",
+"Protect the middle.",
+"Press together."
+],
+notes:"The team should recognize pressing moments while maintaining compact distances between lines.",
+drills:[
+{title:"Shadow Defending",time:"10 min",players:"Team",opposition:"None",desc:"Practice defensive spacing."},
+{title:"Press-Cover-Balance",time:"15 min",players:"Groups",opposition:"Passive",desc:"Understand defensive roles."},
+{title:"8v6 Defensive Game",time:"20 min",players:"Units",opposition:"Live",desc:"Protect central areas."},
+{title:"Wide Trap Exercise",time:"20 min",players:"Team",opposition:"Live",desc:"Force play wide and win possession."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward successful defensive actions."}
+]
+},
+
+{
+title:"Session 6 – Fast Transition Play",
+subtitle:"Turning defensive wins into attacking opportunities.",
+time:"90 min",
+objective:"Develop quick counterattacks through midfield and front two.",
+focus:[
+"Transitions",
+"Counterattacking",
+"Forward support"
+],
+phrases:[
+"React first.",
+"Play forward quickly.",
+"Attack the space."
+],
+notes:"Reward quick recognition of transition moments and immediate support around the ball.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Improve transition awareness."},
+{title:"4v3 Counterattack",time:"15 min",players:"Units",opposition:"Live",desc:"Attack quickly after regaining possession."},
+{title:"Midfield Release Drill",time:"20 min",players:"Midfielders",opposition:"Passive",desc:"Find the forwards early."},
+{title:"Transition Waves",time:"20 min",players:"Groups",opposition:"Live",desc:"Repeated transition situations."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Bonus for goals after regains."}
+]
+},
+
+{
+title:"Session 7 – Wide Midfielder Impact",
+subtitle:"Using LM and RM to create width and service.",
+time:"90 min",
+objective:"Develop attacking contributions from wide midfielders.",
+focus:[
+"Wide play",
+"Crossing quality",
+"Attacking support"
+],
+phrases:[
+"Stay wide early.",
+"Deliver quality service.",
+"Attack the far post."
+],
+notes:"Wide midfielders should understand when to provide width, when to combine, and when to attack aggressively.",
+drills:[
+{title:"Wide Passing Circuit",time:"10 min",players:"Wide Players",opposition:"None",desc:"Improve technical quality."},
+{title:"1v1 Wing Battles",time:"15 min",players:"Pairs",opposition:"Live",desc:"Create advantages wide."},
+{title:"Crossing and Finishing",time:"20 min",players:"Units",opposition:"Passive",desc:"Provide service into the box."},
+{title:"Wide Channel Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Encourage effective flank play."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 8 – Complete 4-4-2 Match Model",
+subtitle:"Combining shape, defending, transition, and finishing.",
+time:"90 min",
+objective:"Execute the full tactical identity of the 4-4-2.",
+focus:[
+"Tactical execution",
+"Game-model understanding",
+"Decision making"
+],
+phrases:[
+"Trust the shape.",
+"Solve problems together.",
+"Play with purpose."
+],
+notes:"Evaluate understanding of all previous sessions. Limit stoppages and observe players applying the complete game model.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review responsibilities and partnerships."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Connect all units effectively."},
+{title:"Defensive Block Review",time:"20 min",players:"Team",opposition:"Passive",desc:"Rehearse compact defending."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply all tactical principles."},
+{title:"Full Match",time:"25 min",players:"Team",opposition:"Live",desc:"Evaluate complete system execution."}
+]
+}
+
+];
+
+f442.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="432" x2="122" y2="250"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="122" y1="250" x2="122" y2="96"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="198" y2="250"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="198" y1="250" x2="198" y2="96"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="122" y2="250"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="122" y1="250" x2="198" y2="96"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+
+const f433 = formations["11v11"].find(f => f.id === "433");
+
+f433.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 4-3-3 Structure",
+subtitle:"Introducing positional play, width, and balance.",
+time:"90 min",
+objective:"Teach player responsibilities and team shape within the 4-3-3.",
+focus:[
+"Formation structure",
+"Width and depth",
+"Positional discipline"
+],
+phrases:[
+"Stay wide.",
+"Create triangles.",
+"Keep our shape."
+],
+notes:"The objective is to help players understand the spacing and relationships between all three lines. Emphasize shape before intensity.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review positioning and team structure."},
+{title:"Three-Line Passing",time:"15 min",players:"Units",opposition:"None",desc:"Connect defenders, midfielders, and attackers."},
+{title:"Width and Depth Exercise",time:"20 min",players:"Team",opposition:"Passive",desc:"Create proper attacking spacing."},
+{title:"Positional Possession",time:"20 min",players:"Team",opposition:"Passive",desc:"Maintain the 4-3-3 shape while circulating."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward maintaining width and shape."}
+]
+},
+
+{
+title:"Session 2 – Building Through the #6",
+subtitle:"Using the defensive midfielder as the team's pivot.",
+time:"90 min",
+objective:"Develop buildup patterns through the 6.",
+focus:[
+"Pivot play",
+"Scanning",
+"Progressive passing"
+],
+phrases:[
+"Play through the six.",
+"Check your shoulder.",
+"Face forward."
+],
+notes:"The #6 should become the central connection point. Encourage awareness, composure, and intelligent body shape.",
+drills:[
+{title:"Scanning and Body Shape",time:"10 min",players:"Midfielders",opposition:"None",desc:"Receive facing forward whenever possible."},
+{title:"Pivot Passing Circuit",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Play through the #6 under pressure."},
+{title:"6v4 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Find the pivot consistently."},
+{title:"Switching Play Exercise",time:"20 min",players:"Units",opposition:"Passive",desc:"Use the 6 to move the point of attack."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward successful buildup through the pivot."}
+]
+},
+
+{
+title:"Session 3 – Midfield Triangle Relationships",
+subtitle:"Developing understanding between the 6, L8, and R8.",
+time:"90 min",
+objective:"Improve support angles, rotations, and possession control.",
+focus:[
+"Third-man play",
+"Midfield support",
+"Rotational movement"
+],
+phrases:[
+"Support the ball.",
+"Create triangles.",
+"Move after the pass."
+],
+notes:"Players should recognize how movement by one midfielder creates opportunities for the others.",
+drills:[
+{title:"Triangle Passing",time:"10 min",players:"Midfielders",opposition:"None",desc:"Build support around the ball."},
+{title:"Third-Man Combinations",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Create forward progression."},
+{title:"8v4 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Control the center of the field."},
+{title:"Midfield Rotation Exercise",time:"20 min",players:"Units",opposition:"Passive",desc:"Rotate without losing balance."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward midfield combinations."}
+]
+},
+
+{
+title:"Session 4 – Front Three Combinations",
+subtitle:"Improving chemistry between LW, ST, and RW.",
+time:"90 min",
+objective:"Develop attacking patterns and finishing opportunities.",
+focus:[
+"Front-three movement",
+"Combination play",
+"Finishing"
+],
+phrases:[
+"Stretch the defense.",
+"Combine quickly.",
+"Attack the goal."
+],
+notes:"The front three should continuously create space for one another through coordinated movement.",
+drills:[
+{title:"Movement Patterns",time:"10 min",players:"Forwards",opposition:"None",desc:"Coordinate attacking runs."},
+{title:"Triangle Finishing",time:"15 min",players:"Attackers",opposition:"Passive",desc:"Combine before shooting."},
+{title:"3v2 Attack",time:"20 min",players:"Forwards",opposition:"Live",desc:"Create and exploit overloads."},
+{title:"Cross and Finish",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Use width to create chances."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward front-three combinations."}
+]
+},
+
+{
+title:"Session 5 – High Pressing in the 4-3-3",
+subtitle:"Winning possession in the attacking half.",
+time:"90 min",
+objective:"Coordinate pressure from the front three and midfield.",
+focus:[
+"Pressing triggers",
+"Collective pressure",
+"Winning possession high"
+],
+phrases:[
+"Press together.",
+"Force mistakes.",
+"Win it back."
+],
+notes:"The front three initiate the press while midfielders provide support underneath. Stress coordinated pressure rather than individual chasing.",
+drills:[
+{title:"Pressing Triggers",time:"10 min",players:"Team",opposition:"None",desc:"Recognize pressing opportunities."},
+{title:"Front Three Pressing",time:"15 min",players:"Forwards",opposition:"Live",desc:"Force opponents into predictable areas."},
+{title:"5v5 Pressing Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Recover the ball quickly."},
+{title:"Half-Field High Press",time:"20 min",players:"Team",opposition:"Live",desc:"Coordinate collective pressure."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Bonus for attacking-third regains."}
+]
+},
+
+{
+title:"Session 6 – Transition and Counter-Pressing",
+subtitle:"Reacting immediately after losing or winning possession.",
+time:"90 min",
+objective:"Develop fast transitions and counter-pressing habits.",
+focus:[
+"Transition moments",
+"Counter-pressing",
+"Immediate reaction"
+],
+phrases:[
+"React first.",
+"Win it back.",
+"Attack quickly."
+],
+notes:"Players should recognize that the first few seconds after possession changes are the most important.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Immediate transition mindset."},
+{title:"Counter-Press Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Win the ball back quickly."},
+{title:"4v3 Transition Attack",time:"20 min",players:"Units",opposition:"Live",desc:"Attack before the defense recovers."},
+{title:"Wave Transition Exercise",time:"20 min",players:"Groups",opposition:"Live",desc:"Repeated transition moments."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward goals after quick transitions."}
+]
+},
+
+{
+title:"Session 7 – Winger Impact and Wide Play",
+subtitle:"Using LW and RW to stretch and break defenses.",
+time:"90 min",
+objective:"Improve decision-making and productivity from wide areas.",
+focus:[
+"1v1 attacking",
+"Wide positioning",
+"Crossing quality"
+],
+phrases:[
+"Stay wide early.",
+"Attack your defender.",
+"Deliver quality service."
+],
+notes:"Wingers should learn when to attack outside, come inside, combine, or create scoring opportunities for teammates.",
+drills:[
+{title:"Wing Passing Circuit",time:"10 min",players:"Wide Players",opposition:"None",desc:"Develop technical quality."},
+{title:"1v1 Wing Battles",time:"15 min",players:"Pairs",opposition:"Live",desc:"Beat defenders and create space."},
+{title:"Crossing and Finishing",time:"20 min",players:"Units",opposition:"Passive",desc:"Deliver quality service."},
+{title:"Wide Channel Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Encourage attacking width."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 8 – Complete 4-3-3 Match Model",
+subtitle:"Combining buildup, pressing, width, and finishing.",
+time:"90 min",
+objective:"Execute the complete tactical identity of the 4-3-3.",
+focus:[
+"Tactical execution",
+"Game-model understanding",
+"Decision making"
+],
+phrases:[
+"Trust the structure.",
+"Play with purpose.",
+"Solve problems together."
+],
+notes:"Use this session to evaluate how well players apply the entire game model with minimal coaching intervention.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review all responsibilities and principles."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Play through the 6 and midfield triangle."},
+{title:"Pressing Review",time:"20 min",players:"Team",opposition:"Passive",desc:"Coordinate the front-three press."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply tactical concepts under pressure."},
+{title:"Full Match",time:"25 min",players:"Team",opposition:"Live",desc:"Evaluate execution of the 4-3-3 game model."}
+]
+}
+
+];
+
+f433.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="432" x2="160" y2="240"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="240" x2="70" y2="125"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="160" y2="240"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="240" x2="250" y2="125"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="160" y2="240"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="240" x2="160" y2="86"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+
+const f4231 = formations["11v11"].find(f => f.id === "4231");
+
+f4231.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 4-2-3-1 Structure",
+subtitle:"Introducing the double pivot and attacking midfield line.",
+time:"90 min",
+objective:"Teach player responsibilities, spacing, and team shape within the 4-2-3-1.",
+focus:[
+"Formation structure",
+"Line relationships",
+"Positional discipline"
+],
+phrases:[
+"Stay connected.",
+"Know your role.",
+"Play between the lines."
+],
+notes:"The objective is helping players understand how the double pivot, attacking midfield line, and striker work together within the overall structure.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review positioning and team structure."},
+{title:"Unit Passing",time:"15 min",players:"Lines",opposition:"None",desc:"Connect defense, pivots, attacking mids, and striker."},
+{title:"Shape Movement Exercise",time:"20 min",players:"Team",opposition:"Passive",desc:"Maintain structure while shifting."},
+{title:"Positional Possession",time:"20 min",players:"Team",opposition:"Passive",desc:"Keep the 4-2-3-1 shape while circulating possession."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward shape, spacing, and positional discipline."}
+]
+},
+
+{
+title:"Session 2 – Mastering the Double Pivot",
+subtitle:"Developing the partnership between LDM and RDM.",
+time:"90 min",
+objective:"Improve defensive balance, support angles, and buildout play.",
+focus:[
+"Double-pivot partnership",
+"Defensive balance",
+"Progressive passing"
+],
+phrases:[
+"Support underneath.",
+"Stay connected.",
+"Play through the pivots."
+],
+notes:"The double pivot provides defensive protection and buildout support. Stress communication, spacing, and body shape when receiving.",
+drills:[
+{title:"Scanning and Receiving",time:"10 min",players:"Midfielders",opposition:"None",desc:"Improve awareness before receiving."},
+{title:"Pivot Passing Circuit",time:"15 min",players:"Pivots",opposition:"Passive",desc:"Develop chemistry and movement."},
+{title:"6v4 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Build through the double pivot."},
+{title:"Switching Play Exercise",time:"20 min",players:"Units",opposition:"Passive",desc:"Move the ball through both pivots."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward successful play through the pivots."}
+]
+},
+
+{
+title:"Session 3 – The Role of the CAM",
+subtitle:"Creating and exploiting space between the lines.",
+time:"90 min",
+objective:"Develop the CAM as the creative link between midfield and attack.",
+focus:[
+"Finding pockets",
+"Creative passing",
+"Attacking vision"
+],
+phrases:[
+"Find the space.",
+"Turn and play forward.",
+"Create chances."
+],
+notes:"The CAM should constantly search for pockets between defensive lines and become the primary creator in attacking situations.",
+drills:[
+{title:"Checking and Turning",time:"10 min",players:"Attacking Mids",opposition:"None",desc:"Receive on the half-turn."},
+{title:"Pocket Awareness Exercise",time:"15 min",players:"Attacking Players",opposition:"Passive",desc:"Find space between lines."},
+{title:"4v3 Attacking Game",time:"20 min",players:"Units",opposition:"Live",desc:"Play through the CAM."},
+{title:"Final Third Combination Play",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Create chances through central combinations."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward goals created through the CAM."}
+]
+},
+
+{
+title:"Session 4 – Supporting the Lone Striker",
+subtitle:"Providing attacking support from the three behind the ST.",
+time:"90 min",
+objective:"Prevent striker isolation and improve chance creation.",
+focus:[
+"Supporting runs",
+"Combination play",
+"Final-third movement"
+],
+phrases:[
+"Support the striker.",
+"Arrive on time.",
+"Create overloads."
+],
+notes:"The striker should never be left isolated. Encourage coordinated support from the CAM and wide attackers.",
+drills:[
+{title:"Target Play Warmup",time:"10 min",players:"Attackers",opposition:"None",desc:"Connect with the striker effectively."},
+{title:"Third-Man Runs",time:"15 min",players:"Attacking Unit",opposition:"Passive",desc:"Support beyond the striker."},
+{title:"5v4 Attack",time:"20 min",players:"Units",opposition:"Live",desc:"Create overloads around the striker."},
+{title:"Combination Finishing",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Develop coordinated attacks."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward support runs and combinations."}
+]
+},
+
+{
+title:"Session 5 – Building Through the Wide Players",
+subtitle:"Using LW and RW to stretch defenses.",
+time:"90 min",
+objective:"Develop attacking width and wide combinations.",
+focus:[
+"Attacking width",
+"Wide combinations",
+"Crossing quality"
+],
+phrases:[
+"Stay wide early.",
+"Stretch the defense.",
+"Deliver quality service."
+],
+notes:"Wide players should recognize when to isolate defenders, combine inside, or create service for attacking runners.",
+drills:[
+{title:"Wide Passing Circuit",time:"10 min",players:"Wide Players",opposition:"None",desc:"Improve technical quality."},
+{title:"1v1 Wing Battles",time:"15 min",players:"Pairs",opposition:"Live",desc:"Attack defenders directly."},
+{title:"Overlap and Underlap Patterns",time:"20 min",players:"Wide Units",opposition:"Passive",desc:"Coordinate runs with fullbacks."},
+{title:"Crossing and Finishing",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Create chances from wide areas."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Wide-assisted goals count double."}
+]
+},
+
+{
+title:"Session 6 – 4-4-1-1 Defensive Organization",
+subtitle:"Defending compactly from the 4-2-3-1 structure.",
+time:"90 min",
+objective:"Develop the defensive shape and pressing cues.",
+focus:[
+"Defensive compactness",
+"Pressing triggers",
+"Team organization"
+],
+phrases:[
+"Protect the middle.",
+"Move together.",
+"Press as a unit."
+],
+notes:"Out of possession the team must transform smoothly into a compact 4-4-1-1 shape while protecting central areas.",
+drills:[
+{title:"Defensive Shadow Play",time:"10 min",players:"Team",opposition:"None",desc:"Practice shape and spacing."},
+{title:"Press-Cover-Balance",time:"15 min",players:"Groups",opposition:"Passive",desc:"Assign defensive responsibilities."},
+{title:"8v6 Defensive Game",time:"20 min",players:"Units",opposition:"Live",desc:"Protect central spaces."},
+{title:"Wide Trap Exercise",time:"20 min",players:"Team",opposition:"Live",desc:"Force play into wide areas."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward defensive compactness."}
+]
+},
+
+{
+title:"Session 7 – Counter-Pressing and Transition",
+subtitle:"Winning the ball back quickly after loss.",
+time:"90 min",
+objective:"Develop aggressive counter-pressing and rapid attacks.",
+focus:[
+"Counter-pressing",
+"Transition moments",
+"Quick reactions"
+],
+phrases:[
+"React first.",
+"Win it back.",
+"Attack immediately."
+],
+notes:"Players must recognize the importance of the first few seconds after losing possession and respond aggressively.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Immediate transition mindset."},
+{title:"Counter-Press Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Recover possession quickly."},
+{title:"5v4 Transition Attack",time:"20 min",players:"Units",opposition:"Live",desc:"Attack before recovery."},
+{title:"Wave Transition Exercise",time:"20 min",players:"Groups",opposition:"Live",desc:"Repeated transition situations."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward goals after quick regains."}
+]
+},
+
+{
+title:"Session 8 – Complete 4-2-3-1 Match Model",
+subtitle:"Combining buildup, defensive structure, and attacking creativity.",
+time:"90 min",
+objective:"Execute the complete tactical identity of the 4-2-3-1.",
+focus:[
+"Tactical execution",
+"Game-model understanding",
+"Decision making"
+],
+phrases:[
+"Trust the structure.",
+"Play with purpose.",
+"Solve problems together."
+],
+notes:"This session evaluates how effectively players can apply all concepts learned throughout the curriculum with minimal coaching intervention.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review all positional responsibilities."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Play through the double pivot."},
+{title:"Attacking Pattern Review",time:"20 min",players:"Team",opposition:"Passive",desc:"Connect CAM, wings, and striker."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply all game model concepts."},
+{title:"Full Match",time:"25 min",players:"Team",opposition:"Live",desc:"Evaluate execution of the complete tactical system."}
+]
+}
+
+];
+
+f4231.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="432" x2="110" y2="264"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="110" y1="264" x2="160" y2="192"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="160" y1="192" x2="160" y2="86"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="210" y2="264"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="210" y1="264" x2="160" y2="192"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="160" y1="192" x2="160" y2="86"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="110" y2="264"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="110" y1="264" x2="70" y2="168"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="70" y1="168" x2="70" y2="168"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="70" y1="168" x2="160" y2="86"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f352 = formations["11v11"].find(f => f.id === "352");
+
+f352.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 3-5-2 Structure",
+subtitle:"Introducing the back three, midfield triangle, and strike partnership.",
+time:"90 min",
+objective:"Teach player responsibilities and spacing within the 3-5-2.",
+focus:[
+"Formation structure",
+"Team shape",
+"Line relationships"
+],
+phrases:[
+"Stay connected.",
+"Know your role.",
+"Protect the middle."
+],
+notes:"Players must understand how the back three, midfield five, and front two connect. Prioritize shape before introducing advanced tactical concepts.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review responsibilities and positioning."},
+{title:"Three-Line Passing",time:"15 min",players:"Units",opposition:"None",desc:"Connect defenders, midfielders, and forwards."},
+{title:"Shape Movement Exercise",time:"20 min",players:"Team",opposition:"Passive",desc:"Maintain structure while shifting."},
+{title:"Positional Possession",time:"20 min",players:"Team",opposition:"Passive",desc:"Keep the 3-5-2 shape while circulating."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward positional discipline and spacing."}
+]
+},
+
+{
+title:"Session 2 – Building Through the Back Three",
+subtitle:"Creating confidence and composure in possession.",
+time:"90 min",
+objective:"Develop ball circulation and progression from the defensive line.",
+focus:[
+"Buildout play",
+"Defensive composure",
+"Ball circulation"
+],
+phrases:[
+"Stay patient.",
+"Use the extra player.",
+"Keep the ball moving."
+],
+notes:"The back three naturally create numerical superiority. Encourage players to use possession to draw pressure before progressing.",
+drills:[
+{title:"Back Three Passing Circuit",time:"10 min",players:"Defenders",opposition:"None",desc:"Improve technical quality and communication."},
+{title:"3v2 Buildout",time:"15 min",players:"Back Three",opposition:"Passive",desc:"Play through pressure calmly."},
+{title:"Back-to-Midfield Progression",time:"20 min",players:"Units",opposition:"Passive",desc:"Connect into the midfield triangle."},
+{title:"Buildout Possession Game",time:"20 min",players:"Team",opposition:"Live",desc:"Progress through thirds under pressure."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward successful buildup sequences."}
+]
+},
+
+{
+title:"Session 3 – Wingback Mastery",
+subtitle:"Developing the attacking and defensive role of the wingbacks.",
+time:"90 min",
+objective:"Improve the effectiveness of LWB and RWB in all phases.",
+focus:[
+"Wingback positioning",
+"Attacking support",
+"Recovery defending"
+],
+phrases:[
+"Provide width.",
+"Recover quickly.",
+"Support both ways."
+],
+notes:"Wingbacks are critical to the success of the 3-5-2. Reinforce their dual responsibility in attack and defense.",
+drills:[
+{title:"Wingback Conditioning",time:"10 min",players:"Wingbacks",opposition:"None",desc:"Prepare for repeated high-intensity runs."},
+{title:"Overlap Patterns",time:"15 min",players:"Wide Units",opposition:"Passive",desc:"Coordinate attacking movement."},
+{title:"1v1 Wide Defending",time:"20 min",players:"Pairs",opposition:"Live",desc:"Defend isolated situations."},
+{title:"Crossing and Recovery",time:"20 min",players:"Wingbacks",opposition:"Passive",desc:"Attack then recover quickly."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward wingback involvement."}
+]
+},
+
+{
+title:"Session 4 – Midfield Triangle Control",
+subtitle:"Using the midfield trio to dominate possession.",
+time:"90 min",
+objective:"Improve support, rotations, and control of central areas.",
+focus:[
+"Midfield control",
+"Support angles",
+"Third-man play"
+],
+phrases:[
+"Create triangles.",
+"Support the ball.",
+"Control the middle."
+],
+notes:"The midfield triangle should consistently create passing options and dictate the rhythm of the match.",
+drills:[
+{title:"Triangle Passing",time:"10 min",players:"Midfielders",opposition:"None",desc:"Develop constant support."},
+{title:"Third-Man Combinations",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Create forward progression."},
+{title:"6v4 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Maintain central superiority."},
+{title:"Midfield Rotation Exercise",time:"20 min",players:"Units",opposition:"Passive",desc:"Rotate without losing balance."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward midfield control."}
+]
+},
+
+{
+title:"Session 5 – Strike Partnership Development",
+subtitle:"Building chemistry between LS and RS.",
+time:"90 min",
+objective:"Create coordinated movement and finishing relationships.",
+focus:[
+"Strike partnership",
+"Movement timing",
+"Finishing"
+],
+phrases:[
+"One checks, one stretches.",
+"Combine quickly.",
+"Finish confidently."
+],
+notes:"The front two should complement one another through varied movement and intelligent support.",
+drills:[
+{title:"Checking and Spinning Runs",time:"10 min",players:"Forwards",opposition:"None",desc:"Develop complementary movement."},
+{title:"Wall Pass Finishing",time:"15 min",players:"Forwards",opposition:"Passive",desc:"Combine around defenders."},
+{title:"2v2 Attack",time:"20 min",players:"Forwards",opposition:"Live",desc:"Create and finish chances."},
+{title:"Cross and Finish",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Attack wingback service."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward striker combinations."}
+]
+},
+
+{
+title:"Session 6 – Defensive Compactness in the 3-5-2",
+subtitle:"Protecting the center and defending as a unit.",
+time:"90 min",
+objective:"Develop coordinated defending across all three lines.",
+focus:[
+"Defensive compactness",
+"Protecting central spaces",
+"Team defending"
+],
+phrases:[
+"Protect the middle.",
+"Stay compact.",
+"Move together."
+],
+notes:"The team must stay connected vertically and horizontally. Reinforce shape before pressing aggressively.",
+drills:[
+{title:"Shadow Defending",time:"10 min",players:"Team",opposition:"None",desc:"Establish defensive spacing."},
+{title:"Back Three Communication",time:"15 min",players:"Defenders",opposition:"Passive",desc:"Coordinate movement and cover."},
+{title:"8v7 Defensive Game",time:"20 min",players:"Units",opposition:"Live",desc:"Protect dangerous areas."},
+{title:"Midfield Screening Exercise",time:"20 min",players:"Midfielders",opposition:"Live",desc:"Block central passing lanes."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward defensive discipline."}
+]
+},
+
+{
+title:"Session 7 – Transition and Counterattacking",
+subtitle:"Turning defensive regains into attacking opportunities.",
+time:"90 min",
+objective:"Use midfield support and strike partnerships to attack quickly.",
+focus:[
+"Transition moments",
+"Counterattacking",
+"Decision speed"
+],
+phrases:[
+"React first.",
+"Attack the space.",
+"Play forward quickly."
+],
+notes:"The first few seconds after winning possession are critical. Encourage quick recognition and support play.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Prepare for transition moments."},
+{title:"5v4 Counterattack",time:"15 min",players:"Units",opposition:"Live",desc:"Exploit numerical advantages."},
+{title:"Transition Waves",time:"20 min",players:"Groups",opposition:"Live",desc:"Repeated attack-defense transitions."},
+{title:"Forward Release Drill",time:"20 min",players:"Team",opposition:"Passive",desc:"Find forwards early."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward goals after regains."}
+]
+},
+
+{
+title:"Session 8 – Complete 3-5-2 Match Model",
+subtitle:"Combining buildup, wingbacks, midfield control, and strike partnerships.",
+time:"90 min",
+objective:"Execute the full tactical identity of the 3-5-2.",
+focus:[
+"Tactical execution",
+"Game-model understanding",
+"Decision making"
+],
+phrases:[
+"Trust the structure.",
+"Play with purpose.",
+"Solve problems together."
+],
+notes:"This session evaluates the team's ability to apply all previous concepts with limited coach intervention.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review responsibilities and shape."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Progress through the back three and midfield."},
+{title:"Wingback Integration",time:"20 min",players:"Team",opposition:"Passive",desc:"Coordinate attacking and defensive wide play."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply all tactical principles under pressure."},
+{title:"Full Match",time:"25 min",players:"Team",opposition:"Live",desc:"Evaluate execution of the complete 3-5-2 system."}
+]
+}
+
+];
+
+f352.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="432" x2="160" y2="254"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="254" x2="122" y2="77"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="52" y2="240"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="52" y1="240" x2="122" y2="77"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="268" y2="240"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="268" y1="240" x2="198" y2="77"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+const f343 = formations["11v11"].find(f => f.id === "343");
+
+f343.coachData.sessionPlans = [
+
+{
+title:"Session 1 – Understanding the 3-4-3 Structure",
+subtitle:"Introducing the back three, midfield box, and front three.",
+time:"90 min",
+objective:"Teach positioning, spacing, and team shape within the 3-4-3.",
+focus:[
+"Formation structure",
+"Width and depth",
+"Player responsibilities"
+],
+phrases:[
+"Stay connected.",
+"Create width.",
+"Know your role."
+],
+notes:"Players should understand how the back three, wide players, and front three create balance across the field. Prioritize shape before game speed.",
+drills:[
+{title:"Formation Walkthrough",time:"10 min",players:"Team",opposition:"None",desc:"Review shape and responsibilities."},
+{title:"Line Connection Passing",time:"15 min",players:"Units",opposition:"None",desc:"Connect all three lines."},
+{title:"Shape Movement Exercise",time:"20 min",players:"Team",opposition:"Passive",desc:"Shift as a unit while maintaining spacing."},
+{title:"Positional Possession",time:"20 min",players:"Team",opposition:"Passive",desc:"Maintain structure while keeping possession."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward positional discipline and shape."}
+]
+},
+
+{
+title:"Session 2 – Playing Out Through the Back Three",
+subtitle:"Building confidence and composure from the defensive line.",
+time:"90 min",
+objective:"Develop effective buildout patterns through the back three.",
+focus:[
+"Buildout play",
+"Defensive composure",
+"Ball circulation"
+],
+phrases:[
+"Use the extra player.",
+"Stay patient.",
+"Keep the ball moving."
+],
+notes:"The back three provide natural numerical superiority. Encourage players to attract pressure before progressing forward.",
+drills:[
+{title:"Back Three Passing Circuit",time:"10 min",players:"Defenders",opposition:"None",desc:"Develop technical quality and communication."},
+{title:"3v2 Buildout",time:"15 min",players:"Back Three",opposition:"Passive",desc:"Play through pressure calmly."},
+{title:"Back-to-Midfield Progression",time:"20 min",players:"Units",opposition:"Passive",desc:"Connect defenders to midfielders."},
+{title:"Buildout Possession Game",time:"20 min",players:"Team",opposition:"Live",desc:"Advance through thirds under pressure."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward successful buildout sequences."}
+]
+},
+
+{
+title:"Session 3 – Wingback Influence",
+subtitle:"Developing the attacking and defensive impact of LWB and RWB.",
+time:"90 min",
+objective:"Improve the effectiveness of wingbacks in all phases.",
+focus:[
+"Wide support",
+"Recovery defending",
+"Wingback positioning"
+],
+phrases:[
+"Provide width.",
+"Recover quickly.",
+"Support both ways."
+],
+notes:"Wingbacks are critical to the 3-4-3. Reinforce their responsibility to contribute in both attacking and defensive phases.",
+drills:[
+{title:"Wingback Conditioning",time:"10 min",players:"Wingbacks",opposition:"None",desc:"Prepare for repeated high-intensity runs."},
+{title:"Overlap and Underlap Patterns",time:"15 min",players:"Wide Units",opposition:"Passive",desc:"Coordinate attacking movement."},
+{title:"1v1 Wide Defending",time:"20 min",players:"Pairs",opposition:"Live",desc:"Defend isolated situations."},
+{title:"Crossing and Recovery",time:"20 min",players:"Wingbacks",opposition:"Passive",desc:"Attack then recover quickly."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Reward wingback involvement."}
+]
+},
+
+{
+title:"Session 4 – Midfield Pair Control",
+subtitle:"Using the central midfielders to control tempo and transitions.",
+time:"90 min",
+objective:"Develop positioning, support angles, and possession management.",
+focus:[
+"Midfield control",
+"Support angles",
+"Tempo management"
+],
+phrases:[
+"Control the middle.",
+"Support the ball.",
+"Play with patience."
+],
+notes:"The midfield pair must provide balance between defense and attack while helping control the game's rhythm.",
+drills:[
+{title:"Scanning and Receiving",time:"10 min",players:"Midfielders",opposition:"None",desc:"Improve awareness before receiving."},
+{title:"Midfield Combination Passing",time:"15 min",players:"Midfielders",opposition:"Passive",desc:"Create constant support."},
+{title:"6v4 Possession",time:"20 min",players:"Groups",opposition:"Live",desc:"Retain and move the ball effectively."},
+{title:"Switching Play Exercise",time:"20 min",players:"Units",opposition:"Passive",desc:"Move opponents side-to-side."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward midfield control."}
+]
+},
+
+{
+title:"Session 5 – Front Three Relationships",
+subtitle:"Building chemistry between LW, ST, and RW.",
+time:"90 min",
+objective:"Improve movement, finishing, and attacking combinations.",
+focus:[
+"Front-three movement",
+"Combination play",
+"Finishing"
+],
+phrases:[
+"Stretch the defense.",
+"Combine quickly.",
+"Attack together."
+],
+notes:"The front three must constantly create space for each other through coordinated movement and intelligent positioning.",
+drills:[
+{title:"Movement Patterns",time:"10 min",players:"Forwards",opposition:"None",desc:"Coordinate attacking runs."},
+{title:"Triangle Combinations",time:"15 min",players:"Attackers",opposition:"Passive",desc:"Create space through interaction."},
+{title:"3v2 Attack",time:"20 min",players:"Forwards",opposition:"Live",desc:"Exploit overloads in the final third."},
+{title:"Cross and Finish",time:"20 min",players:"Attackers",opposition:"Passive",desc:"Finish chances from wide service."},
+{title:"Match Play",time:"25 min",players:"Team",opposition:"Live",desc:"Reward goals involving front-three combinations."}
+]
+},
+
+{
+title:"Session 6 – High Pressing in the 3-4-3",
+subtitle:"Winning the ball back aggressively in advanced areas.",
+time:"90 min",
+objective:"Coordinate pressure from the front three and midfield line.",
+focus:[
+"Pressing triggers",
+"Collective pressure",
+"Winning possession high"
+],
+phrases:[
+"Press together.",
+"Force mistakes.",
+"Win it back."
+],
+notes:"The front three should initiate pressure while the midfield pair supports underneath. Emphasize coordinated pressing.",
+drills:[
+{title:"Pressing Triggers",time:"10 min",players:"Team",opposition:"None",desc:"Recognize pressing opportunities."},
+{title:"Front Three Pressing",time:"15 min",players:"Attackers",opposition:"Live",desc:"Force opponents into predictable areas."},
+{title:"5v5 Pressing Game",time:"20 min",players:"Groups",opposition:"Live",desc:"Recover possession quickly."},
+{title:"Half-Field High Press",time:"20 min",players:"Team",opposition:"Live",desc:"Coordinate team pressure."},
+{title:"Conditioned Match",time:"25 min",players:"Team",opposition:"Live",desc:"Bonus for attacking-third regains."}
+]
+},
+
+{
+title:"Session 7 – Counter-Pressing and Fast Transitions",
+subtitle:"Reacting immediately after losses and regains.",
+time:"90 min",
+objective:"Develop aggressive counter-pressing and rapid attacking transitions.",
+focus:[
+"Counter-pressing",
+"Transitions",
+"Immediate reaction"
+],
+phrases:[
+"React first.",
+"Win it back.",
+"Attack quickly."
+],
+notes:"Players should recognize that the first few seconds after a turnover are the most important moments in the game.",
+drills:[
+{title:"Reaction Warmup",time:"10 min",players:"Groups",opposition:"None",desc:"Develop transition awareness."},
+{title:"Counter-Press Game",time:"15 min",players:"Groups",opposition:"Live",desc:"Win the ball back immediately."},
+{title:"5v4 Transition Attack",time:"20 min",players:"Units",opposition:"Live",desc:"Attack before recovery occurs."},
+{title:"Wave Transition Exercise",time:"20 min",players:"Groups",opposition:"Live",desc:"Practice repeated transition moments."},
+{title:"Scrimmage",time:"25 min",players:"Team",opposition:"Live",desc:"Reward goals after quick regains."}
+]
+},
+
+{
+title:"Session 8 – Complete 3-4-3 Match Model",
+subtitle:"Combining buildout, pressing, wingback play, and attacking width.",
+time:"90 min",
+objective:"Execute the full tactical identity of the 3-4-3.",
+focus:[
+"Tactical execution",
+"Game-model understanding",
+"Decision making"
+],
+phrases:[
+"Trust the structure.",
+"Play with purpose.",
+"Solve problems together."
+],
+notes:"Use this final session to evaluate how effectively players can apply the complete 3-4-3 game model with minimal coaching intervention.",
+drills:[
+{title:"System Review",time:"10 min",players:"Team",opposition:"None",desc:"Review all responsibilities and principles."},
+{title:"Buildout Review",time:"15 min",players:"Team",opposition:"Passive",desc:"Progress through the back three."},
+{title:"Pressing and Transition Review",time:"20 min",players:"Team",opposition:"Passive",desc:"Coordinate pressing and counter-pressing."},
+{title:"Scenario Match",time:"20 min",players:"Team",opposition:"Live",desc:"Apply tactical concepts under pressure."},
+{title:"Full Match",time:"25 min",players:"Team",opposition:"Live",desc:"Evaluate execution of the complete 3-4-3 model."}
+]
+}
+
+];
+
+f343.coachData.buildoutVisuals = [
+
+`
+<line x1="160" y1="432" x2="52" y2="230"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="52" y1="230" x2="77" y2="125"
+stroke="#16a34a" stroke-width="4"/>
+
+<line x1="77" y1="125" x2="77" y2="125"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="268" y2="230"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="268" y1="230" x2="243" y2="125"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`,
+
+`
+<line x1="160" y1="432" x2="160" y2="230"
+stroke="#eab308" stroke-width="4"/>
+
+<line x1="160" y1="230" x2="160" y2="96"
+stroke="#16a34a" stroke-width="4"
+marker-end="url(#arrowGreen)"/>
+`
+
+];
+
+
+/* Set default selection to 7v7 current formation */
+state.format = '7v7';
+setDefaultFormationForFormat('7v7');
+render();
+
+/* ===== Part 4 — Inject unique 11v11 Coach content and finalize =====
+ Sources shaping these roles/patterns:
+ - Be Your Best: 4-4-2 / 4-3-3 strengths/uses [beyourbest.com](https://www.beyourbest.com/insight/soccer-formations-exploring-the-4-4-2-4-3-3-and-more)
+ - Coaches’ Voice: formation trade-offs and wing-back considerations [learning.coachesvoice.com](https://learning.coachesvoice.com/cv/formations-football-tactics-explained-best-most-used/)
+ - Arlington Soccer 11v11 roles/numbering (structure references) [arlingtonsoccer.ottosport.ai](https://arlingtonsoccer.ottosport.ai/_files/programs/recreation/coach-education-development/rec-curriculum/11_v_11_Soccer_Formations-2.pdf)
+*/
+
+function actionsTable(formation, mapByLabel) {
+// mapByLabel: { "LB": "...", "RB": "...", ... } -> expanded into full team table
+return formation.positions.map(p => ({
+position: p.label,
+action: mapByLabel[p.label] || `${p.label} keeps compact spacing and performs role-appropriate action for the cue.`
+}));
+}
+
+function coachingTable(formation, pointByLabel) {
+return formation.positions.map(p => ({
+position: p.label,
+point: pointByLabel[p.label] || `${p.label} scan early, receive side-on, and support next pass.`
+}));
+}
+
+// 4-4-2 specific content
+(function apply442(){
+const f = formations["11v11"].find(x => x.id === "442"); if (!f) return;
+
+f.coachData.triggers = [
+{
+title: 'Our GK has the ball',
+cue: 'Build with fullbacks ready, CMs staggered, wide mids on touchlines.',
+summary: 'Classic 4-4-2 buildout: fullbacks create width, two CMs provide inside links, wide mids pin or check, and the front two coordinate check/spin.',
+actions: actionsTable(f, {
+"GK":"Open body; choose safer side or 6/8 if central lane is clear; disguise before playing.",
+"LB":"Drop to receive front-foot; progress down the line or into LCM/LM.",
+"RB":"Mirror LB on right; be the quick side-to-side outlet if press shifts.",
+"LCB":"Offer support angle behind LB; split from RCB to stretch first line.",
+"RCB":"Offer support behind RB; avoid flat line with LCB; break line if lane opens.",
+"LM":"Hold width; check to half-space when LB has time; overlap cue for LB.",
+"LCM":"Show under ball on left; be bounce/pass-through option into front two.",
+"RCM":"Stagger higher than LCM; prepare for switch or third-man run.",
+"RM":"Hold width; threaten in behind when RB receives facing forward.",
+"LS":"Alternate: one checks, one runs; set back to CMs when under pressure.",
+"RS":"Run channel opposite the checking striker; occupy CBs to create space."
+})
+},
+{
+title: 'We win the ball in our own half',
+cue: 'Secure first pass, then find a striker or wide mid in stride.',
+summary: 'Use the nearest back or LCM/RCM to settle; then go quickly into wide space or front two if the lane is clean.',
+actions: actionsTable(f, {
+"GK":"Offer reset if regain is scrappy; organize line depth.",
+"LB":"Be first safe option; step if clear lane opens; avoid blind central balls.",
+"RB":"Balance weak side; open for switch once secure.",
+"LCB":"Hold cover; connect simple to CM if pressure rises.",
+"RCB":"Prepare for switch or direct pass to RM if free.",
+"LM":"Explode forward if regain faces up; otherwise tuck under ball.",
+"LCM":"First central outlet; decide settle vs. early forward.",
+"RCM":"Advance into next line for through option.",
+"RM":"Hold touchline as far-side breaker.",
+"LS":"Check to feet; set for runner; spin if defender steps.",
+"RS":"Threaten depth as soon as CM faces up."
+})
+},
+{
+title: 'We win the ball in their half',
+cue: 'Exploit disorganization: front two + nearest wide mid combine fast.',
+summary: 'Immediate combination through a checking striker or quick wide attack; opposite wide mid arrives back post.',
+actions: actionsTable(f, {
+"GK":"Step high to recycle if shot blocked/cleared.",
+"LB":"Hold rest-defense; stop immediate counter in left channel.",
+"RB":"Mirror left on right channel; be recycle outlet.",
+"LCB":"Anchor central cover behind attack.",
+"RCB":"Pick up first clearance in right half-space.",
+"LM":"Attack fullback; early cross if box runners ready.",
+"LCM":"Arrive top of box; shoot or slip striker if lane opens.",
+"RCM":"Late run to weak side for cutback.",
+"RM":"Far-post attack if cross from LM; otherwise prepare quick switch.",
+"LS":"Protect/finish; combine one-two with RS/CM.",
+"RS":"Run across CBs; finish early if possible."
+})
+},
+{
+title: 'They have the ball - defensive block',
+cue: 'Two banks of four; narrow center; show wide.',
+summary: 'Classic 4-4-2 mid/low block: compact distances, channel pressing, deny central progression.',
+actions: actionsTable(f, {
+"GK":"Manage line depth; claim high balls; communicate channel responsibility.",
+"LB":"Compact with LCB; engage only when cover set.",
+"RB":"Compact with RCB; avoid jumping without cover.",
+"LCB":"Protect near-post/central lane; track 9.",
+"RCB":"Protect central lane; track opposite striker runs.",
+"LM":"Tuck inside first; press out once central lane is denied.",
+"LCM":"Screen 6/10 lane; cover front of CBs.",
+"RCM":"Mirror screen on right internal lane.",
+"RM":"Tuck then press; track overlapping fullback on your side.",
+"LS":"Angle press to force to one side; block 6 if possible.",
+"RS":"Cover opposite CB/FB outlet; be ready to spring counter."
+})
+},
+{
+title: 'Long ball over the top',
+cue: 'Back four drop together; CMs close second balls.',
+summary: 'First duel from CBs or FBs in channel; CMs squeeze the drop; wide mids recover inside ball.',
+actions: actionsTable(f, {
+"GK":"Decide early: sweep vs. hold; command box on aerials.",
+"LB":"Drop goal-side; steer runner wide.",
+"RB":"Drop with line; cover back-post if cross follows.",
+"LCB":"Attack first flight if central; otherwise cover depth.",
+"RCB":"Provide depth opposite LCB; win knockdowns.",
+"LM":"Recover inside to block cutback lane.",
+"LCM":"Arrive on second-ball landing spot central left.",
+"RCM":"Arrive central right; clear early if under pressure.",
+"RM":"Track far-side runner into back-post zone.",
+"LS":"Delay their simple next pass; stay outlet aware.",
+"RS":"Stay available for out-ball once secured."
+})
+},
+{
+title: 'Corner Kick - defending',
+cue: 'Protect six-yard and near-post first; clear central.',
+summary: 'Zonal/mark mix: near-post + central attacked, edge protected, one striker as outlet.',
+actions: actionsTable(f, {
+"GK":"Own six-yard; loud claims; start counter if caught clean.",
+"LB":"Near-post guard; clear first contact wide.",
+"RB":"Far central zone; clear beyond box lines.",
+"LCB":"Mark primary aerial target in central lane.",
+"RCB":"Cover back-post seam; win second phase.",
+"LM":"Short-corner blocker; jump if played short.",
+"LCM":"Edge of box left; shoot-blocking ready.",
+"RCM":"Edge of box right; win rebounds.",
+"RM":"Mark spare at D; prevent free strike.",
+"LS":"High outlet to stretch; hold if secured.",
+"RS":"Second outlet or press first pass."
+})
+},
+{
+title: 'Corner Kick - attacking',
+cue: 'Two strikers attack prime zones; edge covered; rest-defense set.',
+summary: 'Deliver to near/middle; arrive with timing; ensure two fullbacks + one CM form rest-defense.',
+actions: actionsTable(f, {
+"GK":"Direct rest-defense positions.",
+"LB":"Hold left rest-defense; stop counters wide.",
+"RB":"Hold right rest-defense; collect long clears.",
+"LCB":"Central rest-defense cover.",
+"RCB":"Central rest-defense cover (pair).",
+"LM":"Near-post option or short routine 2v1.",
+"LCM":"Edge runner for rebounds.",
+"RCM":"Late central attack or block second clearance.",
+"RM":"Far-post or cutback lane occupation.",
+"LS":"Attack prime zone front/middle.",
+"RS":"Attack far-post zone."
+})
+}
+];
+
+f.coachData.buildoutPatterns = [
+{
+title: '4-4-2 Pattern 1 — FB Release to WM',
+trigger: 'Opponent blocks CM lanes; touchline available.',
+objective: 'Use fullback → wide mid to gain territory and combine inside.',
+steps: [
+'GK plays to LB/RB as nearest safe option.',
+'Ball-side CM drops to offer bounce but decoys central press.',
+'FB drives two touches to commit press then plays into WM’s front foot.',
+'Near striker checks, far striker runs channel opposite.',
+'CM supports under; far WM holds width for switch.'
+],
+coaching: coachingTable(f, {
+"GK":"Disguise, play safer foot; avoid floating passes.",
+"LB":"Drive to commit; pass on WM’s stride.",
+"RB":"Balance for switch; mirror detail when ball on right.",
+"LCB":"Create angle behind FB; be recycle option.",
+"RCB":"Hold opposite cover; prepare long switch if needed.",
+"LM":"Receive side-on; inside/outside decision on first touch.",
+"LCM":"Support under; break line if WM bounces.",
+"RCM":"Hold pocket for third man on switch.",
+"RM":"Stay wide until switch cue.",
+"LS":"Check if FB can find feet; set for CM runner.",
+"RS":"Run channel opposite check."
+})
+},
+{
+title: '4-4-2 Pattern 2 — Striker Set / Third-Man',
+trigger: 'Central lane opens to checking striker.',
+objective: 'Break line into 9/10 area, set, then release third-man runner.',
+steps: [
+'LCB/RCB fires into LS/RS who has contact on CB.',
+'Checking striker sets to nearest CM or WM inside lane.',
+'Third-man (opposite CM or striker) runs beyond into space.',
+'Back line squeezes under to compress distances.',
+'If blocked, recycle to opposite CB and restart pattern.'
+],
+coaching: coachingTable(f, {
+"LCB":"Firm pass into feet; not to toes.",
+"RCB":"Match detail other side; be switch point.",
+"LB":"Squeeze under to keep rest-defense compact.",
+"RB":"Mirror left; maintain cover.",
+"LCM":"Arrive to receive set; weight pass into runner.",
+"RCM":"Timed third-man run when partner receives.",
+"LM":"Narrow to support inside when set occurs.",
+"RM":"Stay wide if near ball; far-post run if cross is on.",
+"LS":"Protect ball; set to running angle.",
+"RS":"Run opposite the check; don’t crowd.",
+"GK":"High position to recycle quickly."
+})
+},
+{
+title: '4-4-2 Pattern 3 — Switch to Weak WM',
+trigger: 'Strong-side locked; far WM free.',
+objective: 'Circulate through CBs to opposite FB → WM in stride.',
+steps: [
+'GK → CB → opposite CB with body open.',
+'Opposite FB widens early; far WM holds touchline.',
+'CB plays to FB, then WM on front foot as press shifts.',
+'Near striker drags CBs; far striker sprints far channel.',
+'CM arrives under to secure second action.'
+],
+coaching: coachingTable(f, {
+"GK":"Tempo control; don’t rush switch if press not committed.",
+"LCB":"Diagonal punch to opposite CB; body shape open.",
+"RCB":"Positive first touch; time pass to FB stride.",
+"LB":"Widen early; avoid being flat with WM.",
+"RB":"Mirror when on right; receive forward.",
+"LM":"Hold width; first touch sets direction.",
+"RM":"Hold width far side; attack back post on cross.",
+"LCM":"Arrive under ball to secure possession.",
+"RCM":"Offer next line after WM’s first touch.",
+"LS":"Pin near-side CB.",
+"RS":"Attack far channel on switch."
+})
+}
+];
+
+f.coachData.defensiveBlock = {
+shapeDescription: '4-4-2 two banks of four with coordinated front two; central lanes screened; show play wide.',
+roleSummary: [
+'GK: Manage line depth; claim crosses; cue squeeze.',
+'LB/RB: Compact with CBs; press only with cover.',
+'LCB/RCB: Protect central lane; track 9; clear lines.',
+'LM/RM: Tuck inside first; then press toward touchline.',
+'LCM/RCM: Screen 6/10 lanes; cover front of CBs.',
+'LS/RS: Angle press to one side; switch at cue.'
+],
+principles: [
+'Compact distances first; pressure second.',
+'Angle presses to keep ball to the flank.',
+'Deny split passes through CM corridor.',
+'Fullbacks jump only with CM cover.',
+'Recover runs tracked by WM on their side.',
+'First forward pass on regain must be secure.'
+],
+sessionPlan: [
+{ title:'Step 1', text:'Walk banks of four spacing; set squeeze cues.' },
+{ title:'Step 2', text:'Front-two angled press vs back four.' },
+{ title:'Step 3', text:'Wide trap: WM/FB/CM timing on touchline.' },
+{ title:'Step 4', text:'Bypass recovery: track runners, block cutbacks.' },
+{ title:'Step 5', text:'Conditioned game rewarding forced wide turnovers.' }
+]
+};
+})();
+
+// 4-3-3 specific content
+(function apply433(){
+const f = formations["11v11"].find(x => x.id === "433"); if (!f) return;
+
+f.coachData.triggers = [
+{
+title: 'Our GK has the ball',
+cue: '4 build, single 6 under, 8s split, wingers high/wide.',
+summary: 'Use fullbacks for width, 6 for circulation, 8s for angles, and front three to pin and stretch.',
+actions: actionsTable(f, {
+"GK":"Scan press; play to FB/CB or 6 if central is clear.",
+"LB":"Receive to front foot; advance if winger pins FB.",
+"RB":"Mirror; support switch tempo.",
+"LCB":"Split from RCB; break line if 6 covered but 8 is free.",
+"RCB":"As above; avoid flatness with LCB.",
+"L8":"Provide angle left half-space; be third man.",
+"6":"Offer under pressure exits; switch tempo central.",
+"R8":"Angle right half-space; advance when 6 faces up.",
+"LW":"Pin FB; threaten in behind on FB touch.",
+"ST":"Occupy CBs; check or spin based on 8/6 body shape.",
+"RW":"Pin far FB; be switch target."
+})
+},
+{
+title: 'We win the ball in our own half',
+cue: 'Find 6/8 first, then winger in space.',
+summary: 'Stabilize through 6/8; then exploit wide lanes or ST channel runs.',
+actions: actionsTable(f, {
+"GK":"Offer reset; set back line height.",
+"LB":"Safety option; progress if lane opens.",
+"RB":"Balance; prepare for switch.",
+"LCB":"Connect to 6/8 quickly.",
+"RCB":"Advance if unpressed to draw out line.",
+"L8":"Receive/turn if able; look for LW/ST early.",
+"6":"Secure possession; switch if press heavy.",
+"R8":"Join next line; prepare third-man with RW.",
+"LW":"Explode wide; attack FB space.",
+"ST":"Run channel or check for set.",
+"RW":"Hold width for quick switch."
+})
+},
+{
+title: 'We win the ball in their half',
+cue: 'Front three combine fast; weak 8 arrives edge.',
+summary: 'Immediate diagonal to winger or into ST feet; nearest 8 supports; far 8 times late run.',
+actions: actionsTable(f, {
+"GK":"High support to recycle shot rebounds.",
+"LB":"Hold rest-defense; stop counters left.",
+"RB":"Hold rest-defense right; be outlet.",
+"LCB":"Anchor; claim clearances central left.",
+"RCB":"Anchor; claim clearances central right.",
+"L8":"Arrive under LW; shoot/cutback options.",
+"6":"Balance in front of CBs; stop through counter.",
+"R8":"Late edge run weak side.",
+"LW":"Drive at FB; early cross to near/far zones.",
+"ST":"Protect/finish; drag CBs.",
+"RW":"Far-post or weak diagonal run."
+})
+},
+{
+title: 'They have the ball - defensive block',
+cue: '4-1-4-1 mid block from 4-3-3.',
+summary: 'Wingers narrow to line with 8s; 6 screens; ST sets angle on CB.',
+actions: actionsTable(f, {
+"GK":"Manage depth; communicate weak-side runner.",
+"LB":"Compact; engage only with 6/8 cover.",
+"RB":"Mirror; deny inside lane first.",
+"LCB":"Protect front of box; track ST.",
+"RCB":"Same; coordinate line step/drop.",
+"L8":"Close half-space; jump on poor touch.",
+"6":"Screen 10/pivot; block splits.",
+"R8":"Mirror left; cover fullback when RW jumps.",
+"LW":"Narrow to 8 line; jump to FB on cue.",
+"ST":"Angle press to lock side.",
+"RW":"Narrow; press FB on trigger."
+})
+},
+{
+title: 'Long ball over the top',
+cue: 'CBs manage depth; 6 onto second balls.',
+summary: 'Back four drop compact; 6/8s compress drops; wingers recover inside.',
+actions: actionsTable(f, {
+"GK":"Decide early; sweep if beyond line.",
+"LB":"Drop goal-side; deny inside cut.",
+"RB":"Drop goal-side; coordinate with RCB.",
+"LCB":"Attack first flight if central.",
+"RCB":"Cover depth; win second contact.",
+"L8":"Squeeze second ball left corridor.",
+"6":"Own central second ball zone.",
+"R8":"Squeeze right corridor.",
+"LW":"Recover inside ball; block cutback.",
+"ST":"Delay next pass; remain outlet aware.",
+"RW":"Track far runner to back post."
+})
+},
+{
+title: 'Corner Kick - defending',
+cue: 'Zone + three markers; wingers protect edges.',
+summary: '6 screens edge; ST outlet; FBs/CBs own aerial zones.',
+actions: actionsTable(f, {
+"GK":"Own six; claim early if floated.",
+"LB":"Near-post lane.",
+"RB":"Far central lane.",
+"LCB":"Mark primary aerial target.",
+"RCB":"Back-post seam.",
+"L8":"Mark spare runner near edge.",
+"6":"Protect D; clear second balls.",
+"R8":"Edge opposite side.",
+"LW":"Short-corner block.",
+"ST":"High outlet.",
+"RW":"Edge coverage/counter lane."
+})
+},
+{
+title: 'Corner Kick - attacking',
+cue: 'ST attacks central; wingers alternate near/far; 6 covers.',
+summary: 'Deliver front/middle; retain rest-defense with both FBs + 6.',
+actions: actionsTable(f, {
+"GK":"Direct recoveries.",
+"LB":"Left rest-defense.",
+"RB":"Right rest-defense.",
+"LCB":"Central safety.",
+"RCB":"Central safety pair.",
+"L8":"Edge late run.",
+"6":"Hold D top.",
+"R8":"Crash central gap.",
+"LW":"Near-post or short 2v1.",
+"ST":"Attack prime zone.",
+"RW":"Far-post."
+})
+}
+];
+
+f.coachData.buildoutPatterns = [
+{
+title:'4-3-3 Pattern 1 — 6 Pivot Circulation',
+trigger:'Press narrow on CBs; 6 available under.',
+objective:'Use 6 as pivot to move press then find 8/FB/W.',
+steps:[
+'GK → CB; 6 shows under on angle.',
+'CB → 6 to draw striker; 8s adjust height.',
+'6 → opposite CB or FB depending on jump.',
+'FB into W on front foot; 8 supports under.',
+'ST pins CBs; far W holds weak side.'
+],
+coaching:coachingTable(f,{
+"GK":"Play into stride; avoid aerial floats.",
+"LB/RB":"Open early; body to play forward.",
+"LCB/RCB":"Split, not flat; firm pass into 6.",
+"6":"One-touch when pressed; two when free.",
+"L8/R8":"Create passing lanes; be third man.",
+"LW/RW":"Pin FB; check half-space on cue.",
+"ST":"Occupy CBs; show if lane opens."
+})
+},
+{
+title:'4-3-3 Pattern 2 — FB to Winger Underlap',
+trigger:'Fullback receives facing forward; W pins FB; 8 underlaps.',
+objective:'Exploit wide lane with layered runs.',
+steps:[
+'GK/CB → FB; first touch forward.',
+'W stays high/wide to pin.',
+'Near 8 underlaps into half-space.',
+'FB plays W or 8 depending on jump.',
+'Cutback to arriving ST/8 weak side.'
+],
+coaching:coachingTable(f,{
+"LB/RB":"Drive at space; time release.",
+"LW/RW":"Hold line; first step is behind FB.",
+"L8/R8":"Underlap timing after FB’s first touch.",
+"6":"Balance central rest-defense.",
+"CBs":"Squeeze under; deny big gaps.",
+"ST":"Arrive front post or penalty spot."
+})
+},
+{
+title:'4-3-3 Pattern 3 — Switch to Far Winger',
+trigger:'Strong side locked; far W free.',
+objective:'Rotate through 6/CB to far FB → W.',
+steps:[
+'Strong CB → 6 → opposite CB.',
+'Opposite FB widens; far W holds.',
+'CB → FB → W in stride.',
+'Near 8 arrives for combo; ST attacks box.',
+'Recycle through 6 if lane closes.'
+],
+coaching:coachingTable(f,{
+"6":"Scan before receiving; pre-orient to switch.",
+"Opp CB":"Positive first touch across body.",
+"Opp FB":"Width early; receive to play forward.",
+"Far W":"First touch forward, head up.",
+"Near 8":"Arrive under for wall pass.",
+"ST":"Pin near CB; attack cross zones."
+})
+}
+];
+
+f.coachData.defensiveBlock = {
+shapeDescription:'4-1-4-1 from 4-3-3: wingers narrow, 8s step on trigger, 6 screens central.',
+roleSummary:[
+'GK: Manage depth; direct squeeze timing.',
+'Back four: Compact; FBs engage with cover.',
+'6: Screen 10/pivot; block split passes.',
+'8s: Close half-spaces; jump on poor touches.',
+'Wingers: Narrow to 8 line; jump to FB on cue.',
+'ST: Angle CB to locked side.'
+],
+principles:[
+'Protect central and half-spaces first.',
+'Front press guides, not chases.',
+'Back four step together; no gaps.',
+'Nearest 8 jumps; partner tucks.',
+'On regain, first pass secure, second pass forward.'
+],
+sessionPlan:[
+{title:'Step 1', text:'Walk 4-1-4-1 lines and staggering.'},
+{title:'Step 2', text:'Winger/8 jump cues vs FB.'},
+{title:'Step 3', text:'6 screening and body shape.'},
+{title:'Step 4', text:'Counter-press 5 seconds then drop.'},
+{title:'Step 5', text:'Conditioned game: force wide + fast break.'}
+]
+};
+})();
+
+// 4-2-3-1 specific content
+(function apply4231(){
+const f = formations["11v11"].find(x => x.id === "4231"); if (!f) return;
+
+f.coachData.triggers = [
+{
+title:'Our GK has the ball',
+cue:'Back four + double pivot; 10 floats; wings high/wide.',
+summary:'Double pivot provide secure exits; FBs can step; 10 links into ST.',
+actions:actionsTable(f,{
+"GK":"Choose FB/CB or DMs; avoid hanging pivots.",
+"LB/RB":"Provide width; step when pivot cover set.",
+"LCB/RCB":"Split; break line if pivot covered but 10 free.",
+"LDM/RDM":"One shows, one screens; switch tempo.",
+"LW/RW":"Pin FBs; check to half-space if FB steps.",
+"CAM":"Find pocket between lines; offer bounce or turn.",
+"ST":"Occupy CBs; check or spin to complement CAM."
+})
+},
+{
+title:'We win the ball in our own half',
+cue:'Secure via pivot, then to 10/winger.',
+summary:'Stabilize through nearest DM; look early for 10 or wing in space.',
+actions:actionsTable(f,{
+"GK":"Reset if pressed; organize counterscreen.",
+"Back four":"Nearest receives; avoid blind central pass.",
+"LDM":"First outlet; body open to switch.",
+"RDM":"Higher support; ready third-man.",
+"LW/RW":"Explode wide; time run off FB.",
+"CAM":"Present between lines; turn to play ST.",
+"ST":"Run channel or set for CAM."
+})
+},
+{
+title:'We win the ball in their half',
+cue:'10 and wings combine; ST attacks central lane.',
+summary:'Play quickly into 10 or winger; opposite wing attacks far post.',
+actions:actionsTable(f,{
+"GK":"High to recycle second phase.",
+"Back four":"Hold rest-defense shape compact.",
+"LDM/RDM":"One balances; one arrives top of box.",
+"LW/RW":"Immediate drive/cross or wall pass to 10.",
+"CAM":"Slip ST or far winger; shoot if lane opens.",
+"ST":"First touch forward; finish early."
+})
+},
+{
+title:'They have the ball - defensive block',
+cue:'4-4-1-1 out of 4-2-3-1.',
+summary:'Wings drop to line with DMs, 10 screens pivot, ST angles press.',
+actions:actionsTable(f,{
+"GK":"Depth; claim crosses; set offside line.",
+"Back four":"Compact; FB engages with DM cover.",
+"LDM/RDM":"Screen central; track 10 runs.",
+"LW/RW":"Drop to 4; jump to FB on cue.",
+"CAM":"Screen their pivot; block inside feed.",
+"ST":"Angle to force one side."
+})
+},
+{
+title:'Long ball over the top',
+cue:'Back four drop together; nearest DM contests second ball.',
+summary:'Back line handles flight; DMs squeeze drop; wings recover interior.',
+actions:actionsTable(f,{
+"GK":"Sweep decision early.",
+"Back four":"Drop compact; channel to corners.",
+"LDM/RDM":"Second-ball ownership central.",
+"LW/RW":"Recover inside ball to block cutback.",
+"CAM":"Delay next pass; be outlet.",
+"ST":"Prepare counter lane."
+})
+},
+{
+title:'Corner Kick - defending',
+cue:'Zone + man on prime target; DMs protect D.',
+summary:'Six-yard owned by GK/CBs; DMs cover edge; 10 stays ready for outlet.',
+actions:actionsTable(f,{
+"GK":"Own six; loud comms.",
+"CBs":"Central aerial zones.",
+"FBs":"Near/far posts lanes.",
+"LDM/RDM":"Protect D; clear second balls.",
+"LW/RW":"Edge runners responsibility.",
+"CAM":"First outlet if secured.",
+"ST":"High outlet second."
+})
+},
+{
+title:'Corner Kick - attacking',
+cue:'10 + ST attack central; wings split near/far; DMs hold.',
+summary:'Retain double pivot for rest-defense; deliver front/middle.',
+actions:actionsTable(f,{
+"GK":"Direct cover.",
+"Back four":"Two hold central + FBs pinch.",
+"LDM/RDM":"Hold D and half-spaces.",
+"LW":"Near-post or short.",
+"RW":"Far-post lane.",
+"CAM":"Crash central gap.",
+"ST":"Attack prime zone."
+})
+}
+];
+
+f.coachData.buildoutPatterns = [
+{
+title:'4-2-3-1 Pattern 1 — DM Pivot Switch',
+trigger:'Opp blocks one side; use opposite pivot to rotate.',
+objective:'Switch through DMs to free FB/W.',
+steps:[
+'GK → CB → near DM (show).',
+'Near DM → far DM (one touch if pressed).',
+'Far DM → FB or 10 depending on pressure.',
+'W holds width; 10 presents between lines.',
+'ST pins CBs; far W attacks opposite.'
+],
+coaching:coachingTable(f,{
+"DMs":"Opposite movements: one shows, other balances.",
+"CBs":"Firm pass into pivot feet.",
+"FBs":"Step only with DM cover.",
+"10":"Constant scanning; half-turn early.",
+"Wings":"Pin fullbacks; time check.",
+"ST":"Run channel opposite rotation."
+})
+},
+{
+title:'4-2-3-1 Pattern 2 — 10 Bounce to ST',
+trigger:'10 finds pocket; quick up-back-through.',
+objective:'Exploit central pocket to release ST or wing.',
+steps:[
+'CB/DM plays into CAM between lines.',
+'CAM bounces to DM or 8-lane (here DM).',
+'Third-man to ST or running wing.',
+'Back line squeezes compact behind.',
+'Recycle if blocked; look weak side.'
+],
+coaching:coachingTable(f,{
+"CAM":"Check shoulder; tempo of bounce key.",
+"DMs":"Support distances short; play on runner’s path.",
+"ST":"Hold CB; time spin across front.",
+"Wings":"Arrive on through; keep width until cue.",
+"FBs":"Squeeze under; rest-defense compact."
+})
+},
+{
+title:'4-2-3-1 Pattern 3 — FB Overlap / Wing Inside',
+trigger:'Wing checks inside; FB overlaps on cue.',
+objective:'Create layered wide attack with cutback options.',
+steps:[
+'DM → Wing into half-space.',
+'Wing sets to DM/10; FB overlaps outside.',
+'Slip FB down line; cutback to 10/DM/ST.',
+'Far wing attacks far-post zone.',
+'Reset with DM if lane closes.'
+],
+
+	coaching:coachingTable(f,{
+"Wing":"First touch inside; head up early.",
+"FB":"Overlap timing after set; not before.",
+"DM":"Support angle and weight on slip.",
+"10":"Arrive penalty spot / D top.",
+"ST":"Near-post run; attack front space.",
+"Far Wing":"Far-post arrival."
+})
+}
+];
+
+f.coachData.defensiveBlock = {
+shapeDescription:'4-4-1-1 out of 4-2-3-1: wings drop, double pivot screens central areas, CAM screens their pivot, and ST angles the press.',
+roleSummary:[
+'GK: Manage depth and organize the back line.',
+'Back four: Stay compact and engage with pivot cover.',
+'LDM/RDM: Screen central lanes and contest second balls.',
+'LW/RW: Recover into the midfield line and jump on wide cues.',
+'CAM: Screen the opponent pivot and connect counters.',
+'ST: Angle pressure and remain the forward outlet.'
+],
+principles:[
+'Protect the center first.',
+'Keep the double pivot connected.',
+'Wingers recover before jumping to press.',
+'CAM blocks central access.',
+'Back four move together.',
+'First pass on regain should be secure.'
+],
+sessionPlan:[
+{title:'Step 1', text:'Walk through the 4-4-1-1 defensive shape.'},
+{title:'Step 2', text:'Train winger recovery and jump cues.'},
+{title:'Step 3', text:'Coach double-pivot screening responsibilities.'},
+{title:'Step 4', text:'Add transition moments after regains.'},
+{title:'Step 5', text:'Play a conditioned game rewarding compact defending.'}
+]
+};
+})();
+render();
