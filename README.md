@@ -48,3 +48,5 @@ The production build will be created in `dist/`.
 ## Notes
 
 This is a compatibility-first React conversion. It wraps the original working app inside React while preserving the original UI, UX, and data. A later refactor can progressively convert the legacy rendering functions into fully idiomatic React components.
+
+Deploy trigger
