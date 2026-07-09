@@ -1,3 +1,5 @@
+redeploy trigger
+
 # 2026/07/07 Update
 Adding a standard, secure starter design you can add to your existing soccer-formations-react app.
 
