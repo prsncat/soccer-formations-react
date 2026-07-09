@@ -89,7 +89,7 @@ Backend:
 - Frontend redirects to login.
 
 ### Important Production Notes
-For production, replace the in-memory user store with a database table such as:
+For production, replace the in-memory user store with a database table on PostgreSQL (GitHub login) :
 
 ```text
 sers
@@ -105,7 +105,8 @@ Also use:
 NODE_ENV=production
 CLIENT_ORIGIN=https://soccer-formations-react.vercel.app
 
-And deploy the Express backend to a service such as Render, Railway, Fly.io, Azure App Service, or another Node-capable host. (Will update when determined and deployed).
+Express APU Node backend: Railway (GitHub login).
+Email provider: Resend (GitHub login).
 
 The frontend cannot store or read HttpOnly cookies directly; the backend must set them through Set-Cookie, and the browser sends them automatically when credentials: 'include' is used.
 
