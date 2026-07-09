@@ -1,0 +1,101 @@
+import { useEffect, useState } from 'react';
+import { useAuth } from '../auth/AuthContext.jsx';
+
+function extractLegacyBody(htmlText) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlText, 'text/html');
+
+  doc.querySelectorAll('script').forEach((script) => script.remove());
+
+  return doc.body.innerHTML;
+}
+
+export default function LegacyAppPage() {
+  const { logout, user } = useAuth();
+  const [legacyMarkup, setLegacyMarkup] = useState('');
+  const [loadError, setLoadError] = useState('');
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadLegacyMarkup() {
+      try {
+        const response = await fetch('/original-index-reconstructed.html');
+
+        if (!response.ok) {
+          throw new Error('Could not load original-index-reconstructed.html');
+        }
+
+        const htmlText = await response.text();
+        const bodyHtml = extractLegacyBody(htmlText);
+
+        if (!cancelled) {
+          setLegacyMarkup(bodyHtml);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setLoadError(error.message || 'Unable to load soccer app.');
+        }
+      }
+    }
+
+    loadLegacyMarkup();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!legacyMarkup) return;
+
+    if (window.__soccerLegacyLoaded) {
+      if (typeof window.render === 'function') {
+        window.render();
+      }
+      return;
+    }
+
+    window.__soccerLegacyLoaded = true;
+
+    const script = document.createElement('script');
+    script.src = '/legacy-app.js';
+    script.async = false;
+    document.body.appendChild(script);
+  }, [legacyMarkup]);
+
+  if (loadError) {
+    return (
+      <main className="auth-page">
+        <div className="auth-card">
+          <h1>Unable to Load App</h1>
+          <div className="auth-error">{loadError}</div>
+        </div>
+      </main>
+    );
+  }
+
+  if (!legacyMarkup) {
+    return (
+      <main className="auth-page">
+        <div className="auth-card">
+          <h1>Loading Soccer App...</h1>
+          <p>Please wait while the formations dashboard loads.</p>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <>
+      <div className="auth-topbar">
+        <span>{user?.email}</span>
+        <button type="button" onClick={logout}>
+          Log Out
+        </button>
+      </div>
+
+      <div dangerouslySetInnerHTML={{ __html: legacyMarkup }} />
+    </>
+  );
+}
