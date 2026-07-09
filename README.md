@@ -1,3 +1,5 @@
+Redeploy after Vite configuration fix
+
 # Soccer Formations React
 
 This Vite + React JavaScript project was generated from the original `index.html` single-page app.
