@@ -39,10 +39,15 @@ export function AuthProvider({ children }) {
     return data.user;
   }
 
-  async function logout() {
+async function logout() {
+  try {
     await logoutRequest();
+  } catch (error) {
+    console.warn('Logout request failed, clearing local auth state anyway:', error);
+  } finally {
     setUser(null);
   }
+}
 
   return (
     <AuthContext.Provider
