@@ -74,9 +74,16 @@ export default function LoginPage() {
           {busy ? 'Logging in...' : 'Log In'}
         </button>
 
-        <p className="auth-footer">
-          Need an account? <Link to="/signup">Create one</Link>
-        </p>
+<p className="auth-footer">
+  Need an account? <Link to="/signup">Create one</Link>
+</p>
+
+<p className="auth-footer">
+  <Link to="/resend-verification">
+    Need a new verification email?
+  </Link>
+</p>
+
       </form>
     </main>
   );

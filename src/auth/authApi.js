@@ -59,3 +59,12 @@ export function refreshSession() {
 export function verifyEmail(token) {
   return request(`/api/auth/verify-email?token=${encodeURIComponent(token)}`);
 }
+
+export function resendVerificationEmail(email) {
+  return request('/api/auth/resend-verification', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+    }),
+  });
+}
